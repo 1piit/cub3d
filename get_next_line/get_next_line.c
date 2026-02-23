@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:10:19 by pbride            #+#    #+#             */
-/*   Updated: 2025/10/10 19:25:28 by pbride           ###   ########.fr       */
+/*   Updated: 2026/02/23 15:06:18 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/cub3d.h"
 
 static int	ft_has_newline(char *str)
 {
@@ -48,12 +48,13 @@ char	*ft_update_stash(char *str)
 	char	*new_stash;
 
 	if (!str)
-		return (free(str), NULL);
+		return ((gc_mem(FREE, 0, str, GEN)), NULL);
 	new_line = ft_strchr(str, '\n');
 	if (!new_line)
-		return (free(str), NULL);
-	new_stash = ft_strdup(new_line + 1);
-	free(str);
+		return ((gc_mem(FREE, 0, str, GEN)), NULL);
+	new_stash = gc_strdup(new_line + 1, GEN);
+	(gc_mem(FREE, 0, str, GEN));
+	/* free(str) */;
 	return (new_stash);
 }
 
@@ -61,23 +62,25 @@ char	*ft_read_line(char *str, int fd)
 {
 	char		*buffer;
 	int			bytes_read;
-
-	buffer = (char *) malloc(BUFFER_SIZE + 1);
+	
+	buffer = gc_mem(MALLOC, (BUFFER_SIZE + 1), NULL, GEN);
+	// buffer = (char *) malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (free(str), NULL);
+		return ((gc_mem(FREE, 0, str, GEN)), NULL);
 	bytes_read = 1;
 	while (!ft_has_newline(str) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(str), free(buffer), str = NULL, NULL);
+			return ((gc_mem(FREE, 0, str, GEN)), (gc_mem(FREE, 0, buffer, GEN)),NULL);
 		else if (bytes_read == 0 && (!str || str[0] == 0))
-			return (free(str), free(buffer), str = NULL, NULL);
+			return ((gc_mem(FREE, 0, str, GEN)), (gc_mem(FREE, 0, buffer, GEN)),NULL);
 		buffer[bytes_read] = '\0';
 		str = ft_strjoin_free(str, buffer);
 	}
-	free(buffer);
-	return (str);
+	gc_mem(FREE, 0, buffer, GEN);
+/* 	free(buffer);
+ */	return (str);
 }
 
 char	*get_next_line(int fd)
@@ -87,7 +90,8 @@ char	*get_next_line(int fd)
 
 	if (fd == -1 && stash)
 	{
-		free(stash);
+		gc_mem(FREE, 0, stash, GEN);
+		/* free(stash); */
 		stash = NULL;
 		return (NULL);
 	}

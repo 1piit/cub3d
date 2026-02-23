@@ -1,0 +1,11 @@
+NO ./img/n.xpm
+SO ./img/s.xpm
+WE ./img/w.xpm
+EA ./img/e.xpm
+
+F 220,100,0
+C 225,30,0
+
+1111111
+1E11111
+1111111

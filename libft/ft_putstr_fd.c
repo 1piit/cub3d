@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 14:38:42 by pbride            #+#    #+#             */
-/*   Updated: 2025/08/15 14:38:58 by pbride           ###   ########.fr       */
+/*   Created: 2025/05/06 15:34:38 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(int c)
+#include "../includes/libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (c == ' ' || (c >= '\t' && c <= '\r'))
-		return (1);
-	else
-		return (0);
+	size_t	i;
+
+	i = ft_strlen(s);
+	write(fd, s, i);
 }
