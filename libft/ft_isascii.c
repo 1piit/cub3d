@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/18 13:43:56 by pbride            #+#    #+#             */
-/*   Updated: 2026/02/18 13:44:31 by pbride           ###   ########.fr       */
+/*   Created: 2025/04/28 15:42:56 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
+#include "../includes/libft.h"
 
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
 	return (0);
 }
