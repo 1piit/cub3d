@@ -30,9 +30,15 @@ SRC_UTILS = src/utils/
 OBJ_DIR = obj
 
 # === SRC ===
-MAIN_FILES = main2.c
-PARSING_FILES = parsing1.c
-UTILS_FILES = /garbage_collector/gc_features.c
+MAIN_FILES = 	main.c \
+				main_utils.c \
+
+PARSING_FILES = file_alloc.c \
+				extract_map.c \
+				extract_ceilfloor.c \
+				extract_textures.c \
+
+UTILS_FILES = /garbage_collector/gc_features.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \

@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:42:22 by althorel          #+#    #+#             */
-/*   Updated: 2026/02/23 13:59:10 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:30:47 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,12 @@ void	*gc_free(t_garbage **garb, void *ptr, t_label label)
 } */
 static void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, t_garbage *tmp)
 {
-    if(garb && *garb)
-    {
-        if (cur->ptr)
-            free(cur->ptr);
-        if (prev)
-            prev->next = tmp;
-        else
-            *garb = tmp;
-    }
+	if (cur->ptr)
+		free(cur->ptr);
+	if (prev)
+		prev->next = tmp;
+	else
+		*garb = tmp;
     free(cur);
 }
 
@@ -140,9 +137,7 @@ void	*gc_mem(t_mem type, size_t size, void *ptr, t_label label)
 	if (type == MALLOC)
 		return (gc_malloc(garb, size, ptr, label));
 	else if (type == FULL_CLEAN && garb)
-	{
 		return (gc_full_clean(garb, label));
-	}
 	else if (type == FREE && garb && *garb)
 		return (gc_free(garb, ptr, label));
 	return (NULL);
