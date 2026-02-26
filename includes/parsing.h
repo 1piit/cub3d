@@ -23,7 +23,7 @@ char **map_part(char **map, char **whole_file);
 char **ceilfloor_part(t_file *cubfile, char **wf);
 
 //extract_textures.c
-char **textures_part(char **texture_file, char **wt_line, char **wf);
+void textures_part(char **texture_file, char **wt_line, char **wf);
 
 //file_alloc.c
 int count_fd_lines(int fd);
