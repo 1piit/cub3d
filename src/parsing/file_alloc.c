@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:21:31 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/24 18:36:26 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/02/26 18:42:12 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_file	split_file(t_file cubfile, char **file_tab)
 {
 	cubfile.map = map_part(cubfile.map, file_tab);
 	cubfile.ceilfloor = ceilfloor_part(&cubfile, file_tab);
+	cubfile.wt_line = gc_mem(MALLOC, (sizeof(char*) * 5), NULL, GEN);
+	cubfile.texture_file = gc_mem(MALLOC, sizeof(char*) * 5, NULL, GEN);
 	textures_part(cubfile.texture_file, cubfile.wt_line, file_tab);
 	return (cubfile);
 }
