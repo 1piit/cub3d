@@ -7,6 +7,6 @@ int main()
     char *lil = "jour";
 
     printf("%s\n", big);
-    big = ft_strnstr(big, lil, ft_strlen(big));
+    big = ft_substr(big, 3, 2);
     printf("%s\n",big);
 }

@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:26:08 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/26 18:40:32 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/02 16:06:27 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ int blank_skipper(char **str, int i)
     }
     return i;
 }
-
+int ft_isspace(int c)
+{
+    if(c == ' ' || (c >= 9 && c <= 13))
+        return 1;
+    return 0;
+}
 int wt_line_getter(char **wt_line, int *index, char *wf, const char *orientation)
 {
-    if(wf[0] == ' ' ||(wf[0] >= 9 && wf[0] <= 13))
-        blank_skipper(&wf, 0);
+/*     if(wf[0] == ' ' ||(wf[0] >= 9 && wf[0] <= 13))
+        blank_skipper(&wf, 0); */
     wf = ft_strnstr(wf, orientation, ft_strlen(wf));
     if(wf == NULL)
         return 0;      
@@ -39,12 +44,7 @@ int wt_line_getter(char **wt_line, int *index, char *wf, const char *orientation
     }
     return 0;
 }
-int ft_isspace(int c)
-{
-    if(c == ' ' || (c >= 9 && c <= 13))
-        return 1;
-    return 0;
-}
+
 int textures_getter(char **texture_file, int *index, char *wf, char *orientation)
 {
     int i;
@@ -73,6 +73,7 @@ void bf_wt_line(char **wt_line, char *wf)
         return;
     else if(wt_line_getter(wt_line, &index, wf, "WE"))
         return;
+    return;
 }
 
 void bf_textures_getter(char **texture_file, char *wf)
@@ -80,31 +81,33 @@ void bf_textures_getter(char **texture_file, char *wf)
     static int index = 0;
     if(textures_getter(texture_file, &index, wf, "NO"))
         return;
-    if(textures_getter(texture_file, &index, wf, "SO"))
+    else if(textures_getter(texture_file, &index, wf, "SO"))
         return;
-    if(textures_getter(texture_file, &index, wf, "EA"))
+    else if(textures_getter(texture_file, &index, wf, "EA"))
         return;
-    if(textures_getter(texture_file, &index, wf, "WE"))
+    else if(textures_getter(texture_file, &index, wf, "WE"))
         return;
+    return;
 }
 
 void textures_part(char **texture_file, char **wt_line, char **wf)
 {
     int i;
     int j;
-    int k = 0;
-    char *test;     
 
-    test = "NOSOWEEA";
     i = 0;
     while(wf[i])
     {
         j = 0;
-        if(wf[i][0] == ' ' || (wf[i][0] <= 13 && wf[i][0] >= 9))
-            i = blank_skipper(&wf[i], i);
-        bf_wt_line(wt_line, wf[i]);
-        bf_textures_getter(texture_file, wf[i]);
-        k++;
+        char *current_line = wf[i];
+/*         while(ft_isspace(*current_line))
+        {
+            current_line++;
+            if(*current_line == '\n' || !*current_line)
+                break;
+        } */
+        bf_wt_line(wt_line, current_line);
+        bf_textures_getter(texture_file, current_line);
         i++;
         while(texture_file[j] && wt_line[j])
         {

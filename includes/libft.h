@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:09:32 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/23 15:05:11 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/02/27 18:04:32 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include "garb.h"
 
-// Part 1
+/* Part 1 */
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -46,10 +46,10 @@ int					ft_atoi(const char *str);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
 
-// Part 2
+/* Part 2 */
 
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-//char				*ft_strjoin(char const *s1, char const *s2);
+/* char				*ft_strjoin(char const *s1, char const *s2); */
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
@@ -60,7 +60,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-// Bonus
 
 typedef struct s_list
 {
@@ -79,7 +78,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
-// For GC
+/* For GC */
 
 char	*gc_strdup(const char *s, t_label label);
 
