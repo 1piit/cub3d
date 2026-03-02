@@ -1,0 +1,10 @@
+TODO:
+- Set la HEIGHT et WIDTH de l'ecran avec la fonction pour definir sur chaque ordinateur
+- Definir un ratio de taille de map en fonction de la taille d'ecran. Exemple 1/5.
+- On fonction de la taille creer un ratio de la mini map, et l'appliquer au scale deja mis en place, il faut passer les int en float pour etre plus precis
+- Ajouter un contour a la mini map
+- Bien penser a ce que ca marche bien!!
+- Rendre la mini_map dynamique
+- Commencer a reflechir comment faire un rendu frame par frame, toujours avoir une frame tempo, qui permettra d'ecrire dessus avant de put l'image
+- Une fois fait faire bouger le personnage sur la mini_map avec les A W S D
+- Checker pour le raycasting : commencer avec un rayon envoyer
