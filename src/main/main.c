@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/02 16:17:40 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/02 17:11:47 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	main(int ac, char **av)
     file_tab = alloc_file_size(file_tab, cubfile.fd, fd2);
     cubfile = split_file(cubfile, file_tab);
     tester_extract(cubfile);
-    if(!parsing_datas(cubfile))
-        return(printf("\n MAP INVALIDE\n"), 0);
+/*     if(!parsing_datas(cubfile))
+        return(printf("\n MAP INVALIDE\n"), 0); */
     gc_mem(FULL_CLEAN, 0, NULL, GEN);
     return (0);
 }
