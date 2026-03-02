@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 13:13:13 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/02 16:45:01 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	render_mini_map(t_data *data, char **map)
 		{
 			if (map[axis.y][axis.x] == '1')
 				my_mlx_put_square(&data->mini_map, axis, 15, 0x00FF0000);
+			if (map[axis.y][axis.x] == 'N')
+				my_mlx_put_triangle_no(&data->mini_map, axis, 15, 0x00FFFF00);
+			else if (map[axis.y][axis.x] == 'S')
+				my_mlx_put_triangle_so(&data->mini_map, axis, 15, 0x00FFFF00);
+			else if (map[axis.y][axis.x] == 'W')
+				my_mlx_put_triangle_we(&data->mini_map, axis, 15, 0x00FFFF00);
+			else if (map[axis.y][axis.x] == 'E')
+				my_mlx_put_triangle_ea(&data->mini_map, axis, 15, 0x00FFFF00);
 			axis.x++;
 		}
 		axis.y++;

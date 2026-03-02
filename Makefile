@@ -40,6 +40,7 @@ PARSING_FILES = file_alloc.c \
 
 UTILS_FILES = garbage_collector/gc_features.c \
 			mlx_utils.c \
+			mlx_utils_2.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \

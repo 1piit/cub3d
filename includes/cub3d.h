@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 12:47:42 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/02 16:45:53 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,11 @@ void	render_mini_map(t_data *data, char **map);
 //mlx_utils.c
 void	my_mlx_put_pixel(t_img *img, int x, int y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
+
+//mlx_utils_2.c
+void	my_mlx_put_triangle_no(t_img *img, t_axis axis, int scale, int color);
+void	my_mlx_put_triangle_so(t_img *img, t_axis axis, int scale, int color);
+void	my_mlx_put_triangle_we(t_img *img, t_axis axis, int scale, int color);
+void	my_mlx_put_triangle_ea(t_img *img, t_axis axis, int scale, int color);
 
 #endif
