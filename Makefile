@@ -38,11 +38,13 @@ PARSING_FILES = file_alloc.c \
 				extract_ceilfloor.c \
 				extract_textures.c \
 
-UTILS_FILES = /garbage_collector/gc_features.c \
+UTILS_FILES = garbage_collector/gc_features.c \
+			mlx_utils.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
-	$(addprefix src/utils/,$(UTILS_FILES))
+	$(addprefix src/utils/,$(UTILS_FILES)) \
+	src/mini_map.c \
 
 # === OBJ ===
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
@@ -65,7 +67,9 @@ $(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(GNL_NAME):
-	$(MAKE) -C $(GNL_DIR)
+	$(MAKE) -C $(GNL_DIR) CFLAGS="-Wall -Wextra -Werror -I. -I../$(MLX_DIR)"
+#$(GNL_NAME):
+#	$(MAKE) -C $(GNL_DIR)
 
 $(MLX_NAME):
 	$(MAKE) -C $(MLX_DIR)

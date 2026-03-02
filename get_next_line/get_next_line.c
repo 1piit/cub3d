@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:10:19 by pbride            #+#    #+#             */
-/*   Updated: 2026/02/23 15:06:18 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/02 12:00:05 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_read_line(char *str, int fd)
 {
 	char		*buffer;
 	int			bytes_read;
-	
+
 	buffer = gc_mem(MALLOC, (BUFFER_SIZE + 1), NULL, GEN);
 	// buffer = (char *) malloc(BUFFER_SIZE + 1);
 	if (!buffer)
