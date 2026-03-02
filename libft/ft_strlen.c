@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:32:15 by pbride            #+#    #+#             */
-/*   Updated: 2025/08/12 15:21:10 by pbride           ###   ########.fr       */
+/*   Created: 2025/04/28 16:21:15 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 		i++;
 	return (i);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	char *str;
+	int i;
+
+	i = 0;
+	str = "lgobigt42";
+
+	printf("%zu", ft_strlen(str));
+	return (0);
+} */

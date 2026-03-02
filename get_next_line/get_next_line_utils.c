@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:23 by pbride            #+#    #+#             */
-/*   Updated: 2025/09/18 13:05:54 by pbride           ###   ########.fr       */
+/*   Updated: 2026/02/23 14:06:05 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/cub3d.h"
 
 char	*ft_substr_light(char const *s, size_t len)
 {
@@ -19,7 +19,8 @@ char	*ft_substr_light(char const *s, size_t len)
 
 	if (!s)
 		return (NULL);
-	subs = (char *) malloc((len + 1) * sizeof(char));
+	subs = gc_mem(MALLOC, ((len + 1) * sizeof(char)), NULL, GEN);
+	// subs = (char *) malloc((len + 1) * sizeof(char));
 	if (!subs)
 		return (NULL);
 	i = 0;
@@ -32,7 +33,7 @@ char	*ft_substr_light(char const *s, size_t len)
 	return (subs);
 }
 
-char	*ft_strjoin(char *joins, const char *s1, const char *s2)
+static char	*ft_strjoin(char *joins, const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
@@ -64,10 +65,12 @@ char	*ft_strjoin_free(const char *s1, char const *s2)
 		s1_size = ft_strlen(s1);
 	else
 		s1_size = 0;
-	joins = (char *) malloc((s1_size + ft_strlen(s2) + 1) * sizeof(char));
+	joins = gc_mem(MALLOC, (s1_size + ft_strlen(s2) + 1) * sizeof(char), NULL, GEN);
+	//joins = (char *) malloc((s1_size + ft_strlen(s2) + 1) * sizeof(char));
 	if (!joins)
 		return (NULL);
 	joins = ft_strjoin(joins, s1, s2);
-	free((char *) s1);
+	gc_mem(FREE, 0, (char *)s1, GEN);
+	/* free((char *) s1); */
 	return (joins);
 }

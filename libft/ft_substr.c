@@ -3,37 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 17:22:13 by pbride            #+#    #+#             */
-/*   Updated: 2025/05/26 15:22:07 by pbride           ###   ########.fr       */
+/*   Created: 2025/05/05 15:02:59 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*subs;
-	size_t	i;
-	size_t	s_size;
+	char			*sub;
+	unsigned int	i;
 
-	if (!s)
-		return (NULL);
-	s_size = ft_strlen(s);
-	if (start >= s_size)
+	if (start >= ft_strlen(s))
 		return (ft_strdup(""));
-	if (len > s_size - start)
-		len = s_size - start;
-	subs = (char *) malloc((len + 1) * sizeof(char));
-	if (!subs)
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	sub = malloc(sizeof(char) * (len + 1));
+	if (!sub)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (start + i < ft_strlen(s) && i < len)
 	{
-		subs[i] = s[start + i];
+		sub[i] = s[start + i];
 		i++;
 	}
-	subs[i] = '\0';
-	return (subs);
+	sub[i] = '\0';
+	return (sub);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	printf("%s", ft_substr("holastico", 4, 3));
+} */

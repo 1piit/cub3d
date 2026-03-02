@@ -1,0 +1,6 @@
+MAPS:
+
+--> Pourquoi le spawn du joueur ne peut pas se faire sur l'edge de la map.
+
+-->ATtention avec le gc, on ne peut pas simplement tout free a la fin. Il faut que periodiquement 
+on puisse vider la RAM.

@@ -1,42 +1,68 @@
-TARGET = libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/05 12:07:23 by ptricaud          #+#    #+#              #
+#    Updated: 2026/02/23 15:09:11 by ptricaud         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC = ft_isspace.c\
-	ft_sitoa.c\
-	ft_isdigit.c\
-	ft_strchr.c\
-	ft_strdup.c\
-	ft_strlen.c\
-	ft_substr.c\
-	ft_strncmp.c
+SRCS_P1	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
+    ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c\
+    ft_strchr.c ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c \
+    ft_strrchr.c ft_tolower.c ft_toupper.c
 
-OBJS := $(SRC:%.c=%.o)
+SRCS_P2 = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
+    ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-CC = cc
+BONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c \
+	ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c \
+	ft_lstmap_bonus.c
 
-CFLAGS = -Wall -Wextra -Werror
+GC		= gc_strdup.c \
 
-INC_DIR = .
+SRCS_O = $(SRCS_P1) $(SRCS_P2) $(GC)
 
-CPPFLAGS = -I$(INC_DIR)
+SRCS_OB = $(SRCS_P1) $(SRCS_P2) $(BONUS) $(GC)
 
-ARNAME = ar rcs $(TARGET)
+OBJS	= $(SRCS_O:.c=.o)
 
-RM = rm -f
+OBJS_OB = $(SRCS_OB:.c=.o)
 
-all: $(TARGET)
+CC		= cc
 
-$(TARGET): $(OBJS)
-	$(ARNAME) $(OBJS)
+ARFLAGS	= rcs
 
-%.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+AR 		= ar
 
-clean:
-	$(RM) $(OBJS)
+CFLAGS	= -Werror -Wextra -Wall
 
-fclean: clean
-	$(RM) $(TARGET)
+RM		= rm -f
 
-re: fclean all
+NAME 	= libft.a
 
-.PHONY: all clean fclean re
+.c.o:
+			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
+			$(AR) $(ARFLAGS) -o $(NAME) $^
+
+bonus:		$(OBJS_OB)
+			$(AR) $(ARFLAGS) -o $(NAME) $^
+			
+
+clean:		
+			$(RM) $(OBJS_OB)
+
+fclean:		clean
+			$(RM) $(NAME)
+
+re:			fclean
+			make
+			
+
+.PHONY:		all clean fclean re bonus

@@ -24,16 +24,28 @@ GNL_DIR = get_next_line
 GNL_NAME = $(GNL_DIR)/get_next_line.a
 
 # === DIR ===
-SRC_DIR = src
+SRC_MAIN = src/main/
+SRC_PARSING = src/parsing/
+SRC_UTILS = src/utils/
 OBJ_DIR = obj
 
 # === SRC ===
-SRCS = \
-	src/main.c
+MAIN_FILES = 	main.c \
+				main_utils.c \
+
+PARSING_FILES = file_alloc.c \
+				extract_map.c \
+				extract_ceilfloor.c \
+				extract_textures.c \
+
+UTILS_FILES = /garbage_collector/gc_features.c \
+
+SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
+	$(addprefix src/parsing/,$(PARSING_FILES)) \
+	$(addprefix src/utils/,$(UTILS_FILES))
 
 # === OBJ ===
-OBJS = \
-	obj/main.o
+OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
@@ -62,8 +74,12 @@ $(NAME): $(OBJS) $(GNL_NAME) $(LIBFT_NAME) $(MLX_NAME)
 	$(CC) $(CFLAGS) $(HEADERS) $(OBJS) $(GNL_NAME) \
 	$(LIBFT_NAME) $(MLX_NAME) $(MLX_FLAGS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+# $(OBJ_DIR)/%.o: $(SRC_MAIN)$(SRC_PARSING)/%.c
+# 	@mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
+
+obj/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:

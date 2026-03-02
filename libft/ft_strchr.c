@@ -3,29 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:18:32 by pbride            #+#    #+#             */
-/*   Updated: 2025/05/05 13:53:51 by pbride           ###   ########.fr       */
+/*   Created: 2025/04/30 11:01:01 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	char	cc;
 	size_t	i;
 
-	cc = (char) c;
 	i = 0;
-	while (str[i])
+	while (s[i])
 	{
-		if (str[i] == cc)
-			return ((char *)(str + i));
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 		i++;
 	}
-	if (str[i] == cc)
-		return ((char *)(str + i));
+	if (s[i] == (char)c)
+		return ((char *)s + i);
 	return (NULL);
 }
+
+/* #include <stdio.h>
+#include <string.h>
+
+int	main(void)
+{
+	char str[] = "Lino Ventura";
+	char *trunks;
+    char *trunks2;
+
+	trunks = ft_strchr(str, '\0');
+    trunks2 = strchr(str, '\0');
+	printf("%s\n", trunks);
+    printf("%s\n", trunks2);
+	return (0);
+} */
