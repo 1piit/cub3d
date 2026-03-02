@@ -92,6 +92,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(GNL_DIR) fclean
 	$(RM) $(NAME)
+	$(RM) vgcore.*
 
 re: fclean all
 
