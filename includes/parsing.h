@@ -16,16 +16,16 @@ typedef struct s_file
     int fd;
 } t_file;
 
-//extract_map.c
+/* extract_map.c */
 char **map_part(char **map, char **whole_file);
 
-//extract_ceilfloor.c
+/* extract_ceilfloor.c */
 char **ceilfloor_part(t_file *cubfile, char **wf);
 
-//extract_textures.c
+/* extract_textures.c */
 void textures_part(char **texture_file, char **wt_line, char **wf);
 
-//file_alloc.c
+/* file_alloc.c */
 int count_fd_lines(int fd);
 char **alloc_file_size(char **file_tab, int fd, int fd2);
 t_file split_file(t_file cubfile, char **file_tab);

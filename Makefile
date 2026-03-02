@@ -49,7 +49,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror  -g3
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 
