@@ -4,6 +4,8 @@
 #define BUFFER_SIZE 42
 #include <stdbool.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "parsing.h"
 #include "get_next_line.h"

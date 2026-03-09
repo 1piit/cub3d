@@ -37,6 +37,13 @@ PARSING_FILES = file_alloc.c \
 				extract_map.c \
 				extract_ceilfloor.c \
 				extract_textures.c \
+				parsing_datas_gen.c \
+				parsing_ceilfloor.c \
+				parsing_map.c \
+				parsing_map2.c \
+				parsing_map3.c \
+				parsing_textures.c \
+
 
 UTILS_FILES = /garbage_collector/gc_features.c \
 

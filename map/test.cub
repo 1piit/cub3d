@@ -1,0 +1,28 @@
+NO textures/test/blue.xpm
+SO textures/test/red.xpm
+WE textures/test/yellow.xpm
+EA textures/test/green.xpm
+
+F 20,20,20
+C 200,200,200
+
+1
+
+        11111
+        10001
+        10S01
+        10001
+     111111001111111    111
+    100000000000001
+    111101001111111     111
+        10001
+        10001
+        10001              111111
+        10001              100001
+        10001              11101 
+        11111               1111
+
+1
+
+
+

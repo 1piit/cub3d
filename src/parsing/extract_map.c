@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:24:58 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/27 18:18:38 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:01:58 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,76 +42,92 @@ static int line_tester(char *line/*, int j , int *error */)
 		return 0;}
 	return 1;
 }
-/* char **map_fill(int nb_lines, int start, char **map, int fd)
+char *null_terminate(char *str)
 {
-	int i = 0;
-	char *line;
-	while(i < start)
-	{
-		line = get_next_line(fd);
-		i++;
-	}
-    map = gc_mem(MALLOC, (sizeof(char *) * (nb_lines + 1)), NULL, GEN);
+	int i;
+
 	i = 0;
-	while(i < nb_lines)
-	{
-		map[i] = get_next_line(fd);
+	while(str[i] && str[i] != '\n')
 		i++;
-	}
-    map[i] = NULL;
-	close(fd);
-	return map;
-} */
-char **map_fill(int nb_lines, int start, char **map, char **wf)
+	str[i] = '\0';
+	return str;
+}
+char **map_fill(int *nb_lines, int start, char **map, char **wf)
 {
 	int i = 0;
 	int j = 0;
 /* 	char *line;
  */	while(i < start)
 		i++;
-    map = gc_mem(MALLOC, (sizeof(char *) * (nb_lines + 1)), NULL, GEN);
-	while(i < nb_lines + start)
+    map = gc_mem(MALLOC, (sizeof(char *) * (*nb_lines + 1)), NULL, GEN);
+	while(i < (*nb_lines) + start)
 	{
 		map[j] = wf[i];
+		map[j] = null_terminate(map[j]);
 		i++;
 		j++;
 	}
     map[j] = NULL;
 	return map;
 }
+char **check_eof(int *nb_lines, int start_map, char **map, char **wf)
+{
+	int i;
+	int j;
+	
+	i = start_map + *nb_lines;
+	while(wf[i])
+	{
+		j = 0;
+		printf("we are on this line '%s'\n\n", wf[i]);
+		while(wf[i][j])
+		{
+			if(wf[i][j] != '\n' && !ft_isspace(wf[i][j]) && wf[i][j] != '1' && wf[i][j] != '0' && wf[i][j] != 'S' && wf[i][j] != 'N' && wf[i][j] != 'W' && wf[i][j] != 'E')
+				return (printf("On this line we found '%c', FAILURE\n",wf[i][j]), NULL);
+			j++;
+		}
+		(*nb_lines)++;
+		i++;
+	}
+	return(map_fill(nb_lines, start_map, map, wf));
+}
 char **map_part(char **map, char **wf/* , int fd */)
 {
     int i = 0;
-    int fst = 0;
     int start_map = 0;
     int nb_lines = 0;
-/* 	int error = 0;*/
-	/* char c; */
+	
     while(wf[i] && wf)
     {
-		/* c = wf[i][fst]; */
-		if(wf[i][fst] == '1' || wf[i][fst] == '0' || wf[i][fst] == 'N' || (wf[i][fst] == ' ' 
-            || (wf[i][fst] > 10  && wf[i][fst] <= 13)) || (!(wf[i][fst] == '\n')))
-            if(line_tester((wf[i])/*, i , &error */))
-            {
-				/* printf("The %dth line is accepted : %s\n", i, wf[i] ); */
-                nb_lines++;
-            }
-            else
-            {    
-				/* printf("line %d hasnt been accepted because of error type --> %d\n\n", i, error); */
-				if(!nb_lines)
-                    start_map++;
+		char c = wf[i][0];
+		printf("Tested char is '%c'\n", c);
+		if(wf[i][0] == '1' || wf[i][0] == '0' || (wf[i][0] == ' ' 
+            || (wf[i][0] > 10  && wf[i][0] <= 13)))
+		{
+			if(line_tester((wf[i])))
+			{
+				printf("The %dth line is accepted : %s\n", i, wf[i]);
+				nb_lines++;
+				printf("So we increment number of lines -->%d\n", nb_lines);
 			}
+			else
+			{
+				printf("line %d hasnt been accepted\n\n",i);
+				if(!nb_lines)
+				{
+					printf("we increment start_map -->%d\n", start_map);
+					start_map++;}
+			}
+		}
+		else if(wf[i][0] == '\n' && nb_lines)
+			return(check_eof(&nb_lines, start_map, map, wf));
         else
         {
-			/* printf("line %d didnt pass the first test\n\n", i); */
+			printf("line %d didnt pass the first test because wf[i][0] was '%c'\n\n", i, wf[i][0]);
 			start_map++;
+			printf("we increment start_map -->%d\n", start_map);
 		}
         i++;
     }
-	/* printf("nb_lines --> %d | start --> %d\n", nb_lines, start_map); */
-    map = map_fill(nb_lines, start_map, map, wf);
-	/*  map = map_fill(nb_lines, start_map, map, fd); */
-	return map;
+    return(map_fill(&nb_lines, start_map, map, wf));
 }
