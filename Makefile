@@ -41,11 +41,15 @@ PARSING_FILES = file_alloc.c \
 UTILS_FILES = garbage_collector/gc_features.c \
 			mlx_utils.c \
 			mlx_utils_2.c \
+			utils.c \
+
+GAME_FILES = game_utils.c \
+			mini_map.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
 	$(addprefix src/utils/,$(UTILS_FILES)) \
-	src/mini_map.c \
+	$(addprefix src/game/,$(GAME_FILES)) \
 
 # === OBJ ===
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))

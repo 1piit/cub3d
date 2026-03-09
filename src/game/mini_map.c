@@ -6,47 +6,61 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 16:45:01 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/09 18:00:41 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	init_mini_map(t_data *data)
+static int	calculate_scale(t_data *data, char **map)
 {
-	t_img	mini_map;
+	int	len;
+	int	i;
+	int	j;
+	int	scale;
 
-	mini_map.mlx_img = mlx_new_image(data->mlx, 1920, 1080);
-	mini_map.addr = mlx_get_data_addr(mini_map.mlx_img,
-			&mini_map.bits_per_pixel, &mini_map.line_len, &mini_map.endian);
-	data->mini_map = mini_map;
+	len = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		if (j > len)
+			len = j;
+		i++;
+	}
+	scale = data->win_width / len * 0.2;
+	if (scale == 0)
+		scale = 1;
+	return (scale);
 }
 
-void	render_mini_map(t_data *data, char **map)
+
+void	draw_mini_map(t_data *data, char **map)
 {
+	int		scl;
 	t_axis	axis;
 
+	scl = calculate_scale(data, map);
 	axis.y = 0;
 	while (map[axis.y])
 	{
 		axis.x = 0;
 		while (map[axis.y][axis.x])
 		{
-			if (map[axis.y][axis.x] == '1')
-				my_mlx_put_square(&data->mini_map, axis, 15, 0x00FF0000);
+			if (map[axis.y][axis.x] == '1' || map[axis.y][axis.x] == 'F')
+				my_mlx_put_square(&data->game_img, axis, scl, 0x00FF0000);
 			if (map[axis.y][axis.x] == 'N')
-				my_mlx_put_triangle_no(&data->mini_map, axis, 15, 0x00FFFF00);
+				my_mlx_put_triangle_no(&data->game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'S')
-				my_mlx_put_triangle_so(&data->mini_map, axis, 15, 0x00FFFF00);
+				my_mlx_put_triangle_so(&data->game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'W')
-				my_mlx_put_triangle_we(&data->mini_map, axis, 15, 0x00FFFF00);
+				my_mlx_put_triangle_we(&data->game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'E')
-				my_mlx_put_triangle_ea(&data->mini_map, axis, 15, 0x00FFFF00);
+				my_mlx_put_triangle_ea(&data->game_img, axis, scl, 0x00FFFF00);
 			axis.x++;
 		}
 		axis.y++;
 	}
-	mlx_put_image_to_window(data->mlx,
-		data->mlx_win,
-		data->mini_map.mlx_img, 0, 0);
 }
