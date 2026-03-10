@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/06 17:29:39 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 19:55:35 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int ac, char **av)
     init_structs(&cubfile, av[1]);
     cubfile.fd = open(av[1], O_RDONLY);
     fd2 = open(av[1], O_RDONLY);
+    if(fd2 < 0 || cubfile.fd < 0)
+        return 0;
     /* i = 0; */
     file_tab = NULL;
     file_tab = alloc_file_size(&cubfile, file_tab, cubfile.fd, fd2);

@@ -8,7 +8,7 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	MLX_DIR  = minilibx-linux
 	MLX_NAME = $(MLX_DIR)/libmlx_Linux.a
-	MLX_FLAGS = -L $(MLX_DIR) -lmlx_Linux -L/usr/X11/lib -lXext -lX11 -lm
+	MLX_FLAGS =  -L $(MLX_DIR) -lmlx_Linux -L/usr/X11/lib -lXext -lX11 -lm 
 else ifeq ($(UNAME_S), Darwin) # macOS
 	MLX_DIR  = minilibx_opengl_20191021
 	MLX_NAME = $(MLX_DIR)/libmlx.a

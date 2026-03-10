@@ -38,7 +38,7 @@ ARFLAGS	= rcs
 
 AR 		= ar
 
-CFLAGS	= -Werror -Wextra -Wall -std=c89
+CFLAGS	= -Werror -Wextra -Wall
 
 RM		= rm -f
 

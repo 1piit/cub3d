@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:47:27 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/07 17:33:05 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 19:50:29 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int check_xpm(char *tf)
 	{
 		if(tf[i] == '.')
 		{
-			if(!ft_strncmp(&tf[i], ".xpm", 4))
+
+			if(!ft_strncmp(&tf[i], ".xpm", 4) && !tf[i+4])
 				return 1;
-			else
-				return 0;
 		}
 		i++;
 	}
