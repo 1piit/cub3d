@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 14:47:27 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/07 17:33:05 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:44:35 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int check_xpm(char *tf)
 	{
 		if(tf[i] == '.')
 		{
-			if(!ft_strncmp(&tf[i], ".xpm", 4))
+			if(!ft_strncmp(&tf[i], ".xpm", 4) && !tf[i+4])
 				return 1;
-			else
-				return 0;
 		}
 		i++;
 	}
@@ -34,7 +32,7 @@ void invalid_textures(int *flag, t_file cubfile)
 {
     int fd;
     int i;
-    
+
     i = 0;
     while(cubfile.texture_file[i])
     {

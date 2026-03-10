@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/06 17:29:39 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:42:17 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,9 @@ int	main(int ac, char **av)
     char **file_tab;
     int fd2;
     t_data data;
-/*     int i;
- */    t_file cubfile;
-    /* t_garbage **garbage;
-  
-  
-    garbage = get_garbage(); */
-    check_args(ac);    
+    t_file cubfile;
+
+    check_args(ac);
     init_structs(&cubfile, av[1]);
     cubfile.fd = open(av[1], O_RDONLY);
     fd2 = open(av[1], O_RDONLY);
@@ -84,13 +80,13 @@ int	main(int ac, char **av)
     cubfile = split_file(cubfile, file_tab);
     tester_extract(cubfile);
     if(!parsing_datas(cubfile, av[1]))
-    {   
+    {
         printf("\nMAP/FICHIER INVALIDE\n");
         return(gc_mem(FULL_CLEAN,0, NULL, GEN), 1);
     }
     init_data(&data);
 	init_game_img(&data);
-	draw_mini_map(&data, map);
+	draw_mini_map(&data, cubfile.map);
 	mlx_put_image_to_window(data.mlx, data.mlx_win,
 		data.game_img.mlx_img, 0, 0);
 	mlx_loop(data.mlx);
