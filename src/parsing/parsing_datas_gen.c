@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:21:20 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/09 19:12:27 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:21:45 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	extra_data(int *flag, t_file cubfile)
 		j++;
 	if ((unsigned int)j != cubfile.used_lines)
 		*flag = 1;
-	printf(" %d <=> j VS %d <=> used_lines\n", j, cubfile.used_lines);
 }
 void empty_file(int *flag, t_file cubfile)
 {
@@ -67,21 +66,12 @@ void check_extension(int *flag, char *file)
 	{
 		if(file[i] == '.')
 		{
-			if(!ft_strncmp(&file[i], ".cub", 4))
+			if(!ft_strncmp(&file[i], ".cub", 4) && !file[i+4])
 				return;
-			else
-			{
-				*flag = 1;
-				printf(". found, but not cub extension\n");
-				return;
-			}
 		}
 		i++;
 	}
-	if(!found)
-	{
-		printf(".cub not found\n");
-		*flag = 1;}
+	*flag = 1;
 }
 int	parsing_datas(t_file cubfile, char *file)
 {
