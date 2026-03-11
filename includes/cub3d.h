@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/09 17:52:36 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/11 11:31:22 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,9 @@ void	my_mlx_put_triangle_ea(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
+
+//cleanup.c
+void    cleanup_all(t_data *data);
+void    cleanup_all_exit(t_data *data, char *msg, int err_code);
 
 #endif

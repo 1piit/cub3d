@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/06 17:29:39 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/11 11:31:34 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ int	main(int ac, char **av)
     }
     init_data(&data);
 	init_game_img(&data);
-	draw_mini_map(&data, map);
+	draw_mini_map(&data, cubfile.map);
 	mlx_put_image_to_window(data.mlx, data.mlx_win,
 		data.game_img.mlx_img, 0, 0);
 	mlx_loop(data.mlx);
-    gc_mem(FULL_CLEAN, 0, NULL, GEN);
+    cleanup_all(&data);
     return (0);
 }

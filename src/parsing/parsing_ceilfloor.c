@@ -37,9 +37,9 @@ int count_values(char *str)
 {
     int i;
     int nb;
-    int commas;
+    // int commas;
     
-    commas = 0;
+    // commas = 0;
     nb = 0;
     i = 0;
     while(str && str[i] && str[i] != '\n')

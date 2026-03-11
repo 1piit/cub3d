@@ -168,9 +168,9 @@ char **ceilfloor_part(t_file *cubfile, char **wf)
 {
     char *floor;
     char *ceilling;
-    int i;
+    // int i;
 
-    i = 0;
+    // i = 0;
     cubfile->RGB_f = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
     cubfile->RGB_c = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
     ceilling = NULL;

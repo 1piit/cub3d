@@ -57,6 +57,7 @@ SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
 	$(addprefix src/utils/,$(UTILS_FILES)) \
 	$(addprefix src/game/,$(GAME_FILES)) \
+	src/cleanup.c \
 
 # === OBJ ===
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:04:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/09 16:10:55 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/11 11:22:21 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	init_data(t_data *data)
 	*data = (t_data){0};
 	get_screen_size(&data->win_width, &data->win_height);
 	data->mlx = mlx_init();
+	if (!data->mlx)
+		err_cleanup_exit(data, "mlx init", 1);
 	data->mlx_win = mlx_new_window(data->mlx, data->win_width,
 			data->win_height - 70, "cub3D - P2P");
+	if (!data->mlx_win)
+		err_cleanup_exit(data, "mlx new window", 1);
 }

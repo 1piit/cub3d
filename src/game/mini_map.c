@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/09 18:00:41 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/11 11:36:30 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	calculate_scale(t_data *data, char **map)
 			len = j;
 		i++;
 	}
-	scale = data->win_width / len * 0.2;
+	scale = data->win_width / len * 0.4;
 	if (scale == 0)
 		scale = 1;
 	return (scale);
