@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_datas_gen.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:21:20 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/09 19:12:27 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:39:18 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	error_msg(const char *msg, int status)
 }
 void is_here(int *flag, t_file cubfile)
 {
-    if(!cubfile.ceilfloor || !cubfile.ceilfloor[0] || !cubfile.ceilfloor[1] 
-		|| !cubfile.map || !cubfile.map[0] || !cubfile.wt_line 
+    if(!cubfile.ceilfloor || !cubfile.ceilfloor[0] || !cubfile.ceilfloor[1]
+		|| !cubfile.map || !cubfile.map[0] || !cubfile.wt_line
 		|| !cubfile.wt_line[0])
         *flag = 1;
-	
+
 }
 void	extra_data(int *flag, t_file cubfile)
 {
@@ -35,8 +35,8 @@ void	extra_data(int *flag, t_file cubfile)
 	while (cubfile.map && cubfile.map[i])
 	{
 		if(blank_line(cubfile.map[i]))
-			cubfile.used_lines++; 
-		i++;	
+			cubfile.used_lines++;
+		i++;
 		j++;
 	}
 	i = 0;
@@ -67,21 +67,12 @@ void check_extension(int *flag, char *file)
 	{
 		if(file[i] == '.')
 		{
-			if(!ft_strncmp(&file[i], ".cub", 4))
+			if(!ft_strncmp(&file[i], ".cub", 4) && !file[i+4])
 				return;
-			else
-			{
-				*flag = 1;
-				printf(". found, but not cub extension\n");
-				return;
-			}
 		}
 		i++;
 	}
-	if(!found)
-	{
-		printf(".cub not found\n");
-		*flag = 1;}
+	*flag = 1;
 }
 int	parsing_datas(t_file cubfile, char *file)
 {
@@ -95,7 +86,7 @@ int	parsing_datas(t_file cubfile, char *file)
 	check_player(&flag, cubfile);
 	printf("flag check_player-->%d\n", flag);
 	enclosed_map(&flag, cubfile.map);
-	printf("flag enclosed_map-->%d\n", flag);	
+	printf("flag enclosed_map-->%d\n", flag);
 	invalid_textures(&flag, cubfile);
 	printf("flag invalid_textures-->%d\n", flag);
 	invalid_rgb_case_one(&flag, cubfile.RGB_c, cubfile.RGB_f);
