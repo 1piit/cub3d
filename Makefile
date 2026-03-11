@@ -27,6 +27,7 @@ GNL_NAME = $(GNL_DIR)/get_next_line.a
 SRC_MAIN = src/main/
 SRC_PARSING = src/parsing/
 SRC_UTILS = src/utils/
+SRC_MINIMAP = src/mini_map/
 OBJ_DIR = obj
 
 # === SRC ===
@@ -39,13 +40,16 @@ PARSING_FILES = file_alloc.c \
 				extract_textures.c \
 
 UTILS_FILES = garbage_collector/gc_features.c \
-			mlx_utils.c \
-			mlx_utils_2.c \
+			mlx_utils/mlx_utils.c \
+			mlx_utils/mlx_utils_2.c \
+			mlx_utils/handlers.c \
+
+MINIMAP_FILES = mini_map.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
 	$(addprefix src/utils/,$(UTILS_FILES)) \
-	src/mini_map.c \
+	$(addprefix src/mini_map/,$(MINIMAP_FILES)) \
 
 # === OBJ ===
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))

@@ -6,11 +6,11 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/02 18:36:57 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/11 17:03:00 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "./../includes/cub3d.h"
 
 int	main(int ac, char **av)
 {
@@ -43,8 +43,14 @@ int	main(int ac, char **av)
 	init_data(&data);
 	init_mini_map(&data);
 	render_mini_map(&data, map);
+	
+	// Configuration des hooks AVANT mlx_loop
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_key, &data);
+	mlx_hook(data.mlx_win, DestroyNotify, StructureNotifyMask, handle_close, &data);
+	
+	// Lancement de la boucle principale
 	mlx_loop(data.mlx);
-    //garbage = get_garbage();
+	//garbage = get_garbage();
     //check_args(ac);
     //init_structs(&cubfile, av[1]);
     //cubfile.fd = open(av[1], O_RDONLY);

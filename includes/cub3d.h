@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 16:45:53 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/11 17:10:27 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <mlx.h>
-
-# include "parsing.h"
-# include "get_next_line.h"
-# include "garb.h"
-# include "libft.h"
-
-typedef struct s_axis
-{
-	int	x;
-	int	y;
-}	t_axis;
+#include <X11/keysym.h>
+# include <X11/XKBlib.h>
+# include <X11/X.h>
 
 typedef struct s_img
 {
@@ -46,6 +38,19 @@ typedef struct s_data
 	void	*mlx_win;
 	t_img	mini_map;
 }	t_data;
+
+# include "mlx_utils.h"
+# include "parsing.h"
+# include "get_next_line.h"
+# include "garb.h"
+# include "libft.h"
+
+typedef struct s_axis
+{
+	int	x;
+	int	y;
+}	t_axis;
+
 
 //main_utils.c
 void	check_args(int ac);

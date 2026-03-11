@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 16:45:01 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/11 14:13:31 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "./../includes/cub3d.h"
 
 void	init_mini_map(t_data *data)
 {
@@ -34,6 +34,8 @@ void	render_mini_map(t_data *data, char **map)
 		{
 			if (map[axis.y][axis.x] == '1')
 				my_mlx_put_square(&data->mini_map, axis, 15, 0x00FF0000);
+			if (map[axis.y][axis.x] == '0')
+				my_mlx_put_square(&data->mini_map, axis, 15, 0xBC2E2E);
 			if (map[axis.y][axis.x] == 'N')
 				my_mlx_put_triangle_no(&data->mini_map, axis, 15, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'S')
