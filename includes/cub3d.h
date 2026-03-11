@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/11 17:10:27 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/11 18:40:39 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # define BUFFER_SIZE 42
 # include <stdbool.h>
 # include <stdio.h>
-# include <mlx.h>
+# include <mlx.h>#include <fcntl.h>
+#include <unistd.h>
+
 #include <X11/keysym.h>
 # include <X11/XKBlib.h>
 # include <X11/X.h>

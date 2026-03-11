@@ -8,7 +8,7 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	MLX_DIR  = minilibx-linux
 	MLX_NAME = $(MLX_DIR)/libmlx_Linux.a
-	MLX_FLAGS = -L $(MLX_DIR) -lmlx_Linux -L/usr/X11/lib -lXext -lX11 -lm
+	MLX_FLAGS =  -L $(MLX_DIR) -lmlx_Linux -L/usr/X11/lib -lXext -lX11 -lm 
 else ifeq ($(UNAME_S), Darwin) # macOS
 	MLX_DIR  = minilibx_opengl_20191021
 	MLX_NAME = $(MLX_DIR)/libmlx.a
@@ -38,6 +38,13 @@ PARSING_FILES = file_alloc.c \
 				extract_map.c \
 				extract_ceilfloor.c \
 				extract_textures.c \
+				parsing_datas_gen.c \
+				parsing_ceilfloor.c \
+				parsing_map.c \
+				parsing_map2.c \
+				parsing_map3.c \
+				parsing_textures.c \
+
 
 UTILS_FILES = garbage_collector/gc_features.c \
 			mlx_utils/mlx_utils.c \
@@ -56,7 +63,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror  -g3
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 
@@ -101,6 +108,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(GNL_DIR) fclean
 	$(RM) $(NAME)
+	$(RM) vgcore.*
 
 re: fclean all
 

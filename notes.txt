@@ -4,3 +4,14 @@ MAPS:
 
 -->ATtention avec le gc, on ne peut pas simplement tout free a la fin. Il faut que periodiquement 
 on puisse vider la RAM.
+
+-->actuellement mon code ne gere pas une map avec des valeurs RGB tq :
+
+F   69, 222,  8 199
+
+C 235, 198, 52
+
+Et les valeurs retenues ne sont pas completes, il faudra tester whole_line plutot que les valeurs en tant que telles pour dire 
+que si y a plus de 3 valeurs reperees, ca degage.
+
+-->

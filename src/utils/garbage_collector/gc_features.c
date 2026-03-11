@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:42:22 by althorel          #+#    #+#             */
-/*   Updated: 2026/02/23 18:30:47 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/10 20:25:20 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ void	*gc_free(t_garbage **garb, void *ptr, t_label label)
 	return (NULL);
 }
 
-/* static void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev)
-{
-	if(garb && *garb)
-	{
-		if (cur->ptr)
-			free(cur->ptr);
-		if (prev)
-			prev->next = cur->next;
-		else
-			*garb = cur->next;
-	}
-	free(cur);
-} */
 static void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, t_garbage *tmp)
 {
 	if (cur->ptr)
