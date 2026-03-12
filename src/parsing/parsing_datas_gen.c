@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:21:20 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/10 20:39:18 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 12:47:45 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void empty_file(int *flag, t_file cubfile)
 void check_extension(int *flag, char *file)
 {
 	int i;
-	int found;
+	//int found;
 
-	found = 0;
+	//found = 0;
 	i = 0;
 
 	while(file[i])

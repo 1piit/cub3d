@@ -52,6 +52,7 @@ UTILS_FILES = garbage_collector/gc_features.c \
 
 GAME_FILES = game_utils.c \
 			mini_map.c \
+			hook.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
@@ -64,7 +65,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror  -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -std=gnu89
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 

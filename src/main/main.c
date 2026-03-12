@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/11 11:41:22 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 12:45:48 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,31 @@ int tester_extract(t_file cubfile)
 } */
 int	main(int ac, char **av)
 {
-    char **file_tab;
-    int fd2;
-    t_data data;
-    t_file cubfile;
+	char **file_tab;
+	int fd2;
+	t_data data;
+	t_file cubfile;
 
-    check_args(ac);
-    init_structs(&cubfile, av[1]);
-    cubfile.fd = open(av[1], O_RDONLY);
-    fd2 = open(av[1], O_RDONLY);
-    /* i = 0; */
-    file_tab = NULL;
-    file_tab = alloc_file_size(&cubfile, file_tab, cubfile.fd, fd2);
-    cubfile = split_file(cubfile, file_tab);
-    tester_extract(cubfile);
-    if(!parsing_datas(cubfile, av[1]))
-    {
-        printf("\nMAP/FICHIER INVALIDE\n");
-        return(gc_mem(FULL_CLEAN,0, NULL, GEN), 1);
-    }
-    init_data(&data);
-	init_game_img(&data);
+	check_args(ac);
+	init_structs(&cubfile, av[1]);
+	cubfile.fd = open(av[1], O_RDONLY);
+	fd2 = open(av[1], O_RDONLY);
+	/* i = 0; */
+	file_tab = NULL;
+	file_tab = alloc_file_size(&cubfile, file_tab, cubfile.fd, fd2);
+	cubfile = split_file(cubfile, file_tab);
+	tester_extract(cubfile);
+	if(!parsing_datas(cubfile, av[1]))
+	{
+		printf("\nMAP/FICHIER INVALIDE\n");
+		return(gc_mem(FULL_CLEAN,0, NULL, GEN), 1);
+	}
+	data = (t_data){0};
+	init_game(&data);
 	draw_mini_map(&data, cubfile.map);
 	mlx_put_image_to_window(data.mlx, data.mlx_win,
 		data.game_img.mlx_img, 0, 0);
 	mlx_loop(data.mlx);
-    cleanup_all(&data);
-    return (0);
+	cleanup_all_data(&data);
+	return (0);
 }
