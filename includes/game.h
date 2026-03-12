@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:41:46 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 19:19:42 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_game
 	int		win_width;
 	int		win_height;
 	t_img	game_img;
+	int		keys[65536];
 }	t_game;
 
 //mini_map.c
@@ -47,12 +48,13 @@ void	draw_mini_map(t_data *data, char **map);
 //game_utils.c
 void	init_game(t_data *data);
 
-//hook.c
+//key_handler.c
 int		close_handler(t_data *data);
-int		key_handler(int keysymb, t_data *data);
+int		key_press(int keysymb, t_data *data);
+int		key_release(int keysymb, t_data *data);
 
 //game_loop.c
-void	game_loop(t_data *data);
+int		game_loop(t_data *data);
 
 //mlx_utils.c
 void	my_mlx_put_pixel(t_img *img, int x, int y, int color);

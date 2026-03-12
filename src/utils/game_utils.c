@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 14:39:35 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 19:30:43 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ static void	init_game_img(t_data *data)
 		cleanup_all_exit(data, "mlx get data addr", 1);
 }
 
-static void	init_hook(t_data *data)
+static void	init_hooks(t_data *data)
 {
-	mlx_key_hook(data->game.mlx_win, key_handler, data);
-	mlx_hook(data->game.mlx_win, 17, 0, close_handler, data);
+	mlx_hook(data->game.mlx_win, KeyPress, KeyPressMask, key_press, data);
+	mlx_hook(data->game.mlx_win, KeyRelease, KeyReleaseMask, key_release, data);
+	mlx_hook(data->game.mlx_win, DestroyNotify, 0, close_handler, data);
+	mlx_loop_hook(data->game.mlx, game_loop, data);
 }
 
 void	init_game(t_data *data)
@@ -48,5 +50,5 @@ void	init_game(t_data *data)
 		cleanup_all_exit(data, "mlx init", 1);
 	init_window(data);
 	init_game_img(data);
-	init_hook(data);
+	init_hooks(data);
 }

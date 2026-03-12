@@ -54,7 +54,7 @@ UTILS_FILES = garbage_collector/gc_features.c \
 
 GAME_FILES = game_loop.c \
 			mini_map.c \
-			hook.c \
+			key_handler.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \

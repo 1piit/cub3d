@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 11:06:17 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 12:53:06 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 19:15:07 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ int	close_handler(t_data *data)
 	return (0);
 }
 
-int	key_handler(int keysymb, t_data *data)
+int	key_press(int keysymb, t_data *data)
 {
-	if (keysymb == XK_w)
-		printf("print W - North\n");
-	if (keysymb == XK_s)
-		printf("print S - South\n");
-	if (keysymb == XK_a)
-		printf("print A - East\n");
-	if (keysymb == XK_d)
-		printf("print D - West\n");
-	else if (keysymb == XK_Escape)
-		close_handler(data);
+	data->game.keys[keysymb] = 1;
 	return (0);
 }
+
+int	key_release(int keysymb, t_data *data)
+{
+	data->game.keys[keysymb] = 0;
+	return (0);
+}
+
