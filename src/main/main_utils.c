@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 16:04:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 11:22:22 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 14:37:49 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,10 @@ void	init_structs(t_file *cubfile, char *file_arg)
 	cubfile->ceilfloor = NULL;
 	cubfile->map = NULL;
 	// cubfile->texture_file = NULL;
+}
+
+void	init_data(t_data *data, int ac, char **av)
+{
+	init_parsing(data, ac, av);
+	init_game(data);
 }

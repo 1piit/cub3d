@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/11 11:36:30 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 14:41:00 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	calculate_scale(t_data *data, char **map)
 			len = j;
 		i++;
 	}
-	scale = data->win_width / len * 0.4;
+	scale = data->game.win_width / len * 0.4;
 	if (scale == 0)
 		scale = 1;
 	return (scale);
@@ -50,15 +50,15 @@ void	draw_mini_map(t_data *data, char **map)
 		while (map[axis.y][axis.x])
 		{
 			if (map[axis.y][axis.x] == '1' || map[axis.y][axis.x] == 'F')
-				my_mlx_put_square(&data->game_img, axis, scl, 0x00FF0000);
+				my_mlx_put_square(&data->game.game_img, axis, scl, 0x00FF0000);
 			if (map[axis.y][axis.x] == 'N')
-				my_mlx_put_triangle_no(&data->game_img, axis, scl, 0x00FFFF00);
+				my_mlx_put_triangle_no(&data->game.game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'S')
-				my_mlx_put_triangle_so(&data->game_img, axis, scl, 0x00FFFF00);
+				my_mlx_put_triangle_so(&data->game.game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'W')
-				my_mlx_put_triangle_we(&data->game_img, axis, scl, 0x00FFFF00);
+				my_mlx_put_triangle_we(&data->game.game_img, axis, scl, 0x00FFFF00);
 			else if (map[axis.y][axis.x] == 'E')
-				my_mlx_put_triangle_ea(&data->game_img, axis, scl, 0x00FFFF00);
+				my_mlx_put_triangle_ea(&data->game.game_img, axis, scl, 0x00FFFF00);
 			axis.x++;
 		}
 		axis.y++;

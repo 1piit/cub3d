@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 10:42:03 by pierreb           #+#    #+#             */
-/*   Updated: 2026/03/12 12:50:45 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/12 14:40:06 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void	cleanup_all_data(t_data *data)
 {
 	gc_mem(FULL_CLEAN, 0, NULL, GEN);
-	if (data->game_img.mlx_img)
+	if (data->game.game_img.mlx_img)
 	{
-		mlx_destroy_image(data->mlx, data->game_img.mlx_img);
-		data->game_img.mlx_img = NULL;
+		mlx_destroy_image(data->game.mlx, data->game.game_img.mlx_img);
+		data->game.game_img.mlx_img = NULL;
 	}
-	if (data->mlx_win)
+	if (data->game.mlx_win)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
-		data->mlx_win = NULL;
+		mlx_destroy_window(data->game.mlx, data->game.mlx_win);
+		data->game.mlx_win = NULL;
 	}
-	if (data->mlx)
+	if (data->game.mlx)
 	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-		data->mlx = NULL;
+		mlx_destroy_display(data->game.mlx);
+		free(data->game.mlx);
+		data->game.mlx = NULL;
 	}
 }
 

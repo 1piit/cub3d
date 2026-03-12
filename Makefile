@@ -49,8 +49,10 @@ UTILS_FILES = garbage_collector/gc_features.c \
 			mlx_utils.c \
 			mlx_utils_2.c \
 			utils.c \
+			game_utils.c \
+			parsing_utils.c \
 
-GAME_FILES = game_utils.c \
+GAME_FILES = game_loop.c \
 			mini_map.c \
 			hook.c \
 

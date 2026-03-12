@@ -1,21 +1,24 @@
 #ifndef PARSING_H
-#define PARSING_H
+# define PARSING_H
 
-#include "cub3d.h"
+typedef struct s_data t_data;
 
 typedef struct s_garbage t_garbage;
 typedef struct s_file
 {
-    char *save_file;
-    char **wt_line;
-    char **texture_file;
-    char **map;
-    char **ceilfloor;
-    int  *RGB_f;
-    int  *RGB_c;
-    unsigned int used_lines;
-    int fd;
+	char *save_file;
+	char **wt_line;
+	char **texture_file;
+	char **map;
+	char **ceilfloor;
+	int  *RGB_f;
+	int  *RGB_c;
+	unsigned int used_lines;
+	int fd;
 } t_file;
+
+/* parsing_utils.c */
+void	init_parsing(t_data *data, int ac, char **av);
 
 /* extract_map.c */
 char **map_part(char **map, char **whole_file);
@@ -45,4 +48,4 @@ void enclosed_map(int *flag, char **map);
 char **temp_map(char **map, int *longest);
 int blank_line(char *str);
 
-#endif
+# endif
