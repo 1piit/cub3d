@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 19:30:43 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/16 15:23:03 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	init_game(t_data *data)
 	if (!data->game.mlx)
 		cleanup_all_exit(data, "mlx init", 1);
 	init_window(data);
+	data->game.mini_map_scl = calculate_scale(data, data->cubfile.map);
 	init_game_img(data);
+	init_map_len(data);
+	init_player_pos(data);
 	init_hooks(data);
 }

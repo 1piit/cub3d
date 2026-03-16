@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 19:19:42 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/16 16:16:38 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,40 @@ typedef struct s_img
 	//int		height;
 }	t_img;
 
+typedef struct s_player
+{
+	float	pos_x;
+	float	pos_y;
+}	t_player;
+
 typedef struct s_game
 {
-	void	*mlx;
-	void	*mlx_win;
-	int		win_width;
-	int		win_height;
-	t_img	game_img;
-	int		keys[65536];
+	void		*mlx;
+	void		*mlx_win;
+	int			win_width;
+	int			win_height;
+	int			mini_map_scl;
+	int			map_width;
+	int			map_height;
+	t_img		game_img;
+	t_player	player;
+	int			keys[65536];
 }	t_game;
 
 //mini_map.c
+void	init_map_len(t_data *data);
 void	draw_mini_map(t_data *data, char **map);
+
+//player.c
+void	update_player_pos(t_data *data);
+void	init_player_pos(t_data *data);
+void	draw_player(t_data *data);
 
 //game_utils.c
 void	init_game(t_data *data);
+
+//game_utils2.c
+int	calculate_scale(t_data *data, char **map);
 
 //key_handler.c
 int		close_handler(t_data *data);
@@ -59,12 +78,6 @@ int		game_loop(t_data *data);
 //mlx_utils.c
 void	my_mlx_put_pixel(t_img *img, int x, int y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
-
-//mlx_utils_2.c
-void	my_mlx_put_triangle_no(t_img *img, t_axis axis, int scale, int color);
-void	my_mlx_put_triangle_so(t_img *img, t_axis axis, int scale, int color);
-void	my_mlx_put_triangle_we(t_img *img, t_axis axis, int scale, int color);
-void	my_mlx_put_triangle_ea(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);

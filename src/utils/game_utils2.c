@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   game_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 16:17:18 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/16 15:19:00 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/16 15:19:34 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-static int	render_frame(t_data *data)
+int	calculate_scale(t_data *data, char **map)
 {
-	//printf("render_next_frame\n");
-	draw_mini_map(data, data->cubfile.map);
-	draw_player(data);
-	mlx_put_image_to_window(data->game.mlx, data->game.mlx_win,
-		data->game.game_img.mlx_img, 0, 0);
-	return (0);
-}
+	int	len;
+	int	i;
+	int	j;
+	int	scale;
 
-int	game_loop(t_data *data)
-{
-	//usleep(100);
-	if (data->game.keys[XK_Escape])
-		close_handler(data);
-	update_player_pos(data);
-	render_frame(data);
-	return (0);
+	len = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		if (j > len)
+			len = j;
+		i++;
+	}
+	scale = data->game.win_width / len * 0.4;
+	if (scale == 0)
+		scale = 1;
+	return (scale);
 }

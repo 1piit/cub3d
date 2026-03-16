@@ -6,43 +6,38 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 17:43:18 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 14:41:00 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/16 16:26:34 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-static int	calculate_scale(t_data *data, char **map)
+void	init_map_len(t_data *data)
 {
-	int	len;
-	int	i;
-	int	j;
-	int	scale;
+	char	**map;
+	t_axis	axis;
 
-	len = 0;
-	i = 0;
-	while (map[i])
+	map = data->cubfile.map;
+	axis.y = 0;
+	while (map[axis.y])
 	{
-		j = 0;
-		while (map[i][j])
-			j++;
-		if (j > len)
-			len = j;
-		i++;
+		axis.x = 0;
+		while (map[axis.y][axis.x])
+		{
+			if (data->game.map_width < axis.x)
+				data->game.map_width = axis.x;
+			axis.x++;
+		}
+		if (data->game.map_height < axis.y)
+				data->game.map_height = axis.y;
+		axis.y++;
 	}
-	scale = data->game.win_width / len * 0.4;
-	if (scale == 0)
-		scale = 1;
-	return (scale);
 }
-
 
 void	draw_mini_map(t_data *data, char **map)
 {
-	int		scl;
 	t_axis	axis;
 
-	scl = calculate_scale(data, map);
 	axis.y = 0;
 	while (map[axis.y])
 	{
@@ -50,15 +45,10 @@ void	draw_mini_map(t_data *data, char **map)
 		while (map[axis.y][axis.x])
 		{
 			if (map[axis.y][axis.x] == '1' || map[axis.y][axis.x] == 'F')
-				my_mlx_put_square(&data->game.game_img, axis, scl, 0x00FF0000);
-			if (map[axis.y][axis.x] == 'N')
-				my_mlx_put_triangle_no(&data->game.game_img, axis, scl, 0x00FFFF00);
-			else if (map[axis.y][axis.x] == 'S')
-				my_mlx_put_triangle_so(&data->game.game_img, axis, scl, 0x00FFFF00);
-			else if (map[axis.y][axis.x] == 'W')
-				my_mlx_put_triangle_we(&data->game.game_img, axis, scl, 0x00FFFF00);
-			else if (map[axis.y][axis.x] == 'E')
-				my_mlx_put_triangle_ea(&data->game.game_img, axis, scl, 0x00FFFF00);
+				my_mlx_put_square(&data->game.game_img, axis, data->game.mini_map_scl, 0x00FF0000);
+			if (map[axis.y][axis.x] == '0' || map[axis.y][axis.x] == 'N' || map[axis.y][axis.x] == 'S'
+			|| map[axis.y][axis.x] == 'W' || map[axis.y][axis.x] == 'E')
+				my_mlx_put_square(&data->game.game_img, axis, data->game.mini_map_scl, 0x00000000);
 			axis.x++;
 		}
 		axis.y++;
