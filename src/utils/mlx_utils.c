@@ -6,18 +6,18 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 15:00:26 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/16 17:32:51 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	my_mlx_put_pixel(t_img *img, int x, int y, int color)
+void	my_mlx_put_pixel(t_img *img, float x, float y, int color)
 {
 	char	*dest;
 	int		offset;
 
-	offset = (y * img->line_len + x * (img->bits_per_pixel / 8));
+	offset = ((int)y * img->line_len + (int)x * (img->bits_per_pixel / 8));
 	dest = img->addr + offset;
 	*(unsigned int *)dest = color;
 }

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 16:16:38 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/16 17:41:05 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ typedef struct s_data t_data;
 
 typedef struct s_axis
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }	t_axis;
 
 typedef struct s_img
@@ -76,7 +76,7 @@ int		key_release(int keysymb, t_data *data);
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, int x, int y, int color);
+void	my_mlx_put_pixel(t_img *img, float x, float y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
