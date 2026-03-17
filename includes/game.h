@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 18:07:00 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:49:07 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_axis
 {
@@ -38,6 +38,7 @@ typedef struct s_player
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	radian;
 }	t_player;
 
 typedef struct s_game
@@ -60,6 +61,7 @@ void	draw_mini_map(t_data *data, char **map);
 
 //player.c
 void	update_player_pos(t_data *data);
+void	update_player_dir(t_data *data);
 void	init_player_dir(t_data *data, char c);
 void	init_player(t_data *data);
 void	draw_line(t_data *data);

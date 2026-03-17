@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 18:14:23 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:48:29 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,44 @@ void	update_player_pos(t_data *data)
 	);
 }
 
+void	update_player_dir(t_data *data)
+{
+	double	move_speed;
+
+	move_speed = 0.05;
+	if (data->game.keys[XK_Left])
+	{
+		data->game.player.radian -= move_speed;
+	}
+	else if (data->game.keys[XK_Right])
+	{
+		data->game.player.radian += move_speed;
+	}
+	data->game.player.dir_x = cos(data->game.player.radian);
+	data->game.player.dir_y = sin(data->game.player.radian);
+}
+
 void	init_player_dir(t_data *data, char c)
 {
 	if (c == 'N')
 	{
-		data->game.player.dir_y = data->game.player.pos_y - 1;
-		data->game.player.dir_x = data->game.player.pos_x;
+		data->game.player.radian = (3 * M_PI) / 2;
+		data->game.player.dir_y = sin(data->game.player.radian);
 	}
 	else if (c == 'S')
 	{
-		data->game.player.dir_y = data->game.player.pos_y + 1;
-		data->game.player.dir_x = data->game.player.pos_x;
+		data->game.player.radian = M_PI / 2;
+		data->game.player.dir_y = sin(data->game.player.radian);
 	}
 	else if (c == 'E')
 	{
-		data->game.player.dir_y = data->game.player.pos_y;
-		data->game.player.dir_x = data->game.player.pos_x + 1;
+		data->game.player.radian = 0;
+		data->game.player.dir_x = cos(data->game.player.radian);
 	}
 	else if (c == 'W')
 	{
-		data->game.player.dir_y = data->game.player.pos_y;
-		data->game.player.dir_x = data->game.player.pos_x - 1;
+		data->game.player.radian = M_PI;
+		data->game.player.dir_x = cos(data->game.player.radian);
 	}
 }
 
@@ -101,26 +118,19 @@ void	init_player(t_data *data)
 
 void	draw_line(t_data *data)
 {
-	double	deltaY = data->game.player.dir_y - data->game.player.pos_y;
-	double	deltaX = data->game.player.dir_x - data->game.player.pos_x;
-	
-	int flag = 0;
-	
-	if(!flag)
-	{
-		printf("\n\n\n%f && %f\n\n\n", deltaY, deltaX);
-		flag = 1;
-	}
-	double	pixelX = data->game.player.pos_x;
-	double	pixelY = data->game.player.pos_y;
-	int	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	deltaX /= pixels;
-	deltaY /= pixels;
+	int		scl = data->game.mini_map_scl;
+
+	double	pixelX = data->game.player.pos_x * scl + scl / 2;
+	double	pixelY = data->game.player.pos_y * scl + scl / 2;
+
+	double	deltaX = data->game.player.dir_x;
+	double	deltaY = data->game.player.dir_y;
+
+	int		pixels = scl;
+
 	while (pixels)
 	{
-		my_mlx_put_pixel(&data->game.game_img, 
-			data->game.player.pos_x * data->game.mini_map_scl + pixelX , 
-			data->game.player.pos_y * data->game.mini_map_scl + pixelY, 0x0009EE01);
+		my_mlx_put_pixel(&data->game.game_img, pixelX, pixelY, 0x0009EE01);
 		pixelX += deltaX;
 		pixelY += deltaY;
 		--pixels;

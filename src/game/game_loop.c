@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 18:07:00 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:49:28 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	game_loop(t_data *data)
 	if (data->game.keys[XK_Escape])
 		close_handler(data);
 	update_player_pos(data);
+	update_player_dir(data);
 	render_frame(data);
 	return (0);
 }
