@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 16:45:01 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:07:00 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_mini_map(t_data *data, char **map);
 void	update_player_pos(t_data *data);
 void	init_player_dir(t_data *data, char c);
 void	init_player(t_data *data);
-void	draw_ray(t_data *data);
+void	draw_line(t_data *data);
 void	draw_player(t_data *data);
 
 //game_utils.c

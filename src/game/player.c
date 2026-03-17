@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 16:55:23 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:14:23 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,18 @@ void	init_player(t_data *data)
 	}
 }
 
-void	draw_ray(t_data *data)
+void	draw_line(t_data *data)
 {
 	double	deltaY = data->game.player.dir_y - data->game.player.pos_y;
 	double	deltaX = data->game.player.dir_x - data->game.player.pos_x;
+	
+	int flag = 0;
+	
+	if(!flag)
+	{
+		printf("\n\n\n%f && %f\n\n\n", deltaY, deltaX);
+		flag = 1;
+	}
 	double	pixelX = data->game.player.pos_x;
 	double	pixelY = data->game.player.pos_y;
 	int	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
@@ -111,7 +119,7 @@ void	draw_ray(t_data *data)
 	while (pixels)
 	{
 		my_mlx_put_pixel(&data->game.game_img, 
-			data->game.player.pos_x * data->game.mini_map_scl + pixelX, 
+			data->game.player.pos_x * data->game.mini_map_scl + pixelX , 
 			data->game.player.pos_y * data->game.mini_map_scl + pixelY, 0x0009EE01);
 		pixelX += deltaX;
 		pixelY += deltaY;

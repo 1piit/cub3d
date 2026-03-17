@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 16:50:35 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:07:00 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	render_frame(t_data *data)
 	//printf("render_next_frame\n");
 	draw_mini_map(data, data->cubfile.map);
 	draw_player(data);
-	draw_ray(data);
+	draw_line(data);
 	mlx_put_image_to_window(data->game.mlx, data->game.mlx_win,
 		data->game.game_img.mlx_img, 0, 0);
 	return (0);
