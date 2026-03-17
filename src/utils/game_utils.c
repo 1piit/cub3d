@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 15:23:03 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/17 16:50:45 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	init_hooks(t_data *data)
 	mlx_loop_hook(data->game.mlx, game_loop, data);
 }
 
+
 void	init_game(t_data *data)
 {
 	data->game.mlx = mlx_init();
@@ -52,6 +53,6 @@ void	init_game(t_data *data)
 	data->game.mini_map_scl = calculate_scale(data, data->cubfile.map);
 	init_game_img(data);
 	init_map_len(data);
-	init_player_pos(data);
+	init_player(data);
 	init_hooks(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 17:41:05 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/17 16:45:01 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ typedef struct s_data t_data;
 
 typedef struct s_axis
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_axis;
 
 typedef struct s_img
@@ -34,8 +34,10 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	pos_x;
-	float	pos_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
 }	t_player;
 
 typedef struct s_game
@@ -58,7 +60,9 @@ void	draw_mini_map(t_data *data, char **map);
 
 //player.c
 void	update_player_pos(t_data *data);
-void	init_player_pos(t_data *data);
+void	init_player_dir(t_data *data, char c);
+void	init_player(t_data *data);
+void	draw_ray(t_data *data);
 void	draw_player(t_data *data);
 
 //game_utils.c
@@ -76,7 +80,7 @@ int		key_release(int keysymb, t_data *data);
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, float x, float y, int color);
+void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c

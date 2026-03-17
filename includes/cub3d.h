@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:36:51 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/17 16:29:57 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <mlx.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <math.h>
 
 # include "get_next_line.h"
 # include "libft.h"
