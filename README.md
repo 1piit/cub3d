@@ -9,3 +9,4 @@ My first RayCaster with miniLibX
 - [From Flat to Fantastic: How cub3D’s Ray Casting Engine Transforms 2D into 3D](https://medium.com/@elmehdielgarouaz/from-flat-to-fantastic-how-cub3ds-ray-casting-engine-transforms-2d-into-3d-647ff2f7fd4f)
 - [3D Ray-casting Game with Cub3D🧠](https://devabdilah.medium.com/3d-ray-casting-game-with-cub3d-7a116376056a)
 - [oceano mlx explained](https://github.com/suspectedoceano/mlx)
+- [cub3d - Raycasting](https://lodev.org/cgtutor/raycasting.html)
