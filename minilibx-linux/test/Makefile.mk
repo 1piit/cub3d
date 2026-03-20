@@ -5,7 +5,7 @@ INCLIB=$(INC)/../lib
 
 UNAME := $(shell uname)
 
-CFLAGS= -I$(INC) -O3 -I.. -g #-std=gnu8989
+CFLAGS= -I$(INC) -O3 -I.. -g
 
 NAME= mlx-test
 SRC = main.c
@@ -21,7 +21,7 @@ else ifeq ($(UNAME), FreeBSD)
 	CC = clang
 else
 	#Linux and others...
-	CC	= clang
+	CC	= gcc
 	LFLAGS += -lbsd
 endif
 

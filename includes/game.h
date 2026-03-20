@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 19:49:07 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/19 12:43:35 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ typedef struct s_img
 	//int		height;
 }	t_img;
 
+typedef struct t_plane
+{
+	double 	plane_x;
+	double plane_x_start;
+	double 	plane_y;
+	double	plane_y_start;
+	double 	end_x[2];
+	double  end_y[2];
+} 	t_plane;
+
 typedef struct s_player
 {
 	double	pos_x;
@@ -39,6 +49,9 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 	double	radian;
+	double  dir_radian;
+	double 	step;
+	t_plane plane;
 }	t_player;
 
 typedef struct s_game
@@ -62,9 +75,12 @@ void	draw_mini_map(t_data *data, char **map);
 //player.c
 void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
+// void	update_player_plane(t_data *data);
 void	init_player_dir(t_data *data, char c);
 void	init_player(t_data *data);
-void	draw_line(t_data *data);
+void	init_plane(t_data *data, char c);
+void	draw_line(t_data *data, int nb);
+void	get_plane_val(t_data *data, double x, double y);
 void	draw_player(t_data *data);
 
 //game_utils.c
