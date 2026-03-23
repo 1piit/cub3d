@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 16:38:50 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:35:41 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color)
 	int	py;
 
 	px = 0;
+	printf("INITIAL x is --> %f, y is --> %f\n", axis.x, axis.y);
 	while (px < scale)
 	{
 		py = 0;

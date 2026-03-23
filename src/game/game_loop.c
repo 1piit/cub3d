@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/19 13:06:55 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 15:29:32 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ static int	render_frame(t_data *data)
 	draw_mini_map(data, data->cubfile.map);
 	draw_player(data);
 	get_plane_val(data, data->game.player.plane.plane_x, data->game.player.plane.plane_y);
-	draw_line(data, 1000);
+	draw_line(data, 2580);
 /* 	while( data->game.player.radian < 0.66 && data->game.player.radian > -0.66)
 	{
 		data->game.player.radian += 0.01;
 	} */
+	//raycast_game(data);
 	mlx_put_image_to_window(data->game.mlx, data->game.mlx_win,
 		data->game.game_img.mlx_img, 0, 0);
 	return (0);
@@ -33,7 +34,7 @@ static int	render_frame(t_data *data)
 
 int	game_loop(t_data *data)
 {
-	usleep(500);
+	usleep(100);
 	if (data->game.keys[XK_Escape])
 		close_handler(data);
 	update_player_pos(data);

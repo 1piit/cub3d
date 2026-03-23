@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/20 12:22:14 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 15:27:09 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ void	init_player(t_data *data)
 			{
 				init_player_dir(data, map[y][x]);
 				init_plane(data, map[y][x]);
-				data->game.player.pos_x = x;
-				data->game.player.pos_y = y;
+				data->game.player.pos_x = x /* + 0.5 */;
+				data->game.player.pos_y = y /* + 0.5 */;
 			}
 			x++;
 		}
@@ -175,37 +175,134 @@ void	get_plane_val(t_data *data, double x, double y)
 	data->game.player.plane.end_x[1] = data->game.player.plane.plane_x_start - x * scl;
     data->game.player.plane.end_y[1] = data->game.player.plane.plane_y_start - y * scl;
 
-	plane_loop(data);
+	//plane_loop(data);
+}
+//static int chiant = 0;
+// faudra quand meme aller voir en detail l algo bresenham pour etre bien capable d expliquer tout ca
+void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y)
+{
+	int dx;
+	int dy;
+	int step_x;
+	int step_y;
+	int err_factor;
+	int save_err;
+	dx = abs(end_x - start_x);
+	dy = abs(end_y - start_y); 
+	if(start_x < end_x)
+		step_x = 1;
+	else
+		step_x = -1;
+	if(start_y < end_y)
+		step_y = 1;
+	else
+		step_y = -1;
+	if(dx > dy)
+		err_factor = dx / 2;
+	else
+		err_factor = -dy / 2;
+
+	while(1)
+	{
+		if (start_x >= 0 && start_x < data->game.map_width * data->game.mini_map_scl 
+			&& start_y >= 0 && start_y < data->game.map_height * data->game.mini_map_scl)
+            my_mlx_put_pixel(&data->game.game_img, start_x, start_y, 0x009EE01);
+		//printf("%d\n", chiant++);
+		if(start_x == end_x && start_y == end_y)
+			break;
+		save_err = err_factor;
+		if(save_err > -dx)
+		{
+			err_factor -= dy;
+			start_x += step_x;
+		}
+		if(save_err < dy)
+		{
+			err_factor += dx;
+			start_y += step_y;
+		}
+	}
 }
 void which_line(t_data *data, double ray_dx, double ray_dy)
 {
+	int map_x;
+	int map_y;
+	double side_dstx;
+	double side_dsty;
+	double rho_dstx;
+	double rho_dsty;
+	double perp_wd;
+	/* double pixel_x;
+	double pixel_y; */
+	int step_x;
+	int step_y;
 	int hit = 0;
-	double cur_x = data->game.player.pos_x;
-	double cur_y = data->game.player.pos_y;
-	double pixel_x;
-	double pixel_y;
-	double step = 0.05;
-	int x_pos;
-	int y_pos;
+	int side;
+	double hit_x;
+	double hit_y;
+
+	map_x = data->game.player.pos_x;
+	map_y = data->game.player.pos_y;
+	if(!ray_dx)
+		rho_dstx = 1e30;
+	else
+		rho_dstx = fabs(1/ray_dx);
+	if(!ray_dy)
+		rho_dsty = 1e30;
+	else
+		rho_dsty = fabs(1/ray_dy);
+	if(ray_dx < 0)
+	{
+		step_x = -1;
+		side_dstx = (data->game.player.pos_x - map_x) * rho_dstx;
+	}
+	else
+	{
+		step_x = 1;
+		side_dstx = (map_x + 1 - data->game.player.pos_x) * rho_dstx;
+	}
+	if(ray_dy < 0)
+	{
+		step_y = -1;
+		side_dsty = (data->game.player.pos_y - map_y) * rho_dsty;
+	}
+	else
+	{
+		step_y = 1;
+		side_dsty = (map_y + 1 - data->game.player.pos_y) * rho_dsty;
+	}
 	while(!hit)
 	{
-		cur_x += ray_dx * step;
-		cur_y += ray_dy * step;
-		x_pos = (int)cur_x;
-		y_pos = (int)cur_y;
-        if (x_pos < 0 || x_pos >= data->game.map_width)
-            break;
-        if (y_pos < 0 || y_pos >= data->game.map_height)
-            break;
-		if(data->cubfile.map[y_pos][x_pos] == '1')
+		if(side_dstx < side_dsty)
 		{
-			hit = 1;
-			continue;
+			side_dstx += rho_dstx;
+			map_x += step_x;
+			side = 0;
 		}
-		pixel_x = cur_x * data->game.mini_map_scl + data->game.mini_map_scl / 2;
-		pixel_y = cur_y * data->game.mini_map_scl + data->game.mini_map_scl / 2;
-		my_mlx_put_pixel(&data->game.game_img, pixel_x, pixel_y, 0x0009EE01);
+		else
+		{
+			side_dsty += rho_dsty;
+			map_y += step_y;
+			side = 1;
+		}
+		if (map_x < 0 || map_x >= data->game.map_width || 
+            map_y < 0 || map_y >= data->game.map_height)
+            break;
+		if(data->cubfile.map[map_y][map_x] == '1')
+			hit = 1;
 	}
+    if (side == 0)
+        perp_wd = (side_dstx - rho_dstx);
+    else
+    {
+		perp_wd = (side_dsty - rho_dsty);
+	}	
+	hit_x = data->game.player.pos_x + ray_dx * perp_wd;
+	hit_y = data->game.player.pos_y + ray_dy * perp_wd;
+	bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl) /* + data->game.mini_map_scl / 2 */, 
+	(int)(data->game.player.pos_y * data->game.mini_map_scl) /* + data->game.mini_map_scl / 2 */, 
+		(int)(hit_x * data->game.mini_map_scl) /* + data->game.mini_map_scl / 2 */, 
+		(int)(hit_y * data->game.mini_map_scl) /* + data->game.mini_map_scl / 2 */);
 }
 
 void	draw_line(t_data *data, int nb)
@@ -229,7 +326,7 @@ void	draw_player(t_data *data)
 {
 	t_axis	axis;
 
-	axis.x = data->game.player.pos_x;
-	axis.y = data->game.player.pos_y;
+	axis.x = data->game.player.pos_x - 0.5;
+	axis.y = data->game.player.pos_y - 0.5;
 	my_mlx_put_square(&data->game.game_img, axis, data->game.mini_map_scl, 0x00FFFF00);
 }
