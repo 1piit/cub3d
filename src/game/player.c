@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/23 18:58:09 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:07:58 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,9 +285,9 @@ void which_line(t_data *data, double ray_dx, double ray_dy)
 	}	
 	data->game.box.hit_x = data->game.player.pos_x + ray_dx * data->game.box.perp_wd;
 	data->game.box.hit_y = data->game.player.pos_y + ray_dy * data->game.box.perp_wd;
-	bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl), 
-	(int)(data->game.player.pos_y * data->game.mini_map_scl), 
-		(int)(data->game.box.hit_x * data->game.mini_map_scl), 
+		bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl),
+		(int)(data->game.player.pos_y * data->game.mini_map_scl),
+		(int)(data->game.box.hit_x * data->game.mini_map_scl),
 		(int)(data->game.box.hit_y * data->game.mini_map_scl));
 }
 

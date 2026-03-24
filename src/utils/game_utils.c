@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 16:50:45 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:59:12 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	init_window(t_data *data)
 static void	init_game_img(t_data *data)
 {
 	data->game.game_img = (t_img){0};
+	data->game.ew_wall = 0x0CE9389;
+	data->game.sn_wall = 0x0CD6E5B;
 	data->game.game_img.mlx_img = mlx_new_image(data->game.mlx, data->game.win_width,
 			data->game.win_height);
 	if (!data->game.game_img.mlx_img)

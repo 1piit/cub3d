@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/24 15:17:09 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:08:55 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,24 @@ void raycast_game(t_data *data)
     int lineHeight;
     int drawStart;
     int drawEnd;
-    int ratio;
+    //int ratio;
     int color = 0x0CE9389;
     int i;
     i = 0;
-    ratio = data->game.win_height / 2;
-    lineHeight = (int)(ratio/data->game.box.perp_wd);
-    drawStart = -lineHeight / 2 + ratio / 2;
-    drawEnd = lineHeight / 2 + ratio / 2;
-    if(drawEnd >= ratio)
-        drawEnd = ratio - 1;
-    if(drawStart < 0)
-        drawStart = 0;
+    //ratio = data->img.win_height / 2;
     while(i < data->game.win_width)
     {
+        data->game.player.camera_x = 2.0 * i / (double)data->game.win_width - 1.0;
+        data->game.player.ray_dir_x = data->game.player.dir_x + data->game.player.plane.plane_x * data->game.player.camera_x;
+        data->game.player.ray_dir_y = data->game.player.dir_y + data->game.player.plane.plane_y * data->game.player.camera_x;
+        which_line(data, data->game.player.ray_dir_x, data->game.player.ray_dir_y);
+        lineHeight = (int)(data->game.win_height/data->game.box.perp_wd);
+        drawStart = -lineHeight / 2 + data->game.win_height / 2;
+        drawEnd = lineHeight / 2 + data->game.win_height / 2;
+        if(drawEnd >= data->game.win_height)
+            drawEnd = data->game.win_height - 1;
+        if(drawStart < 0)
+            drawStart = 0;
         draw_vlines(data, i, drawStart, drawEnd, color);
         i++;
     }

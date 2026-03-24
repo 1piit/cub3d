@@ -6,12 +6,14 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/23 19:20:50 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:57:47 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
+
+
 
 typedef struct s_data	t_data;
 
@@ -51,6 +53,9 @@ typedef struct s_player
 	double	radian;
 	double  dir_radian;
 	double 	step;
+	double ray_dir_x;
+	double ray_dir_y;
+	double	camera_x;
 	t_plane plane;
 }	t_player;
 
@@ -73,11 +78,13 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	int			win_width;
-	int			win_height;
+	int			sn_wall;
+	int			ew_wall;
 	int			mini_map_scl;
 	int			map_width;
 	int			map_height;
+	int		win_width;
+	int		win_height;
 	t_img		game_img;
 	t_player	player;
 	t_box		box;
@@ -104,6 +111,8 @@ void	draw_player(t_data *data);
 //raycast.c
 void raycast_game(t_data *data);
 void draw_ceilfloor(t_data *data);
+void which_line(t_data *data, double ray_dir_x, double ray_dir_y);
+
 //game_utils.c
 void	init_game(t_data *data);
 
