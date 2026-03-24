@@ -1,0 +1,56 @@
+NO textures/test/blue.xpm
+SO textures/test/red.xpm
+WE textures/test/yellow.xpm
+EA textures/test/green.xpm
+
+F 20,20,20
+C 200,200,200
+
+        11111
+        10001
+        10S01
+        10001
+    111111001111111
+    100000000000001
+    111101001111111
+        10001
+        10001
+        10001
+        10001
+        10001
+        11111
+
+    Dans un tel cas, ma fonction va faire plusieurs choses.
+    
+    Cote droit:
+    1 --> elle calcule la longueur de la ligne la + longue de toutes les lignes de la map
+    2 --> elle repart de zero et dit que tant que la ligne courante n est pas de la 
+    taille de la ligne la plus longue, alors on ajoute suffisament de 1 
+    a partir du dernier caractere pour combler. 
+    3 --> Ainsi on se retrouve avec des lignes de meme taille, comparables.
+
+    Cote gauche:
+
+    1--> Jusqu a ce qu on rencontre un caractere (while(ft_isspace(str[i])))
+    on remplace le caractere courant par un 1
+
+Ainsi la map d avant doit devenir cette map temporaire pour le test :
+
+1111111111111111111
+1111111110001111111
+1111111110S01111111
+1111111110001111111
+1111111111001111111
+1111100000000000001
+1111111101001111111
+1111111110001111111
+1111111110001111111
+1111111110001111111
+1111111110001111111
+1111111110001111111
+1111111111111111111
+
+Le probleme c est que cette facon de faire rend toute map valide
+Dans ce cas, le probleme vient du 1, trouver un autre caractere pour rendre le test valide
+Prendre des 2.
+

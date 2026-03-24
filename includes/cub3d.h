@@ -1,18 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/12 15:36:51 by pbride           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#define BUFFER_SIZE 42
-#include <stdbool.h>
-#include <stdio.h>
+# define BUFFER_SIZE 42
+# define SUCCESS 0
+# define ERROR 1
+# include <stdbool.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <mlx.h>
+# include <X11/Xlib.h>
+# include <X11/keysym.h>
 
-#include "parsing.h"
-#include "get_next_line.h"
-#include "garb.h"
-#include "libft.h"
+# include "get_next_line.h"
+# include "libft.h"
+# include "garb.h"
+# include "parsing.h"
+# include "game.h"
 
-/* main_utils.c
- */
-void check_args(int ac);
-void init_structs(t_file *cubfile, char *file_arg);
+typedef struct s_data
+{
+	t_game	game;
+	t_file	cubfile;
+}	t_data;
+
+//main_utils.c
+void	check_args(int ac);
+void	init_structs(t_file *cubfile, char *file_arg);
+void	init_data(t_data *data, int ac, char **av);
+
+//cleanup.c
+void	cleanup_all_data(t_data *data);
+void	cleanup_all_exit(t_data *data, char *msg, int err_code);
 
 #endif

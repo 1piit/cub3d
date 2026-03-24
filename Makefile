@@ -37,19 +37,38 @@ PARSING_FILES = file_alloc.c \
 				extract_map.c \
 				extract_ceilfloor.c \
 				extract_textures.c \
+				parsing_datas_gen.c \
+				parsing_ceilfloor.c \
+				parsing_map.c \
+				parsing_map2.c \
+				parsing_map3.c \
+				parsing_textures.c \
 
-UTILS_FILES = /garbage_collector/gc_features.c \
+
+UTILS_FILES = garbage_collector/gc_features.c \
+			mlx_utils.c \
+			utils.c \
+			game_utils.c \
+			game_utils2.c \
+			parsing_utils.c \
+
+GAME_FILES = game_loop.c \
+			mini_map.c \
+			key_handler.c \
+			player.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
-	$(addprefix src/utils/,$(UTILS_FILES))
+	$(addprefix src/utils/,$(UTILS_FILES)) \
+	$(addprefix src/game/,$(GAME_FILES)) \
+	src/cleanup.c \
 
 # === OBJ ===
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror  -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -std=gnu89
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 
@@ -65,7 +84,9 @@ $(LIBFT_NAME):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(GNL_NAME):
-	$(MAKE) -C $(GNL_DIR)
+	$(MAKE) -C $(GNL_DIR) CFLAGS="-Wall -Wextra -Werror -I. -I../$(MLX_DIR)"
+#$(GNL_NAME):
+#	$(MAKE) -C $(GNL_DIR)
 
 $(MLX_NAME):
 	$(MAKE) -C $(MLX_DIR)

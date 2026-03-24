@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/12 19:33:33 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/12 11:06:17 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/12 19:15:07 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "./includes/cub3d.h"
 
-int	main(int ac, char **av)
+int	close_handler(t_data *data)
 {
-	t_data data;
-
-	data = (t_data){0};
-	init_data(&data, ac, av);
-	mlx_loop(data.game.mlx);
-	cleanup_all_data(&data);
+	cleanup_all_exit(data, NULL, SUCCESS);
 	return (0);
 }
+
+int	key_press(int keysymb, t_data *data)
+{
+	data->game.keys[keysymb] = 1;
+	return (0);
+}
+
+int	key_release(int keysymb, t_data *data)
+{
+	data->game.keys[keysymb] = 0;
+	return (0);
+}
+

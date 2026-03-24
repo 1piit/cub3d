@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+         #
+#    By: pbride <pbride@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 12:07:23 by ptricaud          #+#    #+#              #
-#    Updated: 2026/03/02 15:50:53 by ptricaud         ###   ########.fr        #
+#    Updated: 2026/03/12 12:56:52 by pbride           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ ARFLAGS	= rcs
 
 AR 		= ar
 
-CFLAGS	= -Werror -Wextra -Wall -std=c89
+CFLAGS	= -Werror -Wextra -Wall -std=gnu89
 
 RM		= rm -f
 
@@ -53,9 +53,9 @@ $(NAME):	$(OBJS)
 
 bonus:		$(OBJS_OB)
 			$(AR) $(ARFLAGS) -o $(NAME) $^
-			
 
-clean:		
+
+clean:
 			$(RM) $(OBJS_OB)
 
 fclean:		clean
@@ -63,6 +63,6 @@ fclean:		clean
 
 re:			fclean
 			make
-			
+
 
 .PHONY:		all clean fclean re bonus

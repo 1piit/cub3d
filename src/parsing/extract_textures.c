@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:26:08 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/02 16:06:27 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:19:44 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int wt_line_getter(char **wt_line, int *index, char *wf, const char *orientation
 int textures_getter(char **texture_file, int *index, char *wf, char *orientation)
 {
     int i;
+    int last;
+    
     if (!wf)
         return 0;
     i = 0;
@@ -59,6 +61,14 @@ int textures_getter(char **texture_file, int *index, char *wf, char *orientation
     while(ft_isspace(wf[i]))
         i++;
     texture_file[*index] = gc_strdup(&wf[i], GEN);
+    i = 0;
+    while(texture_file[i])
+    {
+        last = ft_strlen(texture_file[i]);
+        if(texture_file[i][last - 1] == '\n')
+            texture_file[i][last - 1] = '\0';
+        i++;
+    }
     (*index)++;
     return 1;
 }

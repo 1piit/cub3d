@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/20 14:06:49 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/12 19:33:33 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/09 15:43:40 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/09 15:59:35 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "./includes/cub3d.h"
 
-int	main(int ac, char **av)
+void	get_screen_size(int *width, int *height)
 {
-	t_data data;
+	Display	*dpy;
+	int		screen;
 
-	data = (t_data){0};
-	init_data(&data, ac, av);
-	mlx_loop(data.game.mlx);
-	cleanup_all_data(&data);
-	return (0);
+	dpy = XOpenDisplay(NULL);
+	if (!dpy)
+	{
+		perror("Error: cannot open X display\n");
+		*width = 1920;
+		*height = 1080;
+		return ;
+	}
+	screen = DefaultScreen(dpy);
+	*width = DisplayWidth(dpy, screen);
+	*height = DisplayHeight(dpy, screen);
+	XCloseDisplay(dpy);
 }
