@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:18:23 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/02 12:00:08 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/23 17:56:58 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_substr_light(char const *s, size_t len)
 	return (subs);
 }
 
-static char	*ft_strjoin(char *joins, const char *s1, const char *s2)
+static char	*ft_strjoin_b(char *joins, const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
@@ -69,7 +69,7 @@ char	*ft_strjoin_free(const char *s1, char const *s2)
 	//joins = (char *) malloc((s1_size + ft_strlen(s2) + 1) * sizeof(char));
 	if (!joins)
 		return (NULL);
-	joins = ft_strjoin(joins, s1, s2);
+	joins = ft_strjoin_b(joins, s1, s2);
 	gc_mem(FREE, 0, (char *)s1, GEN);
 	/* free((char *) s1); */
 	return (joins);

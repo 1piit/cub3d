@@ -1,0 +1,19 @@
+NO ./textures/test/blue.xpm
+SO ./textures/test/blue.xpm
+WE ./textures/test/blue.xpm
+EA ./textures/test/blue.xpm
+
+
+F 220,100,0
+C 225,30,0
+
+
+
+
+111111111111111
+100000000000001
+10000000N000001
+100000000000001
+100000000000001
+100000010000001
+111111111111111

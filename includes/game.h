@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 17:41:05 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/23 19:20:50 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_axis
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_axis;
 
 typedef struct s_img
@@ -32,12 +32,43 @@ typedef struct s_img
 	//int		height;
 }	t_img;
 
+typedef struct t_plane
+{
+	double 	plane_x;
+	double plane_x_start;
+	double 	plane_y;
+	double	plane_y_start;
+	double 	end_x[2];
+	double  end_y[2];
+} 	t_plane;
+
 typedef struct s_player
 {
-	float	pos_x;
-	float	pos_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	radian;
+	double  dir_radian;
+	double 	step;
+	t_plane plane;
 }	t_player;
 
+typedef struct s_box
+{
+	double perp_wd;
+	double side_x;
+	double side_y;
+	double dltx;
+	double dlty;
+	int map_x;
+	int map_y;
+	int step_x;
+	int step_y;
+	int side;
+	double hit_x;
+	double hit_y;
+} t_box;
 typedef struct s_game
 {
 	void		*mlx;
@@ -49,6 +80,7 @@ typedef struct s_game
 	int			map_height;
 	t_img		game_img;
 	t_player	player;
+	t_box		box;
 	int			keys[65536];
 }	t_game;
 
@@ -58,9 +90,20 @@ void	draw_mini_map(t_data *data, char **map);
 
 //player.c
 void	update_player_pos(t_data *data);
-void	init_player_pos(t_data *data);
+void	update_player_dir(t_data *data);
+
+
+// void	update_player_plane(t_data *data);
+void	init_player_dir(t_data *data, char c);
+void	init_player(t_data *data);
+void	init_plane(t_data *data, char c);
+void	draw_line(t_data *data, int nb);
+void	get_plane_val(t_data *data, double x, double y);
 void	draw_player(t_data *data);
 
+//raycast.c
+void raycast_game(t_data *data);
+void draw_ceilfloor(t_data *data);
 //game_utils.c
 void	init_game(t_data *data);
 
@@ -76,7 +119,7 @@ int		key_release(int keysymb, t_data *data);
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, float x, float y, int color);
+void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
