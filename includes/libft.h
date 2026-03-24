@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:09:32 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/27 18:04:32 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:56:07 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char				*ft_strdup(const char *s);
 /* Part 2 */
 
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-/* char				*ft_strjoin(char const *s1, char const *s2); */
+char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

@@ -56,6 +56,7 @@ GAME_FILES = game_loop.c \
 			mini_map.c \
 			key_handler.c \
 			player.c \
+			raycast.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
