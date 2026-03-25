@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/24 17:57:47 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 04:06:14 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-
+# define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
+# define MOVE_SPEED 0.07
+# define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
+# define FOV 0.66
 
 typedef struct s_data	t_data;
 
@@ -99,6 +102,11 @@ void	draw_mini_map(t_data *data, char **map);
 void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
 
+//dda.c
+void	ft_dda(t_data *data, double ray_dx, double ray_dy);
+
+//bresenham.c
+void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y);
 
 // void	update_player_plane(t_data *data);
 void	init_player_dir(t_data *data, char c);
@@ -117,7 +125,14 @@ void which_line(t_data *data, double ray_dir_x, double ray_dir_y);
 void	init_game(t_data *data);
 
 //game_utils2.c
-int	calculate_scale(t_data *data, char **map);
+int	calculate_scale(t_data *data);
+
+//player_utils.c
+void	move_player_x(t_data *data, double dir_x);
+void	move_player_y(t_data *data, double dir_y);
+void	init_player_dir(t_data *data, char c);
+void	init_plane(t_data *data, char c);
+void	init_player(t_data *data);
 
 //key_handler.c
 int		close_handler(t_data *data);

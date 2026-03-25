@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/24 18:08:55 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 02:29:24 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void draw_ceilfloor(t_data *data)
 void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 {
 
-    if (data->game.box.side == 1) 
+    if (data->game.box.side == 1)
     {
         color = color / 2;
     }
     while(drawS != drawE)
     {
         my_mlx_put_pixel(&data->game.game_img, i, drawS, color);
-        drawS++;   
+        drawS++;
     }
 }
 void raycast_game(t_data *data)
@@ -93,7 +93,7 @@ void raycast_game(t_data *data)
         data->game.player.camera_x = 2.0 * i / (double)data->game.win_width - 1.0;
         data->game.player.ray_dir_x = data->game.player.dir_x + data->game.player.plane.plane_x * data->game.player.camera_x;
         data->game.player.ray_dir_y = data->game.player.dir_y + data->game.player.plane.plane_y * data->game.player.camera_x;
-        which_line(data, data->game.player.ray_dir_x, data->game.player.ray_dir_y);
+        ft_dda(data, data->game.player.ray_dir_x, data->game.player.ray_dir_y);
         lineHeight = (int)(data->game.win_height/data->game.box.perp_wd);
         drawStart = -lineHeight / 2 + data->game.win_height / 2;
         drawEnd = lineHeight / 2 + data->game.win_height / 2;
