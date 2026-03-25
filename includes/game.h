@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:06:14 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 04:31:00 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MOVE_SPEED 0.07
 # define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
 # define FOV 0.66
+# define PLAYER_COLOR 0x00FFFF00
 
 typedef struct s_data	t_data;
 
@@ -145,6 +146,7 @@ int		game_loop(t_data *data);
 //mlx_utils.c
 void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
+void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);

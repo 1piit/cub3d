@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:03:03 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 04:37:38 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	draw_player(t_data *data)
 
 	axis.x = data->game.player.pos_x - 0.5;
 	axis.y = data->game.player.pos_y - 0.5;
-	my_mlx_put_square(&data->game.game_img, axis, data->game.mini_map_scl, 0x00FFFF00);
+	my_put_circle(&data->game.game_img, axis,
+		data->game.mini_map_scl / 2,
+		data->game.mini_map_scl);
 }
 
 
