@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:31:00 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 04:50:21 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-	//int		width;
-	//int		height;
+	int		win_width;
+	int		win_height;
 }	t_img;
 
 typedef struct t_plane
@@ -87,8 +87,8 @@ typedef struct s_game
 	int			mini_map_scl;
 	int			map_width;
 	int			map_height;
-	int		win_width;
-	int		win_height;
+	int			win_width;
+	int			win_height;
 	t_img		game_img;
 	t_player	player;
 	t_box		box;

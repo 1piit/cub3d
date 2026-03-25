@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 02:33:59 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 04:51:25 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	init_game_img(t_data *data)
 	data->game.game_img = (t_img){0};
 	data->game.ew_wall = 0x0CE9389;
 	data->game.sn_wall = 0x0CD6E5B;
+	data->game.game_img.win_width = data->game.win_width;
+	data->game.game_img.win_height = data->game.win_height;
 	data->game.game_img.mlx_img = mlx_new_image(data->game.mlx, data->game.win_width,
 			data->game.win_height);
 	if (!data->game.game_img.mlx_img)

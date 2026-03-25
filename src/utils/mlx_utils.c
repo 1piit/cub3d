@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:34:06 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 04:52:07 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_put_pixel(t_img *img, double x, double y, int color)
 	char	*dest;
 	int		offset;
 
-	if(x < 0 || y < 0 || x > 2560 - 1 || y > 1440 - 1)
+	if(x < 0 || y < 0 || x > img->win_width - 1 || y > img->win_height - 1)
 		return;
 	offset = ((int)y * img->line_len + (int)x * (img->bits_per_pixel / 8));
 	dest = img->addr + offset;
