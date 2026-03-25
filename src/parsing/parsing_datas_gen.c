@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:21:20 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/12 12:47:45 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 18:46:02 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	parsing_datas(t_file cubfile, char *file)
 	printf("flag enclosed_map-->%d\n", flag);
 	invalid_textures(&flag, cubfile);
 	printf("flag invalid_textures-->%d\n", flag);
-	invalid_rgb_case_one(&flag, cubfile.RGB_c, cubfile.RGB_f);
+	invalid_rgb_case_one(&flag, cubfile.rgb_c, cubfile.rgb_f);
 	printf("flag invalid_rgb_case_one-->%d\n", flag);
 	invalid_rgb_case_two(&flag, cubfile.ceilfloor);
 	printf("flag invalid_rgb_case_two-->%d\n", flag);

@@ -6,7 +6,7 @@
 #    By: pbride <pbride@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 12:07:23 by ptricaud          #+#    #+#              #
-#    Updated: 2026/03/25 02:21:08 by pbride           ###   ########.fr        #
+#    Updated: 2026/03/25 17:13:47 by pbride           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ ARFLAGS	= rcs
 
 AR 		= ar
 
-CFLAGS	= -Werror -Wextra -Wall -std=gnu89
+CFLAGS	= -Werror -Wextra -Wall #-std=gnu89
 
 RM		= rm -f
 

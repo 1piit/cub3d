@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:15:26 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:28:08 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	render_frame(t_data *data)
 
 int	game_loop(t_data *data)
 {
-	usleep(100);
 	if (data->game.keys[XK_Escape])
 		close_handler(data);
 	update_player_pos(data);

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/17 19:33:25 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 18:42:16 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_data
 
 //main_utils.c
 void	check_args(int ac);
-void	init_structs(t_file *cubfile, char *file_arg);
 void	init_data(t_data *data, int ac, char **av);
 
 //cleanup.c

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/25 04:48:33 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 21:16:02 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void draw_ceilfloor(t_data *data)
 	int ceilling;
 	int floor;
 
-	ceilling = get_real_rgb(data->cubfile.RGB_c);
-	floor = get_real_rgb(data->cubfile.RGB_f);
+	ceilling = get_real_rgb(data->cubfile.rgb_c);
+	floor = get_real_rgb(data->cubfile.rgb_f);
 	draw_ceilling(data, ceilling);
 	draw_floor(data, floor);
 }
@@ -79,13 +79,48 @@ void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 		drawS++;
 	}
 }
+
+//void	texture_on_img(t_data *data, t_line *line, )
+
+static void	draw_texture(t_data *data, int draw_start, int draw_end, int line_height, int i)
+{
+	double	wall_x;
+	t_line	line;
+	int		scale;
+
+	if (data->game.box.side == 0)
+		wall_x = data->game.player.pos_y + data->game.box.perp_wd * data->game.player.ray_dir_y;
+	else
+		wall_x = data->game.player.pos_x + data->game.box.perp_wd * data->game.player.ray_dir_x;
+	wall_x -= floor(wall_x);
+	line = (t_line){0};
+	line.tex_x = (int)(wall_x * data->game.tex_img.img_width);
+	if (line.tex_x >= data->game.tex_img.img_width)
+		line.tex_x = data->game.tex_img.img_width - 1;
+	line.x = i;
+	line.y = draw_start;
+	while (line.y < draw_end)
+	{
+		scale = line.y * data->game.tex_img.line_len - data->game.win_height * data->game.tex_img.line_len / 2 + line_height * data->game.tex_img.line_len / 2;
+		line.tex_y = ((scale * data->game.tex_img.img_width) / line_height) / data->game.tex_img.line_len;
+		if (line.tex_y < 0)
+			line.tex_y = 0;
+		if (line.tex_y >= data->game.tex_img.img_width)
+			line.tex_y = data->game.tex_img.img_width - 1;
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8)] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8)];
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8) + 1] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8) + 1];
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8) + 2] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8) + 2];
+		line.y++;
+	}
+}
+
 void raycast_game(t_data *data)
 {
 	int lineHeight;
 	int drawStart;
 	int drawEnd;
 	//int ratio;
-	int color = 0x0CE9389;
+	//int color = 0x0CE9389;
 	int i;
 	i = 0;
 	//ratio = data->img.win_height / 2;
@@ -102,7 +137,8 @@ void raycast_game(t_data *data)
 			drawEnd = data->game.win_height - 1;
 		if(drawStart < 0)
 			drawStart = 0;
-		draw_vlines(data, i, drawStart, drawEnd, color);
+		//draw_vlines(data, i, drawStart, drawEnd, color);
+		draw_texture(data, drawStart, drawEnd, lineHeight, i);
 		i++;
 	}
 }

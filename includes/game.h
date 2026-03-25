@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:50:21 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 20:36:57 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,29 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	int		img_width;
+	int		img_height;
 	int		win_width;
 	int		win_height;
 }	t_img;
 
+typedef struct s_line
+{
+	int	x;
+	int	y;
+	int	tex_x;
+	int	tex_y;
+}	t_line;
+
 typedef struct t_plane
 {
-	double 	plane_x;
-	double plane_x_start;
-	double 	plane_y;
+	double	plane_x;
+	double	plane_x_start;
+	double	plane_y;
 	double	plane_y_start;
-	double 	end_x[2];
-	double  end_y[2];
-} 	t_plane;
+	double	end_x[2];
+	double	end_y[2];
+}	t_plane;
 
 typedef struct s_player
 {
@@ -55,29 +65,30 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 	double	radian;
-	double  dir_radian;
-	double 	step;
-	double ray_dir_x;
-	double ray_dir_y;
+	double	dir_radian;
+	double	step;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	camera_x;
-	t_plane plane;
+	t_plane	plane;
 }	t_player;
 
 typedef struct s_box
 {
-	double perp_wd;
-	double side_x;
-	double side_y;
-	double dltx;
-	double dlty;
-	int map_x;
-	int map_y;
-	int step_x;
-	int step_y;
-	int side;
-	double hit_x;
-	double hit_y;
-} t_box;
+	double	perp_wd;
+	double	side_x;
+	double	side_y;
+	double	dltx;
+	double	dlty;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	hit_x;
+	double	hit_y;
+}	t_box;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -89,6 +100,7 @@ typedef struct s_game
 	int			map_height;
 	int			win_width;
 	int			win_height;
+	t_img		tex_img;
 	t_img		game_img;
 	t_player	player;
 	t_box		box;
