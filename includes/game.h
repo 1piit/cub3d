@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/23 19:20:50 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 04:50:21 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
+
+# define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
+# define MOVE_SPEED 0.07
+# define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
+# define FOV 0.66
+# define PLAYER_COLOR 0x00FFFF00
 
 typedef struct s_data	t_data;
 
@@ -28,8 +34,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-	//int		width;
-	//int		height;
+	int		win_width;
+	int		win_height;
 }	t_img;
 
 typedef struct t_plane
@@ -51,6 +57,9 @@ typedef struct s_player
 	double	radian;
 	double  dir_radian;
 	double 	step;
+	double ray_dir_x;
+	double ray_dir_y;
+	double	camera_x;
 	t_plane plane;
 }	t_player;
 
@@ -73,11 +82,13 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
-	int			win_width;
-	int			win_height;
+	int			sn_wall;
+	int			ew_wall;
 	int			mini_map_scl;
 	int			map_width;
 	int			map_height;
+	int			win_width;
+	int			win_height;
 	t_img		game_img;
 	t_player	player;
 	t_box		box;
@@ -92,6 +103,11 @@ void	draw_mini_map(t_data *data, char **map);
 void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
 
+//dda.c
+void	ft_dda(t_data *data, double ray_dx, double ray_dy);
+
+//bresenham.c
+void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y);
 
 // void	update_player_plane(t_data *data);
 void	init_player_dir(t_data *data, char c);
@@ -104,11 +120,20 @@ void	draw_player(t_data *data);
 //raycast.c
 void raycast_game(t_data *data);
 void draw_ceilfloor(t_data *data);
+void which_line(t_data *data, double ray_dir_x, double ray_dir_y);
+
 //game_utils.c
 void	init_game(t_data *data);
 
 //game_utils2.c
-int	calculate_scale(t_data *data, char **map);
+int	calculate_scale(t_data *data);
+
+//player_utils.c
+void	move_player_x(t_data *data, double dir_x);
+void	move_player_y(t_data *data, double dir_y);
+void	init_player_dir(t_data *data, char c);
+void	init_plane(t_data *data, char c);
+void	init_player(t_data *data);
 
 //key_handler.c
 int		close_handler(t_data *data);
@@ -121,6 +146,7 @@ int		game_loop(t_data *data);
 //mlx_utils.c
 void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
+void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);

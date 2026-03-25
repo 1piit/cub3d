@@ -6,31 +6,29 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:19:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 15:19:34 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 02:45:02 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-int	calculate_scale(t_data *data, char **map)
+int	calculate_scale(t_data *data)
 {
-	int	len;
-	int	i;
-	int	j;
 	int	scale;
+	int	map_len;
+	int	minimap_len;
 
-	len = 0;
-	i = 0;
-	while (map[i])
+	if (data->game.map_width > data->game.map_height)
 	{
-		j = 0;
-		while (map[i][j])
-			j++;
-		if (j > len)
-			len = j;
-		i++;
+		map_len = data->game.map_width;
+		minimap_len = data->game.win_width / MINI_MAP_RATIO;
 	}
-	scale = data->game.win_width / len * 0.4;
+	else
+	{
+		map_len = data->game.map_height;
+		minimap_len = data->game.win_height / MINI_MAP_RATIO;
+	}
+	scale = minimap_len / map_len;
 	if (scale == 0)
 		scale = 1;
 	return (scale);
