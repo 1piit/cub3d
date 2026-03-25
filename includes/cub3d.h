@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 18:42:16 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 22:18:45 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <math.h>
+# include <sys/time.h>
 
 # include "get_next_line.h"
 # include "libft.h"

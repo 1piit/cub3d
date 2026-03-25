@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 20:36:57 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 23:00:54 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define GAME_H
 
 # define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
-# define MOVE_SPEED 0.07
+# define MOVE_SPEED 3.5
+# define DIR_SPEED 2
 # define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
 # define FOV 0.66
 # define PLAYER_COLOR 0x00FFFF00
@@ -91,20 +92,22 @@ typedef struct s_box
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*mlx_win;
-	int			sn_wall;
-	int			ew_wall;
-	int			mini_map_scl;
-	int			map_width;
-	int			map_height;
-	int			win_width;
-	int			win_height;
-	t_img		tex_img;
-	t_img		game_img;
-	t_player	player;
-	t_box		box;
-	int			keys[65536];
+	void			*mlx;
+	void			*mlx_win;
+	int				sn_wall;
+	int				ew_wall;
+	int				mini_map_scl;
+	int				map_width;
+	int				map_height;
+	int				win_width;
+	int				win_height;
+	struct timeval	time_last;
+	double			delta_time;
+	t_img			tex_img;
+	t_img			game_img;
+	t_player		player;
+	t_box			box;
+	int				keys[65536];
 }	t_game;
 
 //mini_map.c
@@ -162,5 +165,6 @@ void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
+void	update_delta_time(t_data *data);
 
 #endif

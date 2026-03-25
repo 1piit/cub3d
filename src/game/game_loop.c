@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 17:28:08 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 22:42:29 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int	render_frame(t_data *data)
 {
-	// int i = 0;
+	update_delta_time(data);
+	printf("delta_time=%f\n", data->game.delta_time);
 	draw_ceilfloor(data);
 	//get_plane_val(data, data->game.player.plane.plane_x, data->game.player.plane.plane_y);
 	raycast_game(data);

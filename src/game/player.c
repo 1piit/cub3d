@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 17:26:43 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 22:46:57 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void	update_player_pos(t_data *data)
 
 void	update_player_dir(t_data *data)
 {
+	double	d_time;
+
+	d_time = data->game.delta_time;
 	if(data->game.keys[XK_Right] || data->game.keys[XK_Left])
 	{
 		if (data->game.keys[XK_Left])
-			data->game.player.radian -= MOVE_SPEED;
+			data->game.player.radian -= (DIR_SPEED * d_time);
 		else if (data->game.keys[XK_Right])
-			data->game.player.radian += MOVE_SPEED;
+			data->game.player.radian += (DIR_SPEED * d_time);
 		data->game.player.dir_x = cos(data->game.player.radian);
 		data->game.player.dir_y = sin(data->game.player.radian);
 		data->game.player.plane.plane_x = -data->game.player.dir_y * FOV;

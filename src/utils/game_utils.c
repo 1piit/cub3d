@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 20:36:41 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 22:37:09 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_game(t_data *data)
 	data->game.mlx = mlx_init();
 	if (!data->game.mlx)
 		cleanup_all_exit(data, "mlx init", 1);
+	gettimeofday(&data->game.time_last, NULL);
 	init_window(data);
 	init_map_len(data);
 	data->game.mini_map_scl = calculate_scale(data);
