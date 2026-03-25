@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:26:15 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/05 18:55:39 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/23 17:30:01 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void get_values(int *rgb, char *str)
     char *ret;
     int j;
     int index;
-/*     printf("ON EST DANS GET_VALUES\n\n\n");
- */    index = 0;
+    
+    index = 0;
     ret = gc_mem(MALLOC, 5, NULL, GEN);
     i = 0;
     while(str[i] && index < 3)
@@ -80,8 +80,7 @@ void get_values(int *rgb, char *str)
         }
         ret[j] = '\0';
         rgb[index] = ft_atoi(ret);
-/*         printf("found value of current rgb[%d] is %d\n", index, rgb[index]);
- */        index++;
+        index++;
     }
 }
 char *join_line(char *str, char letter)
@@ -168,16 +167,14 @@ char **ceilfloor_part(t_file *cubfile, char **wf)
 {
     char *floor;
     char *ceilling;
-    // int i;
 
-    // i = 0;
     cubfile->RGB_f = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
     cubfile->RGB_c = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
     ceilling = NULL;
     floor = NULL;
     cubfile->ceilfloor = gc_mem(MALLOC, sizeof(char *) * 3, NULL, GEN);
     if(!get_ceilfloor_lines(&ceilling, &floor, wf, cubfile))
-        return (/* printf("ON VA PAS DANS GET_VALUES\n\n"), */ NULL);
+        return (NULL);
             get_values(cubfile->RGB_f, floor);
     get_values(cubfile->RGB_c, ceilling);
     cubfile->ceilfloor[0] = gc_strdup(floor, GEN);

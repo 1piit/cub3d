@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 15:23:03 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/24 17:59:12 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	init_window(t_data *data)
 static void	init_game_img(t_data *data)
 {
 	data->game.game_img = (t_img){0};
+	data->game.ew_wall = 0x0CE9389;
+	data->game.sn_wall = 0x0CD6E5B;
 	data->game.game_img.mlx_img = mlx_new_image(data->game.mlx, data->game.win_width,
 			data->game.win_height);
 	if (!data->game.game_img.mlx_img)
@@ -43,6 +45,7 @@ static void	init_hooks(t_data *data)
 	mlx_loop_hook(data->game.mlx, game_loop, data);
 }
 
+
 void	init_game(t_data *data)
 {
 	data->game.mlx = mlx_init();
@@ -52,6 +55,6 @@ void	init_game(t_data *data)
 	data->game.mini_map_scl = calculate_scale(data, data->cubfile.map);
 	init_game_img(data);
 	init_map_len(data);
-	init_player_pos(data);
+	init_player(data);
 	init_hooks(data);
 }

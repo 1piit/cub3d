@@ -56,6 +56,7 @@ GAME_FILES = game_loop.c \
 			mini_map.c \
 			key_handler.c \
 			player.c \
+			raycast.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
@@ -68,7 +69,8 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -std=gnu89
+CFLAGS = -Wall -Wextra -Werror #-g3 #-std=gnu8989
+SPEED_FLAGS = -Ofast -march=native -flto=auto -finline-functions -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 
@@ -92,7 +94,7 @@ $(MLX_NAME):
 	$(MAKE) -C $(MLX_DIR)
 
 $(NAME): $(OBJS) $(GNL_NAME) $(LIBFT_NAME) $(MLX_NAME)
-	$(CC) $(CFLAGS) $(HEADERS) $(OBJS) $(GNL_NAME) \
+	$(CC) $(CFLAGS) $(SPEED_FLAGS) $(HEADERS) $(OBJS) $(GNL_NAME) \
 	$(LIBFT_NAME) $(MLX_NAME) $(MLX_FLAGS) -o $(NAME)
 
 # $(OBJ_DIR)/%.o: $(SRC_MAIN)$(SRC_PARSING)/%.c

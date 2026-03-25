@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:36:51 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/17 19:33:25 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@
 # include <mlx.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <math.h>
 
 # include "get_next_line.h"
 # include "libft.h"
 # include "garb.h"
 # include "parsing.h"
 # include "game.h"
+
+# define M_PI	3.14159265358979323846
 
 typedef struct s_data
 {

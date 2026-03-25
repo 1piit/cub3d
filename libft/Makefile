@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbride <pbride@student.42.fr>              +#+  +:+       +#+         #
+#    By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 12:07:23 by ptricaud          #+#    #+#              #
-#    Updated: 2026/03/12 12:56:52 by pbride           ###   ########.fr        #
+#    Updated: 2026/03/16 19:54:46 by ptricaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ ARFLAGS	= rcs
 
 AR 		= ar
 
-CFLAGS	= -Werror -Wextra -Wall -std=gnu89
+CFLAGS	= -Werror -Wextra -Wall #-std=gnu8989
 
 RM		= rm -f
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 17:49:46 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/24 18:02:22 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 static int	render_frame(t_data *data)
 {
-	//printf("render_next_frame\n");
+	// int i = 0;
+	draw_ceilfloor(data);
+	//get_plane_val(data, data->game.player.plane.plane_x, data->game.player.plane.plane_y);
+	raycast_game(data);
 	draw_mini_map(data, data->cubfile.map);
 	draw_player(data);
+	draw_line(data, 2580);
 	mlx_put_image_to_window(data->game.mlx, data->game.mlx_win,
 		data->game.game_img.mlx_img, 0, 0);
 	return (0);
@@ -24,10 +28,12 @@ static int	render_frame(t_data *data)
 
 int	game_loop(t_data *data)
 {
-	usleep(500);
+	usleep(100);
 	if (data->game.keys[XK_Escape])
 		close_handler(data);
 	update_player_pos(data);
+	update_player_dir(data);
+	//update_player_plane(data);
 	render_frame(data);
 	return (0);
 }
