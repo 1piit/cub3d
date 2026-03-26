@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:43:40 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 22:20:54 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:10:50 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,25 @@ void	get_screen_size(int *width, int *height)
 	XCloseDisplay(dpy);
 }
 
-void	update_delta_time(t_data *data)
+int	get_real_rgb(int *side)
 {
-	struct timeval	now;
-	long			elapsed_us;
+	char	*temp;
+	char	*c_side[3];
 
-	gettimeofday(&now, NULL);
-	elapsed_us = (now.tv_sec - data->game.time_last.tv_sec) * 1000000 + (now.tv_usec - data->game.time_last.tv_usec);
-	data->game.delta_time = elapsed_us / 1000000.0;  // en secondes
-	data->game.time_last = now;
+	c_side[0] = ft_itoa(side[0]);
+	c_side[1] = ft_itoa(side[1]);
+	c_side[2] = ft_itoa(side[2]);
+	temp = ft_strjoin(ft_strjoin(c_side[0], c_side[1]), c_side[2]);
+	return (ft_atoi(temp));
+}
+
+t_img	*get_texture(t_data *data)
+{
+	if (data->game.box.side == 0 && data->game.player.ray_dir_x > 0)
+		return (&data->game.textures[EAST]);
+	if (data->game.box.side == 0 && data->game.player.ray_dir_x < 0)
+		return (&data->game.textures[WEST]);
+	if (data->game.box.side == 1 && data->game.player.ray_dir_y > 0)
+		return (&data->game.textures[SOUTH]);
+	return (&data->game.textures[NORTH]);
 }

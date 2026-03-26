@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 18:45:03 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 18:46:02 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:20:35 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_file
 	int				*rgb_f;
 	int				*rgb_c;
 	unsigned int	used_lines;
-	int 			fd;
+	int				fd;
 }	t_file;
 
 /* parsing_utils.c */

@@ -6,15 +6,32 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 10:42:03 by pierreb           #+#    #+#             */
-/*   Updated: 2026/03/12 14:40:06 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 19:07:26 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
+static void	cleanup_textures(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (data->game.textures[i].mlx_img)
+		{
+			mlx_destroy_image(data->game.mlx, data->game.textures[i].mlx_img);
+			data->game.textures[i].mlx_img = NULL;
+		}
+		i++;
+	}
+}
+
 void	cleanup_all_data(t_data *data)
 {
 	gc_mem(FULL_CLEAN, 0, NULL, GEN);
+	cleanup_textures(data);
 	if (data->game.game_img.mlx_img)
 	{
 		mlx_destroy_image(data->game.mlx, data->game.game_img.mlx_img);

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 23:00:54 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:21:39 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 
 # define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
 # define MOVE_SPEED 3.5
-# define DIR_SPEED 2
-# define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
+# define DIR_SPEED 2.5
+# define HIT_MARGIN 0.4
 # define FOV 0.66
 # define PLAYER_COLOR 0x00FFFF00
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 typedef struct s_data	t_data;
 
@@ -48,6 +52,13 @@ typedef struct s_line
 	int	tex_x;
 	int	tex_y;
 }	t_line;
+
+typedef struct s_ray
+{
+	int	draw_start;
+	int	draw_end;
+	int	line_height;
+}	t_ray;
 
 typedef struct t_plane
 {
@@ -103,7 +114,7 @@ typedef struct s_game
 	int				win_height;
 	struct timeval	time_last;
 	double			delta_time;
-	t_img			tex_img;
+	t_img			textures[4];
 	t_img			game_img;
 	t_player		player;
 	t_box			box;
@@ -111,8 +122,8 @@ typedef struct s_game
 }	t_game;
 
 //mini_map.c
-void	init_map_len(t_data *data);
 void	draw_mini_map(t_data *data, char **map);
+void	draw_player(t_data *data);
 
 //player.c
 void	update_player_pos(t_data *data);
@@ -122,30 +133,31 @@ void	update_player_dir(t_data *data);
 void	ft_dda(t_data *data, double ray_dx, double ray_dy);
 
 //bresenham.c
-void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y);
+void	ft_bresenham(t_data *data, int start_x, int start_y, \
+int end_x, int end_y);
 
-// void	update_player_plane(t_data *data);
+//player.c
 void	init_player_dir(t_data *data, char c);
 void	init_player(t_data *data);
 void	init_plane(t_data *data, char c);
-void	draw_line(t_data *data, int nb);
-void	get_plane_val(t_data *data, double x, double y);
-void	draw_player(t_data *data);
+
+//3d_scene.c
+void	draw_ceilfloor(t_data *data);
+void	draw_wall(t_data *data, t_ray ray, int i);
 
 //raycast.c
-void raycast_game(t_data *data);
-void draw_ceilfloor(t_data *data);
-void which_line(t_data *data, double ray_dir_x, double ray_dir_y);
+void	raycast_mini_map(t_data *data, int nb);
+void	raycast_3d_scene(t_data *data);
 
 //game_utils.c
 void	init_game(t_data *data);
 
 //game_utils2.c
-int	calculate_scale(t_data *data);
+void	init_map_len(t_data *data);
+int		calculate_scale(t_data *data);
+void	update_delta_time(t_data *data);
 
 //player_utils.c
-void	move_player_x(t_data *data, double dir_x);
-void	move_player_y(t_data *data, double dir_y);
 void	init_player_dir(t_data *data, char c);
 void	init_plane(t_data *data, char c);
 void	init_player(t_data *data);
@@ -155,16 +167,21 @@ int		close_handler(t_data *data);
 int		key_press(int keysymb, t_data *data);
 int		key_release(int keysymb, t_data *data);
 
+//render.c
+int		render_frame(t_data *data);
+
 //game_loop.c
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
-void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
-void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
+void	put_pixel(t_img *img, double x, double y, int color);
+void	put_square(t_img *img, t_axis axis, int scale, int color);
+void	put_circle(t_img *img, t_axis axis, int scale, int color);
+void	put_texture(t_data *data, t_ray ray, t_line line, t_img *tex_img);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
-void	update_delta_time(t_data *data);
+int		get_real_rgb(int *side);
+t_img	*get_texture(t_data *data);
 
 #endif

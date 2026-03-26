@@ -60,6 +60,8 @@ GAME_FILES = game_loop.c \
 			raycast.c \
 			dda.c \
 			bresenham.c \
+			3d_scene.c \
+			render.c \
 
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \

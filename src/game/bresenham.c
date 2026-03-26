@@ -6,14 +6,14 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 02:26:19 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 03:01:18 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 17:32:25 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
 // faudra quand meme aller voir en detail l algo bresenham pour etre bien capable d expliquer tout ca
-void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y)
+void ft_bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y)
 {
 	int dx;
 	int dy;
@@ -40,7 +40,7 @@ void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y)
 	{
 		if (start_x >= 0 && start_x < data->game.map_width * data->game.mini_map_scl
 			&& start_y >= 0 && start_y < data->game.map_height * data->game.mini_map_scl)
-			my_mlx_put_pixel(&data->game.game_img, start_x, start_y, 0x009EE01);
+			put_pixel(&data->game.game_img, start_x, start_y, 0x009EE01);
 		if(start_x == end_x && start_y == end_y)
 			break;
 		save_err = err_factor;
