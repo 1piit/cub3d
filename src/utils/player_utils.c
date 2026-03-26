@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   player_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 02:58:08 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 22:44:35 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:58:31 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	move_player_x(t_data *data, double dir_x)
+void	move_player_x(t_data *data, float dir_x)
 {
-	double	d_time;
-	double	new_x;
+	float	d_time;
+	float	new_x;
 
 	d_time = data->game.delta_time;
 	new_x = data->game.player.pos_x + dir_x * (MOVE_SPEED * d_time);
@@ -31,10 +31,10 @@ void	move_player_x(t_data *data, double dir_x)
 	}
 }
 
-void	move_player_y(t_data *data, double dir_y)
+void	move_player_y(t_data *data, float dir_y)
 {
-	double	d_time;
-	double	new_y;
+	float	d_time;
+	float	new_y;
 
 	d_time = data->game.delta_time;
 	new_y = data->game.player.pos_y + dir_y * (MOVE_SPEED * d_time);
@@ -117,8 +117,8 @@ void	init_player(t_data *data)
 			{
 				init_player_dir(data, map[y][x]);
 				init_plane(data, map[y][x]);
-				data->game.player.pos_x = x /* + 0.5 */;
-				data->game.player.pos_y = y /* + 0.5 */;
+				data->game.player.pos_x = x + 0.5;
+				data->game.player.pos_y = y + 0.5;
 			}
 			x++;
 		}

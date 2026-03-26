@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 02:22:16 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 02:23:18 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:14:05 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	ft_dda(t_data *data, double ray_dx, double ray_dy)
+void	ft_dda(t_data *data, float ray_dx, float ray_dy)
 {
 	int step_x;
 	int step_y;

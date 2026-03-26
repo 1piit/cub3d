@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 16:52:53 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:12:32 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 static int	render_frame(t_data *data)
 {
 	update_delta_time(data);
-	printf("delta_time=%f\n", data->game.delta_time);
-	//draw_ceilfloor(data);
+	static int times = 0;
+	times++;
+	if(times >= 10)
+	{
+		printf("delta_time=%f\n", data->game.delta_time);
+		times = 0;
+	}
+	draw_ceilfloor(data);
 	//get_plane_val(data, data->game.player.plane.plane_x, data->game.player.plane.plane_y);
 	raycast_game(data);
 	draw_mini_map(data, data->cubfile.map);

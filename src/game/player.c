@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 22:46:57 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 18:14:05 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	update_player_pos(t_data *data)
 
 void	update_player_dir(t_data *data)
 {
-	double	d_time;
+	float	d_time;
 
 	d_time = data->game.delta_time;
 	if(data->game.keys[XK_Right] || data->game.keys[XK_Left])
@@ -55,7 +55,7 @@ void	update_player_dir(t_data *data)
 	//printf("player.dir_y=%f player.dir_x=%f\n", data->game.player.dir_x, data->game.player.dir_y);
 }
 
-void which_line(t_data *data, double ray_dx, double ray_dy)
+void which_line(t_data *data, float ray_dx, float ray_dy)
 {
 	ft_dda(data, ray_dx, ray_dy);
 	bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl),
@@ -67,14 +67,14 @@ void which_line(t_data *data, double ray_dx, double ray_dy)
 void	draw_line(t_data *data, int nb)
 {
 	int 	i;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
 
 	i = 0;
 	while (i < nb)
 	{
-		camera_x = 2 * i / (double)(nb - 1) - 1;
+		camera_x = 2 * i / (float)(nb - 1) - 1;
 		ray_dir_x = data->game.player.dir_x + data->game.player.plane.plane_x * camera_x;
 		ray_dir_y = data->game.player.dir_y + data->game.player.plane.plane_y * camera_x;
 		which_line(data, ray_dir_x, ray_dir_y);
@@ -97,8 +97,8 @@ void	draw_player(t_data *data)
 /* void plane_loop(t_data *data)
 {
 	int pixels;
-	double delta_x;
-	double delta_y;
+	float delta_x;
+	float delta_y;
 
 	delta_x = (data->game.player.plane.end_x[0] - data->game.player.plane.end_x[1]);
 	delta_y = (data->game.player.plane.end_y[0] - data->game.player.plane.end_y[1]);
@@ -113,7 +113,7 @@ void	draw_player(t_data *data)
         --pixels;
     }
 } */
-/* void	get_plane_val(t_data *data, double x, double y)
+/* void	get_plane_val(t_data *data, float x, float y)
 {
     int	scl = data->game.mini_map_scl;
     data->game.player.plane.plane_x_start = (data->game.player.dir_x * scl) + data->game.player.pos_x * scl + scl / 2;

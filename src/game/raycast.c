@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/26 16:53:01 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:54:41 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,18 @@ void draw_floor(t_data *data, int floor)
 		i++;
 	}
 }
-/* void draw_ceilfloor(t_data *data)
+void draw_ceilfloor(t_data *data)
 {
 	static int flag = 0;
-
-	data->game.game_ = get_real_rgb(data->cubfile.rgb_c);
-	floor = get_real_rgb(data->cubfile.rgb_f);
-	draw_ceilling(data, ceilling);
-	draw_floor(data, floor);
-} */
+	if(!flag)
+	{
+		data->game.final_ceilling = get_real_rgb(data->cubfile.rgb_c);
+		data->game.final_floor = get_real_rgb(data->cubfile.rgb_f);
+	}	
+	flag = 1;
+	draw_ceilling(data, data->game.final_ceilling);
+	draw_floor(data, data->game.final_floor);
+}
 
 void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 {
@@ -96,7 +99,7 @@ void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 
 static void	draw_texture(t_data *data, int draw_start, int draw_end, int line_height, int i)
 {
-	double	wall_x;
+	float	wall_x;
 	t_line	line;
 	int		scale;
 
@@ -138,7 +141,7 @@ void raycast_game(t_data *data)
 	//ratio = data->img.win_height / 2;
 	while(i < data->game.win_width)
 	{
-		data->game.player.camera_x = 2.0 * i / (double)data->game.win_width - 1.0;
+		data->game.player.camera_x = 2.0 * i / (float)data->game.win_width - 1.0;
 		data->game.player.ray_dir_x = data->game.player.dir_x + data->game.player.plane.plane_x * data->game.player.camera_x;
 		data->game.player.ray_dir_y = data->game.player.dir_y + data->game.player.plane.plane_y * data->game.player.camera_x;
 		ft_dda(data, data->game.player.ray_dir_x, data->game.player.ray_dir_y);
@@ -149,7 +152,7 @@ void raycast_game(t_data *data)
 			drawEnd = data->game.win_height;
 		if(drawStart < 0)
 			drawStart = 0;
-		//draw_vlines(data, i, drawStart, drawEnd, color);
+		//draw_vlines(data, i, drawStart, drawEnd, 0x0FF00FF);
 		draw_texture(data, drawStart, drawEnd, lineHeight, i);
 		i++;
 	}
