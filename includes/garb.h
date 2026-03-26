@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:03:09 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/23 13:42:34 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 19:52:39 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_garbage
 void	*gc_mem(t_mem type, size_t size, void *ptr, t_label label);
 void	*gc_free(t_garbage **garb, void *ptr, t_label label);
 void	*gc_malloc(t_garbage **garbage, size_t size, void *ptr, t_label label);
+char	*gc_strjoin(char const *s1, char const *s2, t_label label);
 t_garbage	**get_garbage(void);
 void	cleanup_all(void);
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:52:07 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 20:21:19 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-void	my_mlx_put_pixel(t_img *img, double x, double y, int color)
+void	my_mlx_put_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dest;
 	int		offset;

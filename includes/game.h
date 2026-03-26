@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 04:50:21 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 20:38:03 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_game
 	int			map_height;
 	int			win_width;
 	int			win_height;
+	int			final_ceilling;
+	int			final_floor;
 	t_img		game_img;
 	t_player	player;
 	t_box		box;
@@ -144,7 +146,7 @@ int		key_release(int keysymb, t_data *data);
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, double x, double y, int color);
+void	my_mlx_put_pixel(t_img *img, int x, int y, int color);
 void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
 void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
 
