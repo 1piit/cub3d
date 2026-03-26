@@ -6,7 +6,7 @@
 #    By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 12:07:23 by ptricaud          #+#    #+#              #
-#    Updated: 2026/03/25 16:18:40 by ptricaud         ###   ########.fr        #
+#    Updated: 2026/03/26 16:47:01 by ptricaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ ARFLAGS	= rcs
 
 AR 		= ar
 
-CFLAGS	= -Werror -Wextra -Wall #
+CFLAGS	= -Werror -Wextra -Wall #-std=gnu89
 
 RM		= rm -f
 

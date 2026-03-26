@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 16:41:36 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 16:53:26 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,29 @@ static void	init_game_img(t_data *data)
 	data->game.sn_wall = 0x0CD6E5B; */
 	data->game.game_img.win_width = data->game.win_width;
 	data->game.game_img.win_height = data->game.win_height;
-	data->game.game_img.mlx_img = mlx_new_image(data->game.mlx, data->game.win_width,
-			data->game.win_height);
+	data->game.game_img.mlx_img = mlx_new_image(data->game.mlx,
+			data->game.win_width, data->game.win_height);
 	if (!data->game.game_img.mlx_img)
 		cleanup_all_exit(data, "mlx new image", 1);
 	data->game.game_img.addr = mlx_get_data_addr(data->game.game_img.mlx_img,
 			&data->game.game_img.bits_per_pixel, &data->game.game_img.line_len,
 			&data->game.game_img.endian);
 	if (!data->game.game_img.addr)
+		cleanup_all_exit(data, "mlx get data addr", 1);
+}
+
+static void	init_tex_img(t_data *data)
+{
+	data->game.tex_img = (t_img){0};
+	data->game.tex_img.mlx_img = mlx_xpm_file_to_image(data->game.mlx,
+			data->cubfile.texture_file[0], &data->game.tex_img.img_width,
+			&data->game.tex_img.img_height);
+	if (!data->game.tex_img.mlx_img)
+		cleanup_all_exit(data, "mlx xpm file to image", 1);
+	data->game.tex_img.addr = mlx_get_data_addr(data->game.tex_img.mlx_img,
+			&data->game.tex_img.bits_per_pixel, &data->game.tex_img.line_len,
+			&data->game.tex_img.endian);
+	if (!data->game.tex_img.addr)
 		cleanup_all_exit(data, "mlx get data addr", 1);
 }
 
@@ -53,10 +68,12 @@ void	init_game(t_data *data)
 	data->game.mlx = mlx_init();
 	if (!data->game.mlx)
 		cleanup_all_exit(data, "mlx init", 1);
+	gettimeofday(&data->game.time_last, NULL);
 	init_window(data);
 	init_map_len(data);
 	data->game.mini_map_scl = calculate_scale(data);
 	init_game_img(data);
+	init_tex_img(data);
 	init_player(data);
 	init_hooks(data);
 }

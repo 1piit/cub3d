@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:35:34 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:44:39 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/25 18:46:02 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int tester_extract(t_file cubfile)
     i = 0;
     while(i < 3)
     {
-        printf("value [%d] : RGB_c -->%d && RGB_f-->%d\n", i, cubfile.RGB_c[i], cubfile.RGB_f[i]);
+        printf("value [%d] : RGB_c -->%d && RGB_f-->%d\n", i, cubfile.rgb_c[i], cubfile.rgb_f[i]);
         i++;
     }
     printf("\n\n\n --------------------------------------------- \n\n\n");
@@ -54,6 +54,14 @@ int tester_extract(t_file cubfile)
     printf("texture_file[2] is :%s\n\n", cubfile.texture_file[2]);
     printf("texture_file[3] is :%s\n\n", cubfile.texture_file[3]);
     return 0;
+}
+
+void	init_structs(t_file *cubfile, char *file_arg)
+{
+	cubfile->save_file = file_arg;
+	cubfile->ceilfloor = NULL;
+	cubfile->map = NULL;
+	// cubfile->texture_file = NULL;
 }
 
 void	init_parsing(t_data *data, int ac, char **av)

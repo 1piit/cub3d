@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 20:38:03 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 16:46:42 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define GAME_H
 
 # define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
-# define MOVE_SPEED 0.07
+# define MOVE_SPEED 3.5
+# define DIR_SPEED 2
 # define HIT_MARGIN 0.4 //bonne margin pour eviter des bugs dans les coins des murs
 # define FOV 0.66
 # define PLAYER_COLOR 0x00FFFF00
@@ -34,19 +35,29 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	int		img_width;
+	int		img_height;
 	int		win_width;
 	int		win_height;
 }	t_img;
 
+typedef struct s_line
+{
+	int	x;
+	int	y;
+	int	tex_x;
+	int	tex_y;
+}	t_line;
+
 typedef struct t_plane
 {
-	double 	plane_x;
-	double plane_x_start;
-	double 	plane_y;
+	double	plane_x;
+	double	plane_x_start;
+	double	plane_y;
 	double	plane_y_start;
-	double 	end_x[2];
-	double  end_y[2];
-} 	t_plane;
+	double	end_x[2];
+	double	end_y[2];
+}	t_plane;
 
 typedef struct s_player
 {
@@ -55,46 +66,48 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 	double	radian;
-	double  dir_radian;
-	double 	step;
-	double ray_dir_x;
-	double ray_dir_y;
+	double	dir_radian;
+	double	step;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	camera_x;
-	t_plane plane;
+	t_plane	plane;
 }	t_player;
 
 typedef struct s_box
 {
-	double perp_wd;
-	double side_x;
-	double side_y;
-	double dltx;
-	double dlty;
-	int map_x;
-	int map_y;
-	int step_x;
-	int step_y;
-	int side;
-	double hit_x;
-	double hit_y;
-} t_box;
+	double	perp_wd;
+	double	side_x;
+	double	side_y;
+	double	dltx;
+	double	dlty;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	double	hit_x;
+	double	hit_y;
+}	t_box;
+
 typedef struct s_game
 {
-	void		*mlx;
-	void		*mlx_win;
-	int			sn_wall;
-	int			ew_wall;
-	int			mini_map_scl;
-	int			map_width;
-	int			map_height;
-	int			win_width;
-	int			win_height;
-	int			final_ceilling;
-	int			final_floor;
-	t_img		game_img;
-	t_player	player;
-	t_box		box;
-	int			keys[65536];
+	void			*mlx;
+	void			*mlx_win;
+	int				sn_wall;
+	int				ew_wall;
+	int				mini_map_scl;
+	int				map_width;
+	int				map_height;
+	int				win_width;
+	int				win_height;
+	struct timeval	time_last;
+	double			delta_time;
+	t_img			tex_img;
+	t_img			game_img;
+	t_player		player;
+	t_box			box;
+	int				keys[65536];
 }	t_game;
 
 //mini_map.c
@@ -152,5 +165,6 @@ void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
+void	update_delta_time(t_data *data);
 
 #endif

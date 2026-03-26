@@ -1,7 +1,7 @@
-NO ./textures/test/blue.xpm
-SO ./textures/test/blue.xpm
-WE ./textures/test/blue.xpm
-EA ./textures/test/blue.xpm
+NO ./textures/blue.xpm
+SO ./textures/blue.xpm
+WE ./textures/blue.xpm
+EA ./textures/blue.xpm
 
 
 F 220,100,0

@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/25 18:36:12 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 16:46:11 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_time
 } t_time;
 //main_utils.c
 void	check_args(int ac);
-void	init_structs(t_file *cubfile, char *file_arg);
 void	init_data(t_data *data, int ac, char **av);
 t_time *get_time_ms(void);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_ceilfloor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:26:15 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/23 17:30:01 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:46:02 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int check_ceilfloor_line(char *str)
 
     limit  = 0;
     i = 0;
-    
+
     while(str[i])
     {
         if(ft_isalpha(str[i]))
             limit++;
         if(limit > 1)
             return 1;
-        i++;        
+        i++;
     }
     return 0;
 }
@@ -39,7 +39,7 @@ char *look_char(char *wf, char letter)
     while(wf && wf[i])
     {
         if(wf[i] == '\n')
-        {   
+        {
             i++;
             continue;
         }
@@ -50,11 +50,11 @@ char *look_char(char *wf, char letter)
                 i++;
             break;}
         else
-            { 
+            {
 /*                 printf("THE FUNCTION HAS RETURNED %s\n\n", wf);
  */                return(wf);}
     }
-    return NULL;  
+    return NULL;
 }
 void get_values(int *rgb, char *str)
 {
@@ -62,7 +62,7 @@ void get_values(int *rgb, char *str)
     char *ret;
     int j;
     int index;
-    
+
     index = 0;
     ret = gc_mem(MALLOC, 5, NULL, GEN);
     i = 0;
@@ -88,7 +88,7 @@ char *join_line(char *str, char letter)
     int i;
     int j;
     char *temp;
-    
+
     i = 0;
     j = 0;
     if(*str == letter)
@@ -111,7 +111,7 @@ int check_format(char *str, char letter)
 {
     int i;
     char *temp;
-    
+
     i = 0;
     temp = join_line(str, letter);
     if(!temp)
@@ -119,7 +119,7 @@ int check_format(char *str, char letter)
     if(temp[0] == ',')
         return 0;
     while(temp && temp[i++])
-    {                    
+    {
         if(temp[i] == ',')
         {
             if(!ft_isdigit(temp[++i]))
@@ -168,15 +168,15 @@ char **ceilfloor_part(t_file *cubfile, char **wf)
     char *floor;
     char *ceilling;
 
-    cubfile->RGB_f = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
-    cubfile->RGB_c = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
+    cubfile->rgb_f = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
+    cubfile->rgb_c = gc_mem(MALLOC, (sizeof(int) * 3), NULL, GEN);
     ceilling = NULL;
     floor = NULL;
     cubfile->ceilfloor = gc_mem(MALLOC, sizeof(char *) * 3, NULL, GEN);
     if(!get_ceilfloor_lines(&ceilling, &floor, wf, cubfile))
         return (NULL);
-            get_values(cubfile->RGB_f, floor);
-    get_values(cubfile->RGB_c, ceilling);
+            get_values(cubfile->rgb_f, floor);
+    get_values(cubfile->rgb_c, ceilling);
     cubfile->ceilfloor[0] = gc_strdup(floor, GEN);
     cubfile->ceilfloor[1] = gc_strdup(ceilling, GEN);
     cubfile->ceilfloor[2] = NULL;
