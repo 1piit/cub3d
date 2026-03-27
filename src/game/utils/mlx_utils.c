@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 18:15:21 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 09:19:42 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_pixel(t_img *img, double x, double y, int color)
 	*(unsigned int *)dest = color;
 }
 
-void	put_square(t_img *img, t_axis axis, int scale, int color)
+void	put_square(t_img *img, t_axf axis, int scale, int color)
 {
 	int	px;
 	int	py;
@@ -45,7 +45,7 @@ void	put_square(t_img *img, t_axis axis, int scale, int color)
 	}
 }
 
-void	put_circle(t_img *img, t_axis axis, int radius, int scale)
+void	put_circle(t_img *img, t_axf axis, int radius, int scale)
 {
 	int	px;
 	int	py;
@@ -60,7 +60,7 @@ void	put_circle(t_img *img, t_axis axis, int radius, int scale)
 				put_pixel(img,
 					(axis.x * scale + scale / 2) + px,
 					(axis.y * scale + scale / 2) + py,
-					PLAYER_COLOR);
+					PLAYER_CLR);
 			px++;
 		}
 		py++;

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 18:21:39 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 09:20:00 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 # define DIR_SPEED 2.5
 # define HIT_MARGIN 0.4
 # define FOV 0.66
-# define PLAYER_COLOR 0x00FFFF00
+# define PLAYER_CLR 0x00FFFF00
+# define RAY_CLR 0x009EE01
+# define WALL_CLR 0x00FF0000
+# define FLOOR_CLR 0x00000000
 # define NORTH 0
 # define SOUTH 1
 # define WEST 2
@@ -26,11 +29,17 @@
 
 typedef struct s_data	t_data;
 
-typedef struct s_axis
+typedef struct s_axis_f
 {
 	double	x;
 	double	y;
-}	t_axis;
+}	t_axf;
+
+typedef struct s_axis_i
+{
+	int	x;
+	int	y;
+}	t_axi;
 
 typedef struct s_img
 {
@@ -79,8 +88,7 @@ typedef struct s_player
 	double	radian;
 	double	dir_radian;
 	double	step;
-	double	ray_dir_x;
-	double	ray_dir_y;
+	t_axf	ray_dir;
 	double	camera_x;
 	t_plane	plane;
 }	t_player;
@@ -101,6 +109,14 @@ typedef struct s_box
 	double	hit_y;
 }	t_box;
 
+typedef struct s_brsh
+{
+	t_axi	delta;
+	t_axi	step;
+	int		err_factor;
+	int		save_err_fac;
+}	t_brsh;
+
 typedef struct s_game
 {
 	void			*mlx;
@@ -114,6 +130,7 @@ typedef struct s_game
 	int				win_height;
 	struct timeval	time_last;
 	double			delta_time;
+	char			*fps;
 	t_img			textures[4];
 	t_img			game_img;
 	t_player		player;
@@ -130,11 +147,10 @@ void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
 
 //dda.c
-void	ft_dda(t_data *data, double ray_dx, double ray_dy);
+void	ft_dda(t_data *data, t_axf ray_dir);
 
 //bresenham.c
-void	ft_bresenham(t_data *data, int start_x, int start_y, \
-int end_x, int end_y);
+void	ft_bresenham(t_data *data, t_axi start, t_axi end);
 
 //player.c
 void	init_player_dir(t_data *data, char c);
@@ -175,8 +191,8 @@ int		game_loop(t_data *data);
 
 //mlx_utils.c
 void	put_pixel(t_img *img, double x, double y, int color);
-void	put_square(t_img *img, t_axis axis, int scale, int color);
-void	put_circle(t_img *img, t_axis axis, int scale, int color);
+void	put_square(t_img *img, t_axf axis, int scale, int color);
+void	put_circle(t_img *img, t_axf axis, int scale, int color);
 void	put_texture(t_data *data, t_ray ray, t_line line, t_img *tex_img);
 
 //utils.c

@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 13:57:53 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 18:13:12 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 08:12:19 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void	draw_wall(t_data *data, t_ray ray, int i)
 
 	if (data->game.box.side == 0)
 		wall_x = data->game.player.pos_y + data->game.box.perp_wd * \
-data->game.player.ray_dir_y;
+data->game.player.ray_dir.y;
 	else
 		wall_x = data->game.player.pos_x + data->game.box.perp_wd * \
-data->game.player.ray_dir_x;
+data->game.player.ray_dir.x;
 	wall_x -= floor(wall_x);
 	texture = get_texture(data);
 	line = (t_line){0};

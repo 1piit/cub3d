@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_handler.c                                      :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/12 11:06:17 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 11:09:57 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/27 11:12:20 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/27 11:14:05 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-int	close_handler(t_data *data)
+void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, \
+t_garbage *tmp)
 {
-	cleanup_all_exit(data, NULL, SUCCESS);
-	return (0);
+	if (cur->ptr)
+		free(cur->ptr);
+	if (prev)
+		prev->next = tmp;
+	else
+		*garb = tmp;
+	free(cur);
 }
 
-int	key_press(int keysymb, t_data *data)
+void	cleanup_all(void)
 {
-	data->game.keys[keysymb] = 1;
-	return (0);
-}
-
-int	key_release(int keysymb, t_data *data)
-{
-	data->game.keys[keysymb] = 0;
-	return (0);
+	gc_mem(FULL_CLEAN, 0, NULL, GEN);
+	gc_mem(FULL_CLEAN, 0, NULL, ENV);
 }

@@ -39,19 +39,16 @@ PARSING_FILES = file_alloc.c \
 				extract_textures.c \
 				parsing_datas_gen.c \
 				parsing_ceilfloor.c \
-				parsing_map.c \
-				parsing_map2.c \
-				parsing_map3.c \
 				parsing_textures.c \
+				parsing_map.c \
+				parsing_player.c \
 
-
-UTILS_FILES = garbage_collector/gc_features.c \
-			mlx_utils.c \
-			utils.c \
-			game_utils.c \
-			game_utils2.c \
-			parsing_utils.c \
-			player_utils.c \
+PARSING_UTILS_FILES = parsing_utils.c \
+					extract_cf_utils.c \
+					extract_map_utils.c \
+					extract_text_utils.c \
+					parsing_map_utils.c \
+					parsing_map_utils2.c \
 
 GAME_FILES = game_loop.c \
 			mini_map.c \
@@ -63,10 +60,22 @@ GAME_FILES = game_loop.c \
 			3d_scene.c \
 			render.c \
 
+GAME_UTILS_FILES = mlx_utils.c \
+			utils.c \
+			game_utils.c \
+			game_utils2.c \
+			player_utils.c \
+
+GC_FILES = gc_features.c \
+		gc_utils.c \
+
 SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 	$(addprefix src/parsing/,$(PARSING_FILES)) \
+	$(addprefix src/parsing/utils/,$(PARSING_UTILS_FILES)) \
 	$(addprefix src/utils/,$(UTILS_FILES)) \
 	$(addprefix src/game/,$(GAME_FILES)) \
+	$(addprefix src/game/utils/,$(GAME_UTILS_FILES)) \
+	$(addprefix src/garbage_collector/,$(GC_FILES)) \
 	src/cleanup.c \
 
 # === OBJ ===
@@ -74,7 +83,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-std=gnu89 #-g3
+CFLAGS = -Wall -Wextra -Werror -std=gnu89 #-g3
 SPEED_FLAGS = -Ofast -march=native -flto=auto -finline-functions -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
