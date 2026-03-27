@@ -136,4 +136,7 @@ re: fclean all
 val-%: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all --show-reachable=yes --track-origins=yes --trace-children=yes --track-fds=yes --undef-value-errors=yes ./$(NAME) $(@:val-%=./map/%.cub)
 
+norm:
+	norminette ./src ./includes ./get_next_line ./libft
+
 .PHONY: all clean fclean re val-%

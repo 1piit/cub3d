@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:04:53 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/20 15:40:17 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/27 11:26:48 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (set_mem(tab, s, c));
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:09:32 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/23 17:56:07 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/27 11:24:30 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
-
 typedef struct s_list
 {
 	void			*content;
@@ -80,6 +79,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 /* For GC */
 
-char	*gc_strdup(const char *s, t_label label);
+char				*gc_strdup(const char *s, t_label label);
 
 #endif

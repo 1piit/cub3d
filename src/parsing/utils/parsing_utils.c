@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:35:34 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 11:09:03 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 11:23:51 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	init_parsing(t_data *data, int ac, char **av)
 	file_tab = NULL;
 	file_tab = alloc_file_size(&data->cubfile, file_tab, data->cubfile.fd, fd2);
 	data->cubfile = split_file(data->cubfile, file_tab);
-	//tester_extract(data->cubfile);
 	if (!parsing_datas(data->cubfile, av[1]))
 	{
 		printf("\nMAP/FICHIER INVALIDE\n");
