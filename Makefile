@@ -83,7 +83,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -std=gnu89 #-g3
+CFLAGS = -Wall -Wextra -Werror #-std=gnu89 #-g3
 SPEED_FLAGS = -Ofast -march=native -flto=auto -finline-functions -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
