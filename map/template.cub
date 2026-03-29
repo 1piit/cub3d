@@ -1,7 +1,7 @@
-NO ./textures/light_gray_bricks.xpm
-SO ./textures/gray_bricks.xpm
-WE ./textures/brown_bricks.xpm
-EA ./textures/orange_bricks.xpm
+NO ./textures/test_64x64_green_color.xpm
+SO ./textures/test_64x64_green_color.xpm
+WE ./textures/test_64x64_green_color.xpm
+EA ./textures/test_64x64_green_color.xpm
 
 
 F 220,100,0

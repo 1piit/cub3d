@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:43:40 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 08:11:42 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/29 16:06:05 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,11 @@ void	get_screen_size(int *width, int *height)
 	XCloseDisplay(dpy);
 }
 
-int	get_real_rgb(int *side)
+int	get_real_rgb(int *rgb_components)
 {
-	char	*temp;
-	char	*c_side[3];
-
-	c_side[0] = ft_itoa(side[0]);
-	c_side[1] = ft_itoa(side[1]);
-	c_side[2] = ft_itoa(side[2]);
-	temp = ft_strjoin(ft_strjoin(c_side[0], c_side[1]), c_side[2]);
-	return (ft_atoi(temp));
+	return ((rgb_components[0] << 16)
+		| (rgb_components[1] << 8)
+		| rgb_components[2]);
 }
 
 t_img	*get_texture(t_data *data)

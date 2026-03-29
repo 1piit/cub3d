@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 09:20:00 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/29 16:05:41 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void	put_texture(t_data *data, t_ray ray, t_line line, t_img *tex_img);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
-int		get_real_rgb(int *side);
+int		get_real_rgb(int *rgb_components);
 t_img	*get_texture(t_data *data);
 
 #endif

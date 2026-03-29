@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 10:42:03 by pierreb           #+#    #+#             */
-/*   Updated: 2026/03/27 07:03:31 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/29 16:17:50 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ static void	cleanup_textures(t_data *data)
 	}
 }
 
+void	cleanup_fps(t_data *data)
+{
+	if (data->game.fps != NULL)
+	{
+		free(data->game.fps);
+		data->game.fps = NULL;
+	}
+}
+
 void	cleanup_all_data(t_data *data)
 {
 	gc_mem(FULL_CLEAN, 0, NULL, GEN);
 	cleanup_textures(data);
-	if (data->game.fps != NULL)
-		free(data->game.fps);
 	if (data->game.game_img.mlx_img != NULL)
 	{
 		mlx_destroy_image(data->game.mlx, data->game.game_img.mlx_img);

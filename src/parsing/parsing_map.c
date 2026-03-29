@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:57:02 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/27 10:40:21 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/29 17:02:08 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,13 @@ static void	check_enclosed(char **temp, int *flag)
 void	enclosed_map(int *flag, char **map)
 {
 	char	**temp;
-	int		i;
 	int		longest;
 
-	i = 0;
 	temp = temp_map(map, &longest);
 	if (!edges_first(temp))
 	{
 		*flag = 1;
 		return ;
-	}
-	while (temp[i])
-	{
-		printf("%s\n", temp[i]);
-		i++;
 	}
 	check_enclosed(temp, flag);
 }
