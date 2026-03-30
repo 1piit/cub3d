@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_features.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:42:22 by althorel          #+#    #+#             */
-/*   Updated: 2026/02/23 18:30:47 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/27 11:14:31 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 t_garbage	**get_garbage(void)
 {
-	static t_garbage *garbage = NULL;
+	static t_garbage	*garbage = NULL;
 
 	return (&garbage);
-}
-void	cleanup_all(void)
-{
-	gc_mem(FULL_CLEAN, 0, NULL, GEN);
-	gc_mem(FULL_CLEAN, 0, NULL, ENV);
 }
 
 void	*gc_free(t_garbage **garb, void *ptr, t_label label)
@@ -48,30 +43,6 @@ void	*gc_free(t_garbage **garb, void *ptr, t_label label)
 		cur = cur->next;
 	}
 	return (NULL);
-}
-
-/* static void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev)
-{
-	if(garb && *garb)
-	{
-		if (cur->ptr)
-			free(cur->ptr);
-		if (prev)
-			prev->next = cur->next;
-		else
-			*garb = cur->next;
-	}
-	free(cur);
-} */
-static void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, t_garbage *tmp)
-{
-	if (cur->ptr)
-		free(cur->ptr);
-	if (prev)
-		prev->next = tmp;
-	else
-		*garb = tmp;
-    free(cur);
 }
 
 static void	*gc_full_clean(t_garbage **garb, t_label label)
@@ -132,7 +103,6 @@ void	*gc_mem(t_mem type, size_t size, void *ptr, t_label label)
 {
 	t_garbage	**garb;
 
-	
 	garb = get_garbage();
 	if (type == MALLOC)
 		return (gc_malloc(garb, size, ptr, label));

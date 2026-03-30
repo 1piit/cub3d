@@ -1,11 +1,11 @@
-NO ./textures/test/blue.xpm
-SO ./textures/test/blue.xpm
-WE ./textures/test/blue.xpm
-EA ./textures/test/blue.xpm
+NO ./textures/gray_bricks.xpm
+SO ./textures/gray_bricks.xpm
+WE ./textures/gray_bricks.xpm
+EA ./textures/gray_bricks.xpm
 
 
-F 220,100,0
-C 225,30,0
+F 143,99,0
+C 115,207,255
 
 
 

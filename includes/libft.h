@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 16:09:32 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/02/27 18:04:32 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/27 11:24:30 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char				*ft_strdup(const char *s);
 /* Part 2 */
 
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-/* char				*ft_strjoin(char const *s1, char const *s2); */
+char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
@@ -59,7 +59,6 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-
 
 typedef struct s_list
 {
@@ -80,6 +79,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 /* For GC */
 
-char	*gc_strdup(const char *s, t_label label);
+char				*gc_strdup(const char *s, t_label label);
 
 #endif

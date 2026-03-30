@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_utils2.c                                      :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 15:19:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/16 15:19:34 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/27 11:12:20 by pbride            #+#    #+#             */
+/*   Updated: 2026/03/27 11:14:05 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-int	calculate_scale(t_data *data, char **map)
+void	remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, \
+t_garbage *tmp)
 {
-	int	len;
-	int	i;
-	int	j;
-	int	scale;
+	if (cur->ptr)
+		free(cur->ptr);
+	if (prev)
+		prev->next = tmp;
+	else
+		*garb = tmp;
+	free(cur);
+}
 
-	len = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-			j++;
-		if (j > len)
-			len = j;
-		i++;
-	}
-	scale = data->game.win_width / len * 0.4;
-	if (scale == 0)
-		scale = 1;
-	return (scale);
+void	cleanup_all(void)
+{
+	gc_mem(FULL_CLEAN, 0, NULL, GEN);
+	gc_mem(FULL_CLEAN, 0, NULL, ENV);
 }

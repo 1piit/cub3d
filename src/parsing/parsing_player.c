@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_textures.c                                 :+:      :+:    :+:   */
+/*   parsing_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 14:47:27 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/27 10:52:15 by pbride           ###   ########.fr       */
+/*   Created: 2026/03/05 20:23:08 by ptricaud          #+#    #+#             */
+/*   Updated: 2026/03/27 11:08:19 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	check_xpm(char *tf)
+static int	check_nb_of_player(int *flag, int player)
 {
-	int	i;
-
-	i = 0;
-	while (tf[i])
+	if (player)
 	{
-		if (tf[i] == '.')
+		if (player > 1)
 		{
-			if (!ft_strncmp(&tf[i], ".xpm", 4) && !tf[i + 4])
-				return (1);
+			*flag = 1;
+			return (1);
 		}
-		i++;
+		return (1);
 	}
 	return (0);
 }
 
-void	invalid_textures(int *flag, t_file cubfile)
+void	check_player(int *flag, t_file cubfile)
 {
-	int	fd;
 	int	i;
+	int	player;
+	int	j;
 
+	player = 0;
 	i = 0;
-	while (cubfile.texture_file[i])
+	while (cubfile.map && cubfile.map[i])
 	{
-		fd = open(cubfile.texture_file[i], O_RDONLY);
-		if (fd < 0 || !check_xpm(cubfile.texture_file[i]))
+		j = 0;
+		while (cubfile.map[i][j])
 		{
-			*flag = 1;
-			return ;
+			if (cubfile.map[i][j] == 'W' || cubfile.map[i][j] == 'E'
+				|| cubfile.map[i][j] == 'S' || cubfile.map[i][j] == 'N')
+				player++;
+			j++;
 		}
-		else
-			close(fd);
 		i++;
 	}
-	if (i <= 3)
-		*flag = 1;
+	if (check_nb_of_player(flag, player))
+		return ;
+	*flag = 1;
 }

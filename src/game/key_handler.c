@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 11:06:17 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 19:15:07 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 11:09:57 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int	key_release(int keysymb, t_data *data)
 	data->game.keys[keysymb] = 0;
 	return (0);
 }
-
