@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/29 17:09:16 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/30 11:55:17 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	raycast_3d_scene(t_data *data)
 	while (i < data->game.win_width)
 	{
 		data->game.player.camera_x = 2.0 * i / \
-(double)data->game.win_width - 1.0;
+	(double)data->game.win_width - 1.0;
 		data->game.player.ray_dir.x = data->game.player.dir_x + \
 data->game.player.plane.plane_x * data->game.player.camera_x;
 		data->game.player.ray_dir.y = data->game.player.dir_y + \

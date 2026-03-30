@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 13:45:10 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 13:47:27 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/30 11:55:35 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	update_delta_time(t_data *data)
 
 	gettimeofday(&now, NULL);
 	elapsed_us = (now.tv_sec - data->game.time_last.tv_sec) \
-* 1000000 + (now.tv_usec - data->game.time_last.tv_usec);
+	* 1000000 + (now.tv_usec - data->game.time_last.tv_usec);
 	data->game.delta_time = elapsed_us / 1000000.0;
 	data->game.time_last = now;
 }

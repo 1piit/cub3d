@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 10:58:11 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 09:19:42 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/30 11:55:58 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ texture->line_len;
 	if (line.tex_y >= texture->img_width)
 		line.tex_y = texture->img_width - 1;
 	dst_offset = line.y * data->game.game_img.line_len + line.x * \
-(data->game.game_img.bits_per_pixel / 8);
+	(data->game.game_img.bits_per_pixel / 8);
 	src_offset = line.tex_y * texture->line_len + line.tex_x * \
-(texture->bits_per_pixel / 8);
+	(texture->bits_per_pixel / 8);
 	data->game.game_img.addr[dst_offset] = texture->addr[src_offset];
 	data->game.game_img.addr[dst_offset + 1] = texture->addr[src_offset + 1];
 	data->game.game_img.addr[dst_offset + 2] = texture->addr[src_offset + 2];

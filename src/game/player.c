@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/29 17:05:45 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/30 11:53:47 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	move_player_x(t_data *data, double dir_x)
 	new_x = data->game.player.pos_x + dir_x * (MOVE_SPEED * d_time);
 	if (dir_x > 0)
 	{
-		if (data->cubfile.map[(int)data->game.player.pos_y]\
-[(int)(new_x + HIT_MARGIN * 1)] != '1')
+		if (data->cubfile.map[(int)data->game.player.pos_y] \
+	[(int)(new_x + HIT_MARGIN * 1)] != '1')
 			data->game.player.pos_x = new_x;
 	}
 	else
 	{
-		if (data->cubfile.map[(int)data->game.player.pos_y]\
-[(int)(new_x + HIT_MARGIN * -1)] != '1')
+		if (data->cubfile.map[(int)data->game.player.pos_y] \
+	[(int)(new_x + HIT_MARGIN * -1)] != '1')
 			data->game.player.pos_x = new_x;
 	}
 }
@@ -42,14 +42,14 @@ static void	move_player_y(t_data *data, double dir_y)
 	new_y = data->game.player.pos_y + dir_y * (MOVE_SPEED * d_time);
 	if (dir_y > 0)
 	{
-		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * 1)]\
-[(int)data->game.player.pos_x] != '1')
+		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * 1)] \
+	[(int)data->game.player.pos_x] != '1')
 			data->game.player.pos_y = new_y;
 	}
 	else
 	{
-		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * -1)]\
-[(int)data->game.player.pos_x] != '1')
+		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * -1)] \
+	[(int)data->game.player.pos_x] != '1')
 			data->game.player.pos_y = new_y;
 	}
 }
