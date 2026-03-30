@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 18:14:05 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 19:35:30 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	update_player_dir(t_data *data)
 
 void which_line(t_data *data, float ray_dx, float ray_dy)
 {
-	ft_dda(data, ray_dx, ray_dy);
+	ft_dda(data, &data->game.box, ray_dx, ray_dy, &data->game.player);
 	bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl),
 	(int)(data->game.player.pos_y * data->game.mini_map_scl),
 	(int)(data->game.box.hit_x * data->game.mini_map_scl),

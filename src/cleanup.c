@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 10:42:03 by pierreb           #+#    #+#             */
-/*   Updated: 2026/03/12 14:40:06 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/26 19:35:30 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 
 void	cleanup_all_data(t_data *data)
 {
+	int i = 0;
+	if (data->quit_threads == 0) // Prevents running if not even initialised maybe, actually quit_threads is better just as a trigger. But wait, what if init_threads hasn't run? Let's check threads[0]
+	{
+		data->quit_threads = 1;
+		if (data->threads[0]) // Quick check if threads were created
+		{
+			pthread_barrier_wait(&data->barrier_start);
+			while (i < NUM_THREADS)
+			{
+				pthread_join(data->threads[i], NULL);
+				i++;
+			}
+			pthread_barrier_destroy(&data->barrier_start);
+			pthread_barrier_destroy(&data->barrier_end);
+		}
+	}
 	gc_mem(FULL_CLEAN, 0, NULL, GEN);
 	if (data->game.game_img.mlx_img)
 	{

@@ -6,16 +6,16 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 16:19:26 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/26 18:54:41 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:33:57 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-int get_real_rgb(int *side)
+int	get_real_rgb(int *side)
 {
-	char *temp;
-	char *c_side[3];
+	char	*temp;
+	char	*c_side[3];
 
 	c_side[0] = ft_itoa(side[0]);
 	c_side[1] = ft_itoa(side[1]);
@@ -24,15 +24,16 @@ int get_real_rgb(int *side)
 	return (ft_atoi(temp));
 }
 
-void draw_ceilling(t_data *data, int ceilling)
+void	draw_ceilling(t_data *data, int ceilling)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	i = 0;
-	while(i < data->game.win_height / 2)
+	while (i < data->game.win_height / 2)
 	{
 		j = 0;
-		while(j  <  data->game.win_width)
+		while (j < data->game.win_width)
 		{
 			my_mlx_put_pixel(&data->game.game_img, j, i, ceilling);
 			j++;
@@ -40,16 +41,16 @@ void draw_ceilling(t_data *data, int ceilling)
 		i++;
 	}
 }
-void draw_floor(t_data *data, int floor)
+void	draw_floor(t_data *data, int floor)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = data->game.win_height / 2;
-	while(i < data->game.win_height)
+	while (i < data->game.win_height)
 	{
 		j = 0;
-		while(j < data->game.win_width)
+		while (j < data->game.win_width)
 		{
 			my_mlx_put_pixel(&data->game.game_img, j, i, floor);
 			j++;
@@ -57,23 +58,25 @@ void draw_floor(t_data *data, int floor)
 		i++;
 	}
 }
-void draw_ceilfloor(t_data *data)
+void	draw_ceilfloor(t_data *data)
 {
-	static int flag = 0;
-	if(!flag)
+	static int	flag = 0;
+
+	if (!flag)
 	{
 		data->game.final_ceilling = get_real_rgb(data->cubfile.rgb_c);
 		data->game.final_floor = get_real_rgb(data->cubfile.rgb_f);
-	}	
+	}
 	flag = 1;
 	draw_ceilling(data, data->game.final_ceilling);
 	draw_floor(data, data->game.final_floor);
 }
 
-void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
+void	draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 {
+
+
 	/* int y;
-	static int flag = 0;
 	if(!flag)
 	{
 		data->game.final_ceilling = get_real_rgb(data->cubfile.RGB_c);
@@ -81,8 +84,8 @@ void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 	} */
 	if (data->game.box.side == 1)
 		color = color / 2;
-	//flag = 1;
-	//y = 0;
+	// flag = 1;
+	// y = 0;
 	/* while(y < drawS)
 	{
 		my_mlx_put_pixel(&data->game.game_img, i, y, data->game.final_ceilling);
@@ -95,19 +98,14 @@ void draw_vlines(t_data *data, int i, int drawS, int drawE, int color)
 	}
 }
 
-//void	texture_on_img(t_data *data, t_line *line, )
+// void	texture_on_img(t_data *data, t_line *line, )
 
-static void	draw_texture(t_data *data, int draw_start, int draw_end, int line_height, int i)
+static void	draw_texture(t_data *data, int draw_start, int draw_end,
+		int line_height, int i, float wall_x)
 {
-	float	wall_x;
 	t_line	line;
 	int		scale;
 
-	if (data->game.box.side == 0)
-		wall_x = data->game.player.pos_y + data->game.box.perp_wd * data->game.player.ray_dir_y;
-	else
-		wall_x = data->game.player.pos_x + data->game.box.perp_wd * data->game.player.ray_dir_x;
-	wall_x -= floor(wall_x);
 	line = (t_line){0};
 	line.tex_x = (int)(wall_x * data->game.tex_img.img_width);
 	if (line.tex_x >= data->game.tex_img.img_width)
@@ -116,44 +114,85 @@ static void	draw_texture(t_data *data, int draw_start, int draw_end, int line_he
 	line.y = draw_start;
 	while (line.y < draw_end)
 	{
-		scale = line.y * data->game.tex_img.line_len - data->game.win_height * data->game.tex_img.line_len / 2 + line_height * data->game.tex_img.line_len / 2;
-		line.tex_y = ((scale * data->game.tex_img.img_width) / line_height) / data->game.tex_img.line_len;
+		scale = line.y * data->game.tex_img.line_len - data->game.win_height
+			* data->game.tex_img.line_len / 2 + line_height
+			* data->game.tex_img.line_len / 2;
+		line.tex_y = ((scale * data->game.tex_img.img_width) / line_height)
+			/ data->game.tex_img.line_len;
 		if (line.tex_y < 0)
 			line.tex_y = 0;
 		if (line.tex_y >= data->game.tex_img.img_width)
 			line.tex_y = data->game.tex_img.img_width - 1;
-		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8)] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8)];
-		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8) + 1] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8) + 1];
-		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x * (data->game.game_img.bits_per_pixel / 8) + 2] = data->game.tex_img.addr[line.tex_y * data->game.tex_img.line_len + line.tex_x * (data->game.tex_img.bits_per_pixel / 8) + 2];
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x
+			* (data->game.game_img.bits_per_pixel
+				/ 8)] = data->game.tex_img.addr[line.tex_y
+			* data->game.tex_img.line_len + line.tex_x
+			* (data->game.tex_img.bits_per_pixel / 8)];
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x
+			* (data->game.game_img.bits_per_pixel / 8)
+			+ 1] = data->game.tex_img.addr[line.tex_y
+			* data->game.tex_img.line_len + line.tex_x
+			* (data->game.tex_img.bits_per_pixel / 8) + 1];
+		data->game.game_img.addr[line.y * data->game.game_img.line_len + line.x
+			* (data->game.game_img.bits_per_pixel / 8)
+			+ 2] = data->game.tex_img.addr[line.tex_y
+			* data->game.tex_img.line_len + line.tex_x
+			* (data->game.tex_img.bits_per_pixel / 8) + 2];
 		line.y++;
 	}
 }
 
-void raycast_game(t_data *data)
+void	*raycast_game(void *arg)
 {
-	int lineHeight;
-	int drawStart;
-	int drawEnd;
-	//int ratio;
-	//int color = 0x0CE9389;
-	int i;
-	i = 0;
-	//ratio = data->img.win_height / 2;
-	while(i < data->game.win_width)
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	int				i;
+	float			wall_x;
+	t_box			box;
+	t_thread_data	*t_data_ptr;
+	t_data			*data;
+
+	t_data_ptr = (t_thread_data *)arg;
+	data = t_data_ptr->data;
+	while (1)
 	{
-		data->game.player.camera_x = 2.0 * i / (float)data->game.win_width - 1.0;
-		data->game.player.ray_dir_x = data->game.player.dir_x + data->game.player.plane.plane_x * data->game.player.camera_x;
-		data->game.player.ray_dir_y = data->game.player.dir_y + data->game.player.plane.plane_y * data->game.player.camera_x;
-		ft_dda(data, data->game.player.ray_dir_x, data->game.player.ray_dir_y);
-		lineHeight = (int)(data->game.win_height/data->game.box.perp_wd) * 1.2;
-		drawStart = -lineHeight / 2 + data->game.win_height / 2;
-		drawEnd = lineHeight / 2 + data->game.win_height / 2;
-		if(drawEnd >= data->game.win_height)
-			drawEnd = data->game.win_height;
-		if(drawStart < 0)
-			drawStart = 0;
-		//draw_vlines(data, i, drawStart, drawEnd, 0x0FF00FF);
-		draw_texture(data, drawStart, drawEnd, lineHeight, i);
-		i++;
+		// Wait for main thread to signal start of the frame
+		pthread_barrier_wait(&data->barrier_start);
+		if (data->quit_threads)
+			break ;
+		i = t_data_ptr->start_x;
+		while (i < t_data_ptr->end_x)
+		{
+			t_data_ptr->th_player.camera_x = 2.0 * i
+				/ (float)data->game.win_width - 1.0;
+			t_data_ptr->th_player.ray_dir_x = t_data_ptr->th_player.dir_x
+				+ t_data_ptr->th_player.plane.plane_x
+				* t_data_ptr->th_player.camera_x;
+			t_data_ptr->th_player.ray_dir_y = t_data_ptr->th_player.dir_y
+				+ t_data_ptr->th_player.plane.plane_y
+				* t_data_ptr->th_player.camera_x;
+			ft_dda(data, &box, t_data_ptr->th_player.ray_dir_x,
+				t_data_ptr->th_player.ray_dir_y, &t_data_ptr->th_player);
+			lineHeight = (int)(data->game.win_height / box.perp_wd) * 1.3;
+			drawStart = -lineHeight / 2 + data->game.win_height / 2;
+			drawEnd = lineHeight / 2 + data->game.win_height / 2;
+			if (drawEnd >= data->game.win_height)
+				drawEnd = data->game.win_height;
+			if (drawStart < 0)
+				drawStart = 0;
+			if (box.side == 0)
+				wall_x = t_data_ptr->th_player.pos_y + box.perp_wd
+					* t_data_ptr->th_player.ray_dir_y;
+			else
+				wall_x = t_data_ptr->th_player.pos_x + box.perp_wd
+					* t_data_ptr->th_player.ray_dir_x;
+			wall_x -= floor(wall_x);
+			draw_texture(data, drawStart, drawEnd, lineHeight, i, wall_x);
+			i++;
+		}
+		// Signal main thread that this frame section is done
+		pthread_barrier_wait(&data->barrier_start);
 	}
+	return (NULL);
 }

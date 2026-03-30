@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 16:53:26 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 19:35:30 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,32 @@ static void	init_hooks(t_data *data)
 	mlx_loop_hook(data->game.mlx, game_loop, data);
 }
 
+void init_threads(t_data *data)
+{
+	int i;
+	int width_per_thread;
+	
+	// Init synchronisation
+	pthread_barrier_init(&data->barrier_start, NULL, NUM_THREADS + 1);
+	pthread_barrier_init(&data->barrier_end, NULL, NUM_THREADS + 1);
+	data->quit_threads = 0;
+
+    width_per_thread = data->game.win_width / NUM_THREADS;
+    i = 0;
+	
+    while (i < NUM_THREADS)
+    {
+        data->thread_data[i].data = data;
+        data->thread_data[i].start_x = i * width_per_thread;
+        if (i == NUM_THREADS - 1)
+            data->thread_data[i].end_x = data->game.win_width;
+        else
+            data->thread_data[i].end_x = (i + 1) * width_per_thread;
+
+        pthread_create(&data->threads[i], NULL, raycast_game, &data->thread_data[i]);
+        i++;
+    }
+}
 
 void	init_game(t_data *data)
 {
@@ -75,5 +101,6 @@ void	init_game(t_data *data)
 	init_game_img(data);
 	init_tex_img(data);
 	init_player(data);
+	init_threads(data);
 	init_hooks(data);
 }

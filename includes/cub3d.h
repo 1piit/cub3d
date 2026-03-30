@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 16:46:11 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:21:01 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define BUFFER_SIZE 42
 # define SUCCESS 0
 # define ERROR 1
+# define M_PI	3.14159265358979323846
+#define NUM_THREADS 10
+
 # include <stdbool.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -24,6 +27,7 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <math.h>
+# include <pthread.h>
 # include <sys/time.h>
 
 # include "get_next_line.h"
@@ -32,13 +36,27 @@
 # include "parsing.h"
 # include "game.h"
 
-# define M_PI	3.14159265358979323846
+typedef struct s_data	t_data;
 
-typedef struct s_data
+typedef struct s_thread_data
+{
+    int		start_x;
+    int		end_x;
+    t_data	*data; 
+	t_plane th_plane;
+	t_player th_player;
+}	t_thread_data;
+
+struct s_data
 {
 	t_game	game;
 	t_file	cubfile;
-}	t_data;
+	pthread_barrier_t barrier_start;
+	pthread_barrier_t barrier_end;
+	int quit_threads;
+	pthread_t threads[NUM_THREADS];
+	t_thread_data thread_data[NUM_THREADS];
+};
 
 typedef struct s_time
 {

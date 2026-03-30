@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 18:58:41 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:29:59 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
 # define MOVE_SPEED 3.5
 # define DIR_SPEED 2
-# define HIT_MARGIN 0 //bonne margin pour eviter des bugs dans les coins des murs
+# define HIT_MARGIN 0.2 //bonne margin pour eviter des bugs dans les coins des murs
 # define FOV 0.66
 # define PLAYER_COLOR 0x00FFFF00
 
@@ -52,11 +52,7 @@ typedef struct s_line
 typedef struct t_plane
 {
 	float	plane_x;
-	float	plane_x_start;
 	float	plane_y;
-	float	plane_y_start;
-	float	end_x[2];
-	float	end_y[2];
 }	t_plane;
 
 typedef struct s_player
@@ -121,7 +117,7 @@ void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
 
 //dda.c
-void	ft_dda(t_data *data, float ray_dx, float ray_dy);
+void	ft_dda(t_data *data, t_box *box, float ray_dx, float ray_dy, t_player *player);
 
 //bresenham.c
 void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y);
@@ -135,7 +131,7 @@ void	get_plane_val(t_data *data, float x, float y);
 void	draw_player(t_data *data);
 
 //raycast.c
-void raycast_game(t_data *data);
+void *raycast_game(void *arg);
 void draw_ceilfloor(t_data *data);
 void which_line(t_data *data, float ray_dir_x, float ray_dir_y);
 
