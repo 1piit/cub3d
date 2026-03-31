@@ -6,11 +6,65 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:54:45 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 19:35:30 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:23:53 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
+
+static void    move_player_x(t_data *data, double dir_x)
+{
+    //double    d_time;
+    double    new_x;
+
+    //d_time = data->game.delta_time;
+	if(1/data->game.delta_time < 5)
+    	new_x = data->game.player.pos_x + dir_x * (MOVE_SPEED );
+	else
+    	new_x = data->game.player.pos_x + dir_x * (MOVE_SPEED_FPS * data->game.delta_time);
+    if (dir_x > 0)
+    {
+        if ((int)(new_x + HIT_MARGIN * 1) < data->game.map_width
+        && data->cubfile.map[(int)data->game.player.pos_y] \
+    [(int)(new_x + HIT_MARGIN * 1)] != '1' && data->cubfile.map[(int)data->game.player.pos_y] \
+    [(int)(new_x + HIT_MARGIN * 1)] != 'F')
+            data->game.player.pos_x = new_x;
+    }
+    else
+    {
+        if ((int)(new_x + HIT_MARGIN * -1) >= 0
+        && data->cubfile.map[(int)data->game.player.pos_y] \
+    [(int)(new_x + HIT_MARGIN * -1)] != '1' && data->cubfile.map[(int)data->game.player.pos_y] \
+    [(int)(new_x + HIT_MARGIN * -1)] != 'F')
+            data->game.player.pos_x = new_x;
+    }
+}
+
+static void    move_player_y(t_data *data, double dir_y)
+{
+    //double    d_time;
+    double    new_y;
+	if(1/data->game.delta_time < 5)
+    	new_y = data->game.player.pos_y + dir_y * (MOVE_SPEED );
+	else
+    	new_y = data->game.player.pos_y + dir_y * (MOVE_SPEED_FPS * data->game.delta_time);
+    if (dir_y > 0)
+    {
+        if ((int)(new_y + HIT_MARGIN * 1) < data->game.map_height
+        && data->cubfile.map[(int)(new_y + HIT_MARGIN * 1)] \
+    [(int)data->game.player.pos_x] != '1' && data->cubfile.map[(int)(new_y + HIT_MARGIN * 1)] \
+    [(int)data->game.player.pos_x] != 'F')
+            data->game.player.pos_y = new_y;
+    }
+    else
+    {
+        if ((int)(new_y + HIT_MARGIN * -1) >= 0
+        && data->cubfile.map[(int)(new_y + HIT_MARGIN * -1)] \
+    [(int)data->game.player.pos_x] != '1' && data->cubfile.map[(int)(new_y + HIT_MARGIN * -1)] \
+    [(int)data->game.player.pos_x] != 'F')
+            data->game.player.pos_y = new_y;
+    }
+}
 
 void	update_player_pos(t_data *data)
 {
@@ -41,7 +95,7 @@ void	update_player_dir(t_data *data)
 	float	d_time;
 
 	d_time = data->game.delta_time;
-	if(data->game.keys[XK_Right] || data->game.keys[XK_Left])
+	if (data->game.keys[XK_Right] || data->game.keys[XK_Left])
 	{
 		if (data->game.keys[XK_Left])
 			data->game.player.radian -= (DIR_SPEED * d_time);
@@ -52,19 +106,18 @@ void	update_player_dir(t_data *data)
 		data->game.player.plane.plane_x = -data->game.player.dir_y * FOV;
 		data->game.player.plane.plane_y = data->game.player.dir_x * FOV;
 	}
-	//printf("player.dir_y=%f player.dir_x=%f\n", data->game.player.dir_x, data->game.player.dir_y);
 }
 
-void which_line(t_data *data, float ray_dx, float ray_dy)
+/* void which_line(t_data *data, float ray_dx, float ray_dy)
 {
 	ft_dda(data, &data->game.box, ray_dx, ray_dy, &data->game.player);
 	bresenham(data, (int)(data->game.player.pos_x * data->game.mini_map_scl),
 	(int)(data->game.player.pos_y * data->game.mini_map_scl),
 	(int)(data->game.box.hit_x * data->game.mini_map_scl),
 	(int)(data->game.box.hit_y * data->game.mini_map_scl));
-}
+} */
 
-void	draw_line(t_data *data, int nb)
+/* void	draw_line(t_data *data, int nb)
 {
 	int 	i;
 	float	camera_x;
@@ -91,38 +144,4 @@ void	draw_player(t_data *data)
 	my_put_circle(&data->game.game_img, axis,
 		data->game.mini_map_scl / 2,
 		data->game.mini_map_scl);
-}
-
-
-/* void plane_loop(t_data *data)
-{
-	int pixels;
-	float delta_x;
-	float delta_y;
-
-	delta_x = (data->game.player.plane.end_x[0] - data->game.player.plane.end_x[1]);
-	delta_y = (data->game.player.plane.end_y[0] - data->game.player.plane.end_y[1]);
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-    while (pixels)
-    {
-        my_mlx_put_pixel(&data->game.game_img, data->game.player.plane.end_x[1], data->game.player.plane.end_y[1], 0x003399FF);
-        data->game.player.plane.end_x[1] += delta_x;
-        data->game.player.plane.end_y[1] += delta_y;
-        --pixels;
-    }
 } */
-/* void	get_plane_val(t_data *data, float x, float y)
-{
-    int	scl = data->game.mini_map_scl;
-    data->game.player.plane.plane_x_start = (data->game.player.dir_x * scl) + data->game.player.pos_x * scl + scl / 2;
-    data->game.player.plane.plane_y_start = (data->game.player.dir_y * scl) + data->game.player.pos_y * scl + scl / 2;
-    data->game.player.plane.end_x[0] = data->game.player.plane.plane_x_start + x * scl;
-    data->game.player.plane.end_y[0] = data->game.player.plane.plane_y_start + y * scl;
-	data->game.player.plane.end_x[1] = data->game.player.plane.plane_x_start - x * scl;
-    data->game.player.plane.end_y[1] = data->game.player.plane.plane_y_start - y * scl;
-
-	plane_loop(data);
-} */
-//static int chiant = 0;

@@ -6,41 +6,34 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:42:04 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 20:29:00 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/31 16:28:27 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-static int	render_frame(t_data *data)
+int	render_frame(t_data *data)
 {
+	data->game.fps = ft_itoa((int)(1 / data->game.delta_time));
 	update_delta_time(data);
-	static int times = 0;
-	times++;
-	if(times >= 10)
-	{
-		printf("delta_time=%f\n", 1/data->game.delta_time);
-		times = 0;
-	}
-	draw_ceilfloor(data);
-	//get_plane_val(data, data->game.player.plane.plane_x, data->game.player.plane.plane_y);
-	
+	draw_ceilfloor(data);	
 	int i = 0;
 	while (i < NUM_THREADS)
 	{
 		data->thread_data[i].th_player = data->game.player;
 		i++;
 	}
-	// Signal aux threads de commencer la frame
 	pthread_barrier_wait(&data->barrier_start);
-	// Attendre que tous les threads aient terminé la frame
 	pthread_barrier_wait(&data->barrier_start);
-
 	draw_mini_map(data, data->cubfile.map);
 	draw_player(data);
-	draw_line(data, 10);
+	raycast_mini_map(data, 10);
 	mlx_put_image_to_window(data->game.mlx, data->game.mlx_win,
 		data->game.game_img.mlx_img, 0, 0);
+	mlx_string_put(data->game.mlx,
+		data->game.mlx_win, data->game.win_width - 40, 20,
+		PLAYER_CLR, data->game.fps);
+	cleanup_fps(data);
 	return (1);
 }
 

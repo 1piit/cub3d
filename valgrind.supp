@@ -1,0 +1,8 @@
+{
+	mlx_x11_uninit
+	Memcheck:Param
+	writev(vector[0])
+	fun:writev
+	fun:write_vec
+	obj:*libxcb*
+}

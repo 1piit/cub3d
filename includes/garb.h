@@ -6,14 +6,14 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:03:09 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/25 19:52:39 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/30 19:36:30 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GARB_H
-#define GARB_H
+# define GARB_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 typedef enum e_mem
 {
@@ -35,11 +35,17 @@ typedef struct s_garbage
 	struct s_garbage	*next;
 }						t_garbage;
 
-void	*gc_mem(t_mem type, size_t size, void *ptr, t_label label);
-void	*gc_free(t_garbage **garb, void *ptr, t_label label);
-void	*gc_malloc(t_garbage **garbage, size_t size, void *ptr, t_label label);
-char	*gc_strjoin(char const *s1, char const *s2, t_label label);
+/* gc_features.c */
+void		*gc_mem(t_mem type, size_t size, void *ptr, t_label label);
+void		*gc_free(t_garbage **garb, void *ptr, t_label label);
+void		*gc_malloc(t_garbage **garbage, size_t size, void *ptr, \
+t_label label);
 t_garbage	**get_garbage(void);
-void	cleanup_all(void);
+char	*gc_strjoin(char const *s1, char const *s2, t_label label);
+
+/*gc_utils.c */
+void		remove_gc_node(t_garbage **garb, t_garbage *cur, t_garbage *prev, \
+t_garbage *tmp);
+void		cleanup_all(void);
 
 #endif

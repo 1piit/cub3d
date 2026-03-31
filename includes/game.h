@@ -6,27 +6,42 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 20:29:59 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:22:27 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
+#include "cub3d.h"
 # define MINI_MAP_RATIO 4 //correspond a 1/4 win_height ou win_width
-# define MOVE_SPEED 3.5
-# define DIR_SPEED 2
-# define HIT_MARGIN 0.2 //bonne margin pour eviter des bugs dans les coins des murs
+# define MOVE_SPEED 0.06
+# define MOVE_SPEED_FPS 4
+# define DIR_SPEED 2.5
+# define HIT_MARGIN 0.4
 # define FOV 0.66
-# define PLAYER_COLOR 0x00FFFF00
+# define PLAYER_CLR 0x00FFFF00
+# define RAY_CLR 0x009EE01
+# define WALL_CLR 0x00FF0000
+# define FLOOR_CLR 0x00000000
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 typedef struct s_data	t_data;
-
-typedef struct s_axis
+typedef struct s_thread_data	t_thread_data;
+typedef struct s_axis_f
 {
-	float	x;
-	float	y;
-}	t_axis;
+	double	x;
+	double	y;
+}	t_axf;
+
+typedef struct s_axis_i
+{
+	int	x;
+	int	y;
+}	t_axi;
 
 typedef struct s_img
 {
@@ -49,6 +64,13 @@ typedef struct s_line
 	int	tex_y;
 }	t_line;
 
+typedef struct s_ray
+{
+	int	draw_start;
+	int	draw_end;
+	int	line_height;
+}	t_ray;
+
 typedef struct t_plane
 {
 	float	plane_x;
@@ -64,8 +86,7 @@ typedef struct s_player
 	float	radian;
 	float	dir_radian;
 	float	step;
-	float	ray_dir_x;
-	float	ray_dir_y;
+	t_axf	ray_dir;
 	float	camera_x;
 	t_plane	plane;
 }	t_player;
@@ -86,6 +107,14 @@ typedef struct s_box
 	float	hit_y;
 }	t_box;
 
+typedef struct s_brsh
+{
+	t_axi	delta;
+	t_axi	step;
+	int		err_factor;
+	int		save_err_fac;
+}	t_brsh;
+
 typedef struct s_game
 {
 	void			*mlx;
@@ -100,8 +129,10 @@ typedef struct s_game
 	int				win_width;
 	int				win_height;
 	struct timeval	time_last;
-	float			delta_time;
-	t_img			tex_img;
+	double			delta_time;
+	char			*fps;
+	//t_img 			tex_img;
+	t_img			textures[4];
 	t_img			game_img;
 	t_player		player;
 	t_box			box;
@@ -109,41 +140,43 @@ typedef struct s_game
 }	t_game;
 
 //mini_map.c
-void	init_map_len(t_data *data);
 void	draw_mini_map(t_data *data, char **map);
+void	draw_player(t_data *data);
 
 //player.c
 void	update_player_pos(t_data *data);
 void	update_player_dir(t_data *data);
 
 //dda.c
-void	ft_dda(t_data *data, t_box *box, float ray_dx, float ray_dy, t_player *player);
-
+void	ft_dda(t_data *data, t_thread_data *th_data, t_axf ray_dir, t_box *box);
+void	ft_dda_minimap(t_data *data, t_axf ray_dir, t_box *box);
 //bresenham.c
-void bresenham(t_data *data, int start_x, int start_y, int end_x, int end_y);
+void	ft_bresenham(t_data *data, t_axi start, t_axi end);
 
-// void	update_player_plane(t_data *data);
+//player.c
 void	init_player_dir(t_data *data, char c);
 void	init_player(t_data *data);
 void	init_plane(t_data *data, char c);
-void	draw_line(t_data *data, int nb);
-void	get_plane_val(t_data *data, float x, float y);
-void	draw_player(t_data *data);
+
+//3d_scene.c
+void	draw_ceilfloor(t_data *data);
+void	draw_wall(t_thread_data *th_data, t_data *data, t_ray ray, int i,
+			t_box *box);
 
 //raycast.c
-void *raycast_game(void *arg);
-void draw_ceilfloor(t_data *data);
-void which_line(t_data *data, float ray_dir_x, float ray_dir_y);
+void	raycast_mini_map(t_data *data, int nb);
+void	*raycast_game(void *arg);
+// void	raycast_3d_scene(t_data *data);
 
 //game_utils.c
 void	init_game(t_data *data);
 
 //game_utils2.c
-int	calculate_scale(t_data *data);
+void	init_map_len(t_data *data);
+int		calculate_scale(t_data *data);
+void	update_delta_time(t_data *data);
 
 //player_utils.c
-void	move_player_x(t_data *data, float dir_x);
-void	move_player_y(t_data *data, float dir_y);
 void	init_player_dir(t_data *data, char c);
 void	init_plane(t_data *data, char c);
 void	init_player(t_data *data);
@@ -153,16 +186,21 @@ int		close_handler(t_data *data);
 int		key_press(int keysymb, t_data *data);
 int		key_release(int keysymb, t_data *data);
 
+//render.c
+int		render_frame(t_data *data);
+
 //game_loop.c
 int		game_loop(t_data *data);
 
 //mlx_utils.c
-void	my_mlx_put_pixel(t_img *img, int x, int y, int color);
-void	my_mlx_put_square(t_img *img, t_axis axis, int scale, int color);
-void	my_put_circle(t_img *img, t_axis axis, int scale, int color);
+void	put_pixel(t_img *img, double x, double y, int color);
+void	put_square(t_img *img, t_axf axis, int scale, int color);
+void	put_circle(t_img *img, t_axf axis, int scale, int color);
+void	put_texture(t_data *data, t_ray ray, t_line line, t_img *tex_img);
 
 //utils.c
 void	get_screen_size(int *width, int *height);
-void	update_delta_time(t_data *data);
+int		get_real_rgb(int *rgb_components);
+t_img	*get_texture(t_data *data, int side, t_axf ray_dir);
 
 #endif

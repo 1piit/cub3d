@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/26 20:21:01 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/03/31 15:50:46 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define SUCCESS 0
 # define ERROR 1
 # define M_PI	3.14159265358979323846
-#define NUM_THREADS 10
+#define NUM_THREADS 100
 
 # include <stdbool.h>
 # include <stdio.h>
@@ -69,6 +69,7 @@ void	init_data(t_data *data, int ac, char **av);
 t_time *get_time_ms(void);
 
 //cleanup.c
+void	cleanup_fps(t_data *data);
 void	cleanup_all_data(t_data *data);
 void	cleanup_all_exit(t_data *data, char *msg, int err_code);
 
