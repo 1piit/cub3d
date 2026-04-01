@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 13:45:10 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/30 11:55:35 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 11:33:16 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,21 @@ void	update_delta_time(t_data *data)
 	* 1000000 + (now.tv_usec - data->game.time_last.tv_usec);
 	data->game.delta_time = elapsed_us / 1000000.0;
 	data->game.time_last = now;
+}
+
+void	init_game(t_data *data)
+{
+	data->game = (t_game){0};
+	data->game.mlx = mlx_init();
+	if (!data->game.mlx)
+		cleanup_all_exit(data, "mlx init", 1);
+	gettimeofday(&data->game.time_last, NULL);
+	init_window(data);
+	init_map_len(data);
+	data->game.mini_map_scl = calculate_scale(data);
+	init_game_img(data);
+	init_textures(data);
+	init_player(data);
+	init_threads(data);
+	init_hooks(data);
 }

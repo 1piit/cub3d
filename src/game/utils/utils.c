@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:43:40 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/31 15:34:09 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 11:31:51 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	get_real_rgb(int *rgb_components)
 t_img	*get_texture(t_data *data, int side, t_axf ray_dir)
 {
 	if (side == 0 && ray_dir.x > 0)
-		return (&data->game.textures[EAST]);
+		return (&data->game.txt[EAST]);
 	if (side == 0 && ray_dir.x < 0)
-		return (&data->game.textures[WEST]);
+		return (&data->game.txt[WEST]);
 	if (side == 1 && ray_dir.y > 0)
-		return (&data->game.textures[SOUTH]);
-	return (&data->game.textures[NORTH]);
+		return (&data->game.txt[SOUTH]);
+	return (&data->game.txt[NORTH]);
 }

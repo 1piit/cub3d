@@ -1,7 +1,7 @@
-NO textures/test/blue.xpm
-SO textures/test/blue.xpm
-WE textures/test/blue.xpm
-EA textures/test/blue.xpm
+NO textures/test/north.xpm
+SO textures/test/north.xpm
+WE textures/test/north.xpm
+EA textures/test/north.xpm
 
 F 18,53,25
 C 153,204,255

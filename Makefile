@@ -55,7 +55,9 @@ GAME_FILES = game_loop.c \
 			key_handler.c \
 			player.c \
 			raycast.c \
+			raycast2.c \
 			dda.c \
+			dda2.c \
 			bresenham.c \
 			3d_scene.c \
 			render.c \
@@ -83,9 +85,9 @@ SRCS = $(addprefix src/main/,$(MAIN_FILES)) \
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 # === COMPILATION ===
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3#-std=gnu89 
-SPEED_FLAGS = -Ofast -march=native -flto=auto -finline-functions -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
+SPEED_FLAGS = -O3 -march=native -flto=auto -finline-functions -funroll-loops -ftree-vectorize -fprefetch-loop-arrays
 INC_DIR = . $(LIBFT_DIR) $(GNL_DIR) $(MLX_DIR)
 HEADERS = $(addprefix -I,$(INC_DIR))
 

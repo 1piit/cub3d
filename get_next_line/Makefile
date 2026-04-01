@@ -6,7 +6,7 @@ OBJS := $(SRC:%.c=%.o)
 
 NAME = get_next_line.a
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 

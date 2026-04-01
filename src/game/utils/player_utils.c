@@ -6,49 +6,12 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 02:58:08 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/31 16:28:38 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 11:32:23 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
 
-/* void	move_player_x(t_data *data, float dir_x)
-{
-	float	d_time;
-	float	new_x;
-
-	d_time = data->game.delta_time;
-	new_x = data->game.player.pos_x + dir_x * (MOVE_SPEED * d_time);
-	if (dir_x > 0)
-	{
-		if (data->cubfile.map[(int)data->game.player.pos_y][(int)(new_x + HIT_MARGIN * 1)] != '1')
-			data->game.player.pos_x = new_x;
-	}
-	else
-	{
-		if (data->cubfile.map[(int)data->game.player.pos_y][(int)(new_x + HIT_MARGIN * -1)] != '1')
-			data->game.player.pos_x = new_x;
-	}
-}
-
-void	move_player_y(t_data *data, float dir_y)
-{
-	float	d_time;
-	float	new_y;
-
-	d_time = data->game.delta_time;
-	new_y = data->game.player.pos_y + dir_y * (MOVE_SPEED * d_time);
-	if (dir_y > 0)
-	{
-		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * 1)][(int)data->game.player.pos_x] != '1')
-			data->game.player.pos_y = new_y;
-	}
-	else
-	{
-		if (data->cubfile.map[(int)(new_y + HIT_MARGIN * -1)][(int)data->game.player.pos_x] != '1')
-			data->game.player.pos_y = new_y;
-	}
-} */
 void	init_player_dir(t_data *data, char c)
 {
 	if (c == 'N')
@@ -96,6 +59,7 @@ void	init_plane(t_data *data, char c)
 		data->game.player.plane.plane_y = -FOV;
 	}
 }
+
 void	init_player(t_data *data)
 {
 	char	**map;

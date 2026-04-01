@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 13:57:53 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/30 21:37:11 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 12:23:52 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,18 @@ void	draw_ceilfloor(t_data *data)
 	draw_floor(data, floor);
 }
 
-void	draw_wall(t_thread_data *th_data, t_data *data, t_ray ray, int i,
-		t_box *box)
+void	draw_wall(t_thread_data *th_data, t_data *data, int i, t_box *box)
 {
 	double	wall_x;
 	t_line	line;
 	t_img	*texture;
-	
+
 	if (box->side == 0)
-		wall_x = th_data->th_player.pos_y + box->perp_wd * \
-th_data->th_player.ray_dir.y;
+		wall_x = th_data->th_player.pos_y + box->perp_wd
+			* th_data->th_player.ray_dir.y;
 	else
-		wall_x = th_data->th_player.pos_x + box->perp_wd * \
-th_data->th_player.ray_dir.x;
+		wall_x = th_data->th_player.pos_x + box->perp_wd
+			* th_data->th_player.ray_dir.x;
 	wall_x -= floor(wall_x);
 	texture = get_texture(data, box->side, th_data->th_player.ray_dir);
 	line = (t_line){0};
@@ -79,10 +78,10 @@ th_data->th_player.ray_dir.x;
 	if (line.tex_x >= texture->img_width)
 		line.tex_x = texture->img_width - 1;
 	line.x = i;
-	line.y = ray.draw_start;
-	while (line.y < ray.draw_end)
+	line.y = th_data->ray.draw_start;
+	while (line.y < th_data->ray.draw_end)
 	{
-		put_texture(data, ray, line, texture);
+		put_texture(data, th_data->ray, line, texture);
 		line.y++;
 	}
 }

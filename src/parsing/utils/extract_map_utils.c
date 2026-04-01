@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extrat_map_utils.c                                 :+:      :+:    :+:   */
+/*   extract_map_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 09:49:52 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 10:19:46 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 13:13:46 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	**map_fill(int *nb_lines, int start, char **map, char **wf)
 	while (i < (*nb_lines) + start)
 	{
 		map[j] = wf[i];
+		printf("tested line is %s\n", map[j]);
 		map[j] = null_terminate(map[j]);
 		i++;
 		j++;
