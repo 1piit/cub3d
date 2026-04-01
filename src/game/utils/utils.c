@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:43:40 by pbride            #+#    #+#             */
-/*   Updated: 2026/04/01 11:31:51 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:30:33 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/cub3d.h"
-
-void	get_screen_size(int *width, int *height)
-{
-	Display	*dpy;
-	int		screen;
-
-	dpy = XOpenDisplay(NULL);
-	if (!dpy)
-	{
-		perror("Error: cannot open X display\n");
-		*width = 1920;
-		*height = 1080;
-		return ;
-	}
-	screen = DefaultScreen(dpy);
-	*width = DisplayWidth(dpy, screen);
-	*height = DisplayHeight(dpy, screen);
-	XCloseDisplay(dpy);
-}
 
 int	get_real_rgb(int *rgb_components)
 {

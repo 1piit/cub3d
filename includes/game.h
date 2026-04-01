@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 14:16:27 by pbride            #+#    #+#             */
-/*   Updated: 2026/04/01 12:13:37 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:30:12 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,6 @@ void							put_texture(t_data *data, t_ray ray,
 									t_line line, t_img *tex_img);
 
 // utils.c
-void							get_screen_size(int *width, int *height);
 int								get_real_rgb(int *rgb_components);
 t_img							*get_texture(t_data *data, int side,
 									t_axf ray_dir);

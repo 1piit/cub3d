@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:12:00 by pbride            #+#    #+#             */
-/*   Updated: 2026/04/01 11:40:22 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:40:18 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_window(t_data *data)
 {
-	data->game.win_height = 1440;
-	data->game.win_width = 2560;
+	data->game.win_height = 1080;
+	data->game.win_width = 1920;
 	data->game.mlx_win = mlx_new_window(data->game.mlx, data->game.win_width,
 			data->game.win_height - 70, "cub3D - P2P");
 	if (!data->game.mlx_win)
