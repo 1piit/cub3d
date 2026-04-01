@@ -31,7 +31,7 @@ through the scene in real time.
 ### Requirements
 
 - Linux / macOS
-- MiniLibX (included or system-installed)
+- MiniLibX (must download)
 - CC / GCC / Clang
 - Make
 
