@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_cf_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 09:46:51 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 11:09:32 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 14:37:34 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	get_values(int *rgb, char *str)
 	int		index;
 
 	index = 0;
-	ret = gc_mem(MALLOC, 5, NULL, GEN);
+	ret = gc_mem(MALLOC, 100, NULL, GEN);
 	i = 0;
 	while (str[i] && index < 3)
 	{

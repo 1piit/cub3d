@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:24:58 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/27 10:18:22 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 13:21:49 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ char	**map_part(char **map, char **wf)
 {
 	int			i;
 	t_map_part	map_part;
+	char		**parsed_map;
 
 	i = 0;
 	map_part.start = 0;
 	map_part.nb_lines = 0;
-	while (wf[i] && wf)
+	while (wf && wf[i])
 	{
-		parse_map_line(map, wf, &map_part, i);
+		parsed_map = parse_map_line(map, wf, &map_part, i);
+		if (parsed_map)
+			return (parsed_map);
 		i++;
 	}
 	return (map_fill(&map_part.nb_lines, map_part.start, map, wf));

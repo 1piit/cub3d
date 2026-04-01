@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 12:05:33 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/04/01 12:10:48 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:34:00 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	post_dda(t_thread_data *th_data, t_data *data, t_box box)
 {
-	th_data->ray.line_height = (int)(data->game.win_height / box.perp_wd);
+	th_data->ray.line_height = (int)(data->game.win_height / box.perp_wd) * 1.3;
 	th_data->ray.draw_start = -th_data->ray.line_height / 2
 		+ data->game.win_height / 2;
 	th_data->ray.draw_end = th_data->ray.line_height / 2 + data->game.win_height

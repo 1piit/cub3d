@@ -6,7 +6,7 @@
 /*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 09:49:52 by pbride            #+#    #+#             */
-/*   Updated: 2026/04/01 13:13:46 by ptricaud         ###   ########.fr       */
+/*   Updated: 2026/04/01 13:21:52 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ char	**map_fill(int *nb_lines, int start, char **map, char **wf)
 	while (i < start)
 		i++;
 	map = gc_mem(MALLOC, (sizeof(char *) * (*nb_lines + 1)), NULL, GEN);
-	while (i < (*nb_lines) + start)
+	while (i < (*nb_lines) + start && wf[i])
 	{
 		map[j] = wf[i];
-		printf("tested line is %s\n", map[j]);
 		map[j] = null_terminate(map[j]);
 		i++;
 		j++;
