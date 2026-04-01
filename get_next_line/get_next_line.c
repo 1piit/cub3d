@@ -6,7 +6,7 @@
 /*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:10:19 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:34:59 by pbride           ###   ########.fr       */
+/*   Updated: 2026/03/27 11:26:07 by pbride           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_update_stash(char *str)
 		return ((gc_mem(FREE, 0, str, GEN)), NULL);
 	new_stash = gc_strdup(new_line + 1, GEN);
 	(gc_mem(FREE, 0, str, GEN));
-	/* free(str) */;
 	return (new_stash);
 }
 
@@ -64,7 +63,6 @@ char	*ft_read_line(char *str, int fd)
 	int			bytes_read;
 
 	buffer = gc_mem(MALLOC, (BUFFER_SIZE + 1), NULL, GEN);
-	// buffer = (char *) malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return ((gc_mem(FREE, 0, str, GEN)), NULL);
 	bytes_read = 1;
@@ -72,15 +70,16 @@ char	*ft_read_line(char *str, int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return ((gc_mem(FREE, 0, str, GEN)), (gc_mem(FREE, 0, buffer, GEN)),NULL);
+			return ((gc_mem(FREE, 0, str, GEN)),
+				(gc_mem(FREE, 0, buffer, GEN)), NULL);
 		else if (bytes_read == 0 && (!str || str[0] == 0))
-			return ((gc_mem(FREE, 0, str, GEN)), (gc_mem(FREE, 0, buffer, GEN)),NULL);
+			return ((gc_mem(FREE, 0, str, GEN)),
+				(gc_mem(FREE, 0, buffer, GEN)), NULL);
 		buffer[bytes_read] = '\0';
 		str = ft_strjoin_free(str, buffer);
 	}
 	gc_mem(FREE, 0, buffer, GEN);
-/* 	free(buffer);
- */	return (str);
+	return (str);
 }
 
 char	*get_next_line(int fd)
@@ -91,7 +90,6 @@ char	*get_next_line(int fd)
 	if (fd == -1 && stash)
 	{
 		gc_mem(FREE, 0, stash, GEN);
-		/* free(stash); */
 		stash = NULL;
 		return (NULL);
 	}

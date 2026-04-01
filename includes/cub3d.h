@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 11:30:14 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/12 15:36:51 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 16:15:28 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,61 @@
 # define BUFFER_SIZE 42
 # define SUCCESS 0
 # define ERROR 1
-# include <stdbool.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <mlx.h>
-# include <X11/Xlib.h>
-# include <X11/keysym.h>
+# define M_PI 3.14159265358979323846
+# define NUM_THREADS 100
 
+# include "game.h"
+# include "garb.h"
 # include "get_next_line.h"
 # include "libft.h"
-# include "garb.h"
 # include "parsing.h"
-# include "game.h"
+# include <X11/Xlib.h>
+# include <X11/keysym.h>
+# include <fcntl.h>
+# include <math.h>
+# include <mlx.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-typedef struct s_data
+typedef struct s_data	t_data;
+
+typedef struct s_thread_data
 {
-	t_game	game;
-	t_file	cubfile;
-}	t_data;
+	int					start_x;
+	int					end_x;
+	t_data				*data;
+	t_plane				th_plane;
+	t_player			th_player;
+	t_ray				ray;
+}						t_thread_data;
 
-//main_utils.c
-void	check_args(int ac);
-void	init_structs(t_file *cubfile, char *file_arg);
-void	init_data(t_data *data, int ac, char **av);
+struct					s_data
+{
+	t_game				game;
+	t_file				cubfile;
+	pthread_barrier_t	barrier_start;
+	pthread_barrier_t	barrier_end;
+	int					quit_threads;
+	pthread_t			threads[NUM_THREADS];
+	t_thread_data		thread_data[NUM_THREADS];
+};
 
-//cleanup.c
-void	cleanup_all_data(t_data *data);
-void	cleanup_all_exit(t_data *data, char *msg, int err_code);
+typedef struct s_time
+{
+	struct timeval		s_time;
+	struct timeval		c_time;
+}						t_time;
+// main_utils.c
+void					check_args(int ac);
+void					init_data(t_data *data, int ac, char **av);
+t_time					*get_time_ms(void);
+
+// cleanup.c
+void					cleanup_fps(t_data *data);
+void					cleanup_all_data(t_data *data);
+void					cleanup_all_exit(t_data *data, char *msg, int err_code);
 
 #endif
