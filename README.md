@@ -157,7 +157,7 @@ src/
 │   ├── gc_features.c                  # gc_mem, gc_malloc, gc_free, gc_full_clean
 │   ├── gc_strjoin.c                   # gc_strjoin — GC-aware string join
 │   └── gc_utils.c                     # cleanup_all, remove_gc_node
-└── cleanup.c                          # Centralized cleanup handlers & safe 
+└── cleanup.c                          # Centralized cleanup handlers & safe
 ```
 
 ### Parsing Pipeline
@@ -310,3 +310,15 @@ Any allocation failure triggers `cleanup_all()` + `exit(EXIT_FAILURE)`.
 ### Multithreading
 - [POSIX Threads Programming — LLNL](https://hpc-tutorials.llnl.gov/posix/)
 - `man pthread_create`, `man pthread_barrier_wait`
+
+### AI Usage
+AI tools (Claude / Perplexity) were used during this project for the following tasks:
+
+- **Debugging assistance:** identifying logic errors in the DDA loop and in the
+  perpendicular wall distance calculation
+- **Optimization suggestions:** advising on how to improve per-frame rendering speed (FPS)
+  by recommending the implementation of multithreading
+
+AI was **not** used to directly write any algorithm implementations — all minimap,
+raycasting, rendering, parsing, and garbage collector code was written and fully
+understood by the team.
