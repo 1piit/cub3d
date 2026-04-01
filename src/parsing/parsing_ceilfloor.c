@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_ceilfloor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:32:24 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/27 11:00:39 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 14:35:37 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	invalid_rgb_case_one(int *flag, int RGB_c[3], int RGB_f[3])
 	}
 	while (i < 3)
 	{
-		if (RGB_c[i] < 0 || RGB_f[i] < 0)
+		if (RGB_c[i] < 0 || RGB_f[i] < 0 || RGB_c[i] > 255 || RGB_f[i] > 255)
 		{
 			*flag = 1;
 			return ;

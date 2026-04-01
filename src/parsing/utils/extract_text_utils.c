@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_text_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:24:05 by pbride            #+#    #+#             */
-/*   Updated: 2026/03/27 10:25:06 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 16:15:59 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,24 @@ int	ft_isspace(int c)
 
 int	wt_line_getter(char **wt_line, int *index, char *wf, const char *dir)
 {
+	char	*wf_save;
+	int		len;
+	int		i;
+
+	wf_save = wf;
+	len = 0;
+	i = 0;
+	while (wf_save[i])
+	{
+		if (ft_isspace(wf_save[i]))
+			break ;
+		len++;
+		i++;
+	}
 	wf = ft_strnstr(wf, dir, ft_strlen(wf));
 	if (wf == NULL)
 		return (0);
-	if (!ft_strncmp(wf, dir, 2))
+	if (!ft_strncmp(wf_save, dir, 2) && len == 2)
 	{
 		wt_line[*index] = gc_strdup(wf, GEN);
 		(*index)++;

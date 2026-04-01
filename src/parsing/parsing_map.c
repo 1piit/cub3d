@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbride <pbride@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ptricaud <ptricaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:57:02 by ptricaud          #+#    #+#             */
-/*   Updated: 2026/03/29 17:02:08 by pbride           ###   ########.fr       */
+/*   Updated: 2026/04/01 16:24:59 by ptricaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,19 @@ void	check_dimensions(int *flag, t_file cubfile)
 
 static int	check_neighboxes(int i, int j, char **temp)
 {
-	if (temp[i][j + 1] != 'F' && temp[i][j - 1] != 'F'
-		&& temp[i + 1][j] != 'F' && temp[i - 1][j] != 'F')
+	if (temp[i][j + 1] != 'F' && temp[i][j - 1] != 'F' && temp[i + 1][j] != 'F'
+		&& temp[i - 1][j] != 'F')
 		return (0);
 	return (1);
+}
+
+static void	flag_neighbox_attr(int i, int j, char **temp, int *flag)
+{
+	if (check_neighboxes(i, j, temp))
+	{
+		*flag = 1;
+		return ;
+	}
 }
 
 static void	check_enclosed(char **temp, int *flag)
@@ -55,14 +64,9 @@ static void	check_enclosed(char **temp, int *flag)
 		limit = ft_strlen(temp[i]) - 1;
 		while (temp[i][j])
 		{
-			if (temp[i][j] == '0' && j != limit)
-			{
-				if (check_neighboxes(i, j, temp))
-				{
-					*flag = 1;
-					return ;
-				}
-			}
+			if ((temp[i][j] == '0' || temp[i][j] == 'N' || temp[i][j] == 'E'
+					|| temp[i][j] == 'W' || temp[i][j] == 'S') && j != limit)
+				flag_neighbox_attr(i, j, temp, flag);
 			j++;
 		}
 		if (!temp[i + 2])
